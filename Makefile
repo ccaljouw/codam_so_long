@@ -2,34 +2,39 @@ NAME 		:= so_long
 CC 			?= gcc
 CFLAGS 		:= -Wall -Wextra -Werror 
 TEST_FLAGS 	?= -g -fsanitize=address
-LIBFTDIR 	= libft/
-LIBFT		= libft/libft.a
+LIBFT	 	:= ./libft
+LIBMLX		:= ./MLX42
+LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
+HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include
 
 OBJ 		:= $(addprefix obj/, so_long.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT)
+$(NAME): $(OBJ) $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(LIBFT):
-	@$(MAKE) -C $(LIBFTDIR) all
+$(LIBS): 
+	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBMLX) 
 
-test: $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(TEST_FLAGS) $^ -o $@ $(LIBFT)
+test: $(OBJ) $(LIBS)
+	$(CC) $(CFLAGS) $(TEST_FLAGS) $^ -o $@
 
 obj/%.o : %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@ $(HEADERS)
 
 clean:
 	rm -rf obj/
-	@$(MAKE) -C $(LIBFTDIR) clean
+	@$(MAKE) -C $(LIBFT) clean
+	@$(MAKE) -C $(LIBMLX) clean
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f test
-	@$(MAKE) -C $(LIBFTDIR) fclean
+	@$(MAKE) -C $(LIBFT) fclean
+	@$(MAKE) -C $(LIBMLX) fclean
 
 re: fclean all
 

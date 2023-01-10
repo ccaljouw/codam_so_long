@@ -11,6 +11,7 @@ OBJ_PRINTF = $(addprefix $(OBJDIR), ft_printf/ft_printf.o  ft_printf/ft_printf_s
 
 OBJDIR = obj/
 NAME = libft.a
+HEADERS = -I ./include
 
 OBJALL = $(OBJ) $(OBJ_BONUS) $(OBJ_PRINTF)
 
