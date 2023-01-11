@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   so_long.c                                          :+:    :+:            */
+/*   map.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/11 16:28:03 by ccaljouw      ########   odam.nl         */
+/*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
+/*   Updated: 2023/01/11 16:22:26 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "MLX42.h"
 #include "so_long.h"
+#include <fcntl.h>
 
-int main()
+char	*read_file(char *line)
 {
-	char *line;
-	char **arr;
-	
-	line = NULL;
-	line = read_file(line);
-	ft_printf("%s\n", line);
-	arr = ft_split(line, '\n');
-	while (*arr)
+	char	buffer[BUFFER_SIZE + 1];
+	int		fd;
+	ssize_t	count;
+
+	fd = open("./maps/simple.ber", O_RDONLY);
+	while (1)
 	{
-		ft_printf("%s", *arr);
-		arr++;
+		count = read(fd, buffer, BUFFER_SIZE);
+		if (count == -1)
+		{
+			if (line)
+				free(line);
+			return (NULL);
+		}
+		if (count == 0)
+			return (line);
+		buffer[count] = '\0';
+		line = ft_strjoin_free_s1(line, buffer);
+		if (!line || !*buffer)
+			return (NULL);
 	}
-	return (0);
+	return (line);
 }

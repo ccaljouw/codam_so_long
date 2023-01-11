@@ -6,17 +6,13 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/12 14:24:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2022/12/01 10:15:14 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/11 15:59:49 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 // # include <unistd.h>
 # include <stdlib.h>
-
-# ifndef BUFFER_SIZE
-#  define  BUFFER_SIZE 1
-# endif
 
 char	*get_remaining_buf(char *str, char **remaining_buf)
 {

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 11:56:55 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/10 16:07:10 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/11 15:59:43 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // gnl
+# ifndef BUFFER_SIZE
+#  define  BUFFER_SIZE 1
+# endif
+
 char	*get_next_line(int fd);
 char	*ft_strjoin_free_s1(char *s1, char *s2);
 

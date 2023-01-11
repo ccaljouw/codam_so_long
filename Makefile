@@ -1,25 +1,31 @@
 NAME 		:= so_long
 CC 			?= gcc
-CFLAGS 		:= -Wall -Wextra -Werror 
-TEST_FLAGS 	?= -g -fsanitize=address
+CFLAGS 		:= -Wall -Wextra -Werror
+HOMEFLAGS	:= -lglfw # -L /opt/homebrew/Cellar/glfw/3.3.6/lib/
+CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+# TEST_FLAGS 	?= -g -fsanitize=address
 LIBFT	 	:= ./libft
 LIBMLX		:= ./MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
-HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include
+HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 
-OBJ 		:= $(addprefix obj/, so_long.o)
+OBJ 		:= $(addprefix obj/, so_long.o map.o)
+TEST_OBJ	:= $(addprefix obj/, test.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
+
+# home: $(OBJ) $(LIBS)
+# 	$(CC) $(CFLAGS) $(HOMEFLAGS) $^ -o $@
 
 $(LIBS): 
 	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -C $(LIBMLX) 
 
-test: $(OBJ) $(LIBS)
-	$(CC) $(CFLAGS) $(TEST_FLAGS) $^ -o $@
+test: $(TEST_OBJ) $(LIBS)
+	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
 
 obj/%.o : %.c
 	@mkdir -p $(dir $@)
@@ -27,15 +33,16 @@ obj/%.o : %.c
 
 clean:
 	rm -rf obj/
-	@$(MAKE) -C $(LIBFT) clean
-	@$(MAKE) -C $(LIBMLX) clean
+
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f test
+
+clean_libs:
 	@$(MAKE) -C $(LIBFT) fclean
 	@$(MAKE) -C $(LIBMLX) fclean
 
 re: fclean all
 
-.PHONY: all test clean fclean re
+.PHONY: all test clean fclean clean_libs re
