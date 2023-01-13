@@ -1,7 +1,6 @@
 NAME 		:= so_long
 CC 			?= gcc
 CFLAGS 		:= -Wall -Wextra -Werror
-HOMEFLAGS	:= -lglfw # -L /opt/homebrew/Cellar/glfw/3.3.6/lib/
 CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 # TEST_FLAGS 	?= -g -fsanitize=address
 LIBFT	 	:= ./libft
@@ -17,8 +16,8 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBS)
 	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
 
-# home: $(OBJ) $(LIBS)
-# 	$(CC) $(CFLAGS) $(HOMEFLAGS) $^ -o $@
+home: $(OBJ) $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(LIBS): 
 	@$(MAKE) -C $(LIBFT)

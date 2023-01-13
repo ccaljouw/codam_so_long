@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/11 16:21:43 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/13 09:24:06 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 #  define  BUFFER_SIZE 1
 # endif
 
-char	*read_file(char *line);
+void parse_map(void);
 
 #endif

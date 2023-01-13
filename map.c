@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/11 16:22:26 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/13 10:05:41 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*read_file(char *line)
 	ssize_t	count;
 
 	fd = open("./maps/simple.ber", O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	while (1)
 	{
 		count = read(fd, buffer, BUFFER_SIZE);
@@ -38,4 +40,40 @@ char	*read_file(char *line)
 			return (NULL);
 	}
 	return (line);
+}
+
+int	check_map(char **arr)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = 0;
+	while (arr[j])
+	{
+		if (j == 0 || arr[j + 1] == NULL)
+			{
+				ft_printf("%s\n", arr[j]);
+			}
+		while (arr[j][i])
+		{
+			if (i == 0 || arr[j][i + 1] == '\0')
+				ft_printf("%c\n", arr[j][i]);
+			i++;
+		}
+		j++;
+		i = 0;
+	}
+	return (0);
+}
+
+void parse_map(void)
+{
+	char *line;
+	char **arr;
+	
+	line = NULL;
+	line = read_file(line);
+	arr = ft_split(line, '\n');
+	check_map(arr);
 }
