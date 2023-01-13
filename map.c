@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 16:18:00 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 16:59:08 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,31 @@ char	*read_file(char *line, char *file)
 int	check_map(char **arr)
 {
 	if (arr)
-		return (0);
+		return (1);
 	else
-		return (-1);
+		return (0);
 }
 
 int parse_map(char *file)
 {
-	char *line;
-	char **arr;
+	char	*line;
+	char	**arr;
+	int		i;
+	int		j;
 	
 	line = NULL;
+	i = 0;
+	j = 0;
 	line = read_file(line, file);
+	if (!line)
+		return (-1);
 	arr = ft_split(line, '\n');
+	while (arr[j])
+	{
+		while (arr[j][i])
+			i++;
+		j++;
+		i = 0;
+	}
 	return (check_map(arr));
 }
