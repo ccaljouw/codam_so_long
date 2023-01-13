@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 21:42:32 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 22:15:58 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ typedef struct s_images
 
 typedef struct s_gameboard
 {
-	mlx_t		*mlx;
-	t_images	*images;
 	char		**map;
+	t_images	*images;
+	mlx_t		*mlx;
 	uint32_t	map_width;
 	uint32_t	map_height;
+	int			exit[2];
+	uint32_t	collectables;
+	uint32_t	moves;
 } 	t_gameboard;
 
 int 	parse_map(char *file, t_gameboard *gb);

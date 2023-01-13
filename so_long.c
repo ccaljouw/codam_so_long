@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 21:54:40 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 22:15:27 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 	int x;
 	int y;
 
+	gb->images = imgs;
+	gb->collectables = 0;
+	gb->moves = 0;
 	x = 0;
 	y = 0;
-	gb->images = imgs;
 	while (gb->map[y])
 	{
 		while (gb->map[y][x])
@@ -70,8 +72,6 @@ int main(int argc, char **argv)
 {	
 	t_gameboard *gb;
 	t_images	*imgs;
-	// mlx_t		*mlx;
-
 	
 	// check_input(argc, argv)
 	gb = malloc(sizeof(t_gameboard));
@@ -88,11 +88,6 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	init_images(gb->mlx, imgs);
 	init_gameboard(gb, imgs);
-	// mlx_image_to_window(mlx, imgs->empty, 0, 0);
-	// mlx_image_to_window(mlx, imgs->player, 64, 0);
-	// mlx_image_to_window(mlx, imgs->wall, 64*2, 0);
-	// mlx_image_to_window(mlx, imgs->collectable, (64*3) + (32/2), 32/2);
-	// ft_printf("%d, %d, %d", imgs->empty->height, imgs->empty->width, imgs->empty->pixels);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);
 	return (0);
