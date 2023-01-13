@@ -6,21 +6,20 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 10:05:41 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 16:18:00 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "so_long.h"
 #include <fcntl.h>
 
-char	*read_file(char *line)
+char	*read_file(char *line, char *file)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		fd;
 	ssize_t	count;
 
-	fd = open("./maps/simple.ber", O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	while (1)
@@ -44,36 +43,19 @@ char	*read_file(char *line)
 
 int	check_map(char **arr)
 {
-	int	i;
-	int	j;
-	
-	i = 0;
-	j = 0;
-	while (arr[j])
-	{
-		if (j == 0 || arr[j + 1] == NULL)
-			{
-				ft_printf("%s\n", arr[j]);
-			}
-		while (arr[j][i])
-		{
-			if (i == 0 || arr[j][i + 1] == '\0')
-				ft_printf("%c\n", arr[j][i]);
-			i++;
-		}
-		j++;
-		i = 0;
-	}
-	return (0);
+	if (arr)
+		return (0);
+	else
+		return (-1);
 }
 
-void parse_map(void)
+int parse_map(char *file)
 {
 	char *line;
 	char **arr;
 	
 	line = NULL;
-	line = read_file(line);
+	line = read_file(line, file);
 	arr = ft_split(line, '\n');
-	check_map(arr);
+	return (check_map(arr));
 }
