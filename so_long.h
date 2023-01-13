@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 16:43:25 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 21:42:32 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@
 
 typedef struct s_images
 {	
-	mlx_image_t	empty;
-	mlx_image_t	wall;
-	mlx_image_t	collectible;
-	mlx_image_t	exit;
-	mlx_image_t	player;
+	mlx_image_t	*empty;
+	mlx_image_t	*wall;
+	mlx_image_t	*collectable;
+	mlx_image_t	*exit;
+	mlx_image_t	*player;
 }	t_images;
 
 typedef struct s_gameboard
 {
-	mlx_t		mlx;
-	int			map_width;
-	int			map_height;
-	t_images	images;
+	mlx_t		*mlx;
+	t_images	*images;
+	char		**map;
+	uint32_t	map_width;
+	uint32_t	map_height;
 } 	t_gameboard;
 
-int parse_map(char *file);
-
+int 	parse_map(char *file, t_gameboard *gb);
+void	render_map(t_gameboard *gb, int x, int y);
 #endif

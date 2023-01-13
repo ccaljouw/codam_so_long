@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 16:59:08 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/13 21:57:22 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ int	check_map(char **arr)
 		return (0);
 }
 
-int parse_map(char *file)
+int parse_map(char *file, t_gameboard *gb)
 {
 	char	*line;
-	char	**arr;
 	int		i;
 	int		j;
 	
@@ -62,13 +61,23 @@ int parse_map(char *file)
 	line = read_file(line, file);
 	if (!line)
 		return (-1);
-	arr = ft_split(line, '\n');
-	while (arr[j])
-	{
-		while (arr[j][i])
-			i++;
+	gb->map = ft_split(line, '\n');
+	while (gb->map[j][i])
+		i++;
+	gb->map_width = i;		
+	while (gb->map[j])
 		j++;
-		i = 0;
-	}
-	return (check_map(arr));
+	gb->map_height = j;
+	return (check_map(gb->map));
+}
+
+void	render_map(t_gameboard *gb, int x, int y)
+{
+	// ft_printf("%c\n", gb->map[y][x]);
+	if (gb->map[y][x] == '1')
+		mlx_image_to_window(gb->mlx, gb->images->wall, x * 64, y * 64);
+	if (gb->map[y][x] == 'C')
+		mlx_image_to_window(gb->mlx, gb->images->collectable, (x * 64) + 16, (y * 64) + 16);
+	if (gb->map[y][x] == 'P')
+		mlx_image_to_window(gb->mlx, gb->images->player, x * 64, y * 64);
 }
