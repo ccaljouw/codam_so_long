@@ -9,7 +9,7 @@ LIBMLX		:= ./MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
 HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 
-OBJ 		:= $(addprefix obj/, so_long.o map.o)
+OBJ 		:= $(addprefix obj/, so_long.o map.o hooks.o)
 TEST_OBJ	:= $(addprefix obj/, test.o)
 
 all: $(NAME)

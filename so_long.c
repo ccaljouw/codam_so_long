@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/13 22:15:27 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/14 12:24:37 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 {	
 	int x;
 	int y;
+	int count;
 
-	gb->images = imgs;
+	gb->imgs = imgs;
 	gb->collectables = 0;
 	gb->moves = 0;
 	x = 0;
 	y = 0;
+	count = 0;
 	while (gb->map[y])
 	{
 		while (gb->map[y][x])
 		{
-			mlx_image_to_window(gb->mlx, imgs->empty, x * 64, y * 64);
-			render_map(gb, x, y);
+			render_map(gb, x, y, count);
 			x++;
+			count++;
 		}
 		x = 0;
 		y++;
@@ -49,8 +51,8 @@ void	init_images(mlx_t *mlx, t_images *imgs)
 	collectable = mlx_load_png("./images/collectable.png");
 	imgs->empty = mlx_texture_to_image(mlx, empty);
 	imgs->wall = mlx_texture_to_image(mlx, wall);
-	imgs->player = mlx_texture_to_image(mlx, player);
-	imgs->collectable = mlx_texture_to_image(mlx, collectable);
+	imgs->pl = mlx_texture_to_image(mlx, player);
+	imgs->coll = mlx_texture_to_image(mlx, collectable);
 	
 }
 
@@ -88,6 +90,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	init_images(gb->mlx, imgs);
 	init_gameboard(gb, imgs);
+	mlx_key_hook(gb->mlx,f_move, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);
 	return (0);
