@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/14 12:24:04 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/14 21:47:53 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
 
 typedef struct s_images
 {	
+	mlx_texture_t	*player;
+	mlx_texture_t	*playerr;
 	mlx_image_t	*empty;
 	mlx_image_t	*wall;
 	mlx_image_t	*coll;
 	mlx_image_t	*exit;
 	mlx_image_t	*pl;
 	mlx_image_t	*plr;
+	mlx_image_t	*plrr;
 }	t_images;
 
 typedef struct s_gameboard

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/14 12:24:37 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/14 21:54:54 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,21 @@ void	init_images(mlx_t *mlx, t_images *imgs)
 	mlx_texture_t *empty;
 	mlx_texture_t *wall;
 	mlx_texture_t *player;
+	mlx_texture_t *playerr;
 	mlx_texture_t *collectable;
+	mlx_texture_t *exit;
 	empty= mlx_load_png("./images/background.png");
 	wall = mlx_load_png("./images/wall.png");
-	player = mlx_load_png("./images/spiderman.png");
-	collectable = mlx_load_png("./images/collectable.png");
+	player = mlx_load_png("./images/flashman64.png");
+	playerr = mlx_load_png("./images/flashman64r.png");
+	collectable = mlx_load_png("./images/coll64.png");
+	exit = mlx_load_png("./images/exit64.png");
 	imgs->empty = mlx_texture_to_image(mlx, empty);
 	imgs->wall = mlx_texture_to_image(mlx, wall);
 	imgs->pl = mlx_texture_to_image(mlx, player);
+	imgs->plr = mlx_texture_to_image(mlx, playerr);
 	imgs->coll = mlx_texture_to_image(mlx, collectable);
-	
+	imgs->exit = mlx_texture_to_image(mlx, exit);
 }
 
 int		check_input(int argc, char **argv, t_gameboard *gb)
