@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 19:03:33 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:21:11 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 	gb->moves = 0;
 	x = 0;
 	y = 0;
-	while (gb->map[y])
+	while (gb->map->arr[y])
 	{
-		while (gb->map[y][x])
+		while (gb->map->arr[y][x])
 		{
 			render_map(gb, x, y);
 			x++;
@@ -66,17 +66,20 @@ int main(int argc, char **argv)
 {	
 	t_gameboard *gb;
 	t_images	*imgs;
+	t_map		*map;
 	
-	gb = malloc(sizeof(t_gameboard));
 	imgs = malloc(sizeof(t_images));
+	map = malloc(sizeof(t_map));
+	gb = malloc(sizeof(t_gameboard));
+	gb->map = map;
 	if (!check_input(argc, argv, gb) || !gb || !imgs)
 		ft_printf("error in main arguments");
-	gb->mlx = mlx_init(gb->map_width * 64, gb->map_height * 64, "So long!\t\t\tmoves: 0", true);
+	gb->mlx = mlx_init(gb->map->map_width * 64, gb->map->map_height * 64, "So long!\t\t\tmoves: 0", true);
 	if (!gb->mlx)
 		exit(EXIT_FAILURE);
 	init_images(gb->mlx, imgs);
 	init_gameboard(gb, imgs);
-	mlx_key_hook(gb->mlx,f_move, gb);
+	mlx_key_hook(gb->mlx, hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);
 	return (0);

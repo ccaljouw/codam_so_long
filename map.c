@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 16:57:16 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:19:30 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,32 @@ int parse_map(char *file, t_gameboard *gb)
 	line = read_file(line, file);
 	if (!line)
 		return (-1);
-	gb->map = ft_split(line, '\n');
-	while (gb->map[j][i])
+	gb->map->arr = ft_split(line, '\n');
+	while (gb->map->arr[j][i])
 		i++;
-	gb->map_width = i;		
-	while (gb->map[j])
+	gb->map->map_width = i;		
+	while (gb->map->arr[j])
 		j++;
-	gb->map_height = j;
-	return (check_map(gb->map));
+	gb->map->map_height = j;
+	return (check_map(gb->map->arr));
 }
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
 	mlx_image_to_window(gb->mlx, gb->imgs->empty, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	gb->imgs->empty->instances[gb->imgs->empty->count - 1].z = 0;
-	if (gb->map[y][x] == '1')
+	if (gb->map->arr[y][x] == '1')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->wall,x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	}
-	if (gb->map[y][x] == 'C')
+	if (gb->map->arr[y][x] == 'C')
 		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
-	if (gb->map[y][x] == 'P')
+	if (gb->map->arr[y][x] == 'P')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 		mlx_image_to_window(gb->mlx, gb->imgs->plr, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	}
-	if (gb->map[y][x] == 'E')
+	if (gb->map->arr[y][x] == 'E')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 		gb->imgs->exit->enabled = 0;
