@@ -37,6 +37,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f home
 	rm -f test
 
 clean_libs:

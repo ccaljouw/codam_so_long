@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 19:01:36 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:03:33 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ int main(int argc, char **argv)
 	gb = malloc(sizeof(t_gameboard));
 	imgs = malloc(sizeof(t_images));
 	if (!check_input(argc, argv, gb) || !gb || !imgs)
-	{
-		ft_printf("error");
-		exit(0);
-	}
+		ft_printf("error in main arguments");
 	gb->mlx = mlx_init(gb->map_width * 64, gb->map_height * 64, "So long!\t\t\tmoves: 0", true);
 	if (!gb->mlx)
 		exit(EXIT_FAILURE);

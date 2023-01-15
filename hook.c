@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/15 18:55:29 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:05:59 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int check_map_pos(t_gameboard *gb, int x, int y, int x_pl, int y_pl)
 {
-	ft_printf("%c", gb->map[y][x]);
 	if (gb->map[y][x] == '1')
 		return (0);
 	if (gb->map[y][x] == 'C')
@@ -54,9 +53,8 @@ int		check_move(keys_t key, t_gameboard *gb)
 	map_y =(pl_y + (gb->imgs->empty->height - 1)) / gb->imgs->empty->height;
 	if (!(map_x >= 0 && map_y >= 0 && map_x < (int)gb->map_width && map_y < (int)gb->map_height))
 		ft_printf("out of map range");
-
-if (check_map_pos(gb, map_x, map_y, pl_x, pl_y))
-	move_player(gb, pl_x, pl_y);
+	if (check_map_pos(gb, map_x, map_y, pl_x, pl_y))
+		move_player(gb, pl_x, pl_y);
 	return (1);
 }
 
