@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/14 21:47:53 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 10:36:51 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ typedef struct s_gameboard
 	mlx_t		*mlx;
 	uint32_t	map_width;
 	uint32_t	map_height;
-	int			exit[2];
 	uint32_t	collectables;
 	uint32_t	moves;
 } 	t_gameboard;
 
 int 	parse_map(char *file, t_gameboard *gb);
-void	render_map(t_gameboard *gb, int x, int y, int count);
+void	render_map(t_gameboard *gb, int x, int y);
 void	f_move(struct mlx_key_data keypress, void *param);
 #endif

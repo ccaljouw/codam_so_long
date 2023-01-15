@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/14 21:55:01 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 10:43:42 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,27 +71,25 @@ int parse_map(char *file, t_gameboard *gb)
 	return (check_map(gb->map));
 }
 
-void	render_map(t_gameboard *gb, int x, int y, int count)
+void	render_map(t_gameboard *gb, int x, int y)
 {
-	mlx_image_to_window(gb->mlx, gb->imgs->empty, x * 64, y * 64);
-	gb->imgs->empty->instances[count].z = 0;
-	// count++;
+	mlx_image_to_window(gb->mlx, gb->imgs->empty, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
+	gb->imgs->empty->instances[gb->imgs->empty->count - 1].z = 0;
 	if (gb->map[y][x] == '1')
-		mlx_image_to_window(gb->mlx, gb->imgs->wall, x * 64, y * 64);
+		mlx_image_to_window(gb->mlx, gb->imgs->wall,x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	if (gb->map[y][x] == 'C')
 	{
-		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * 64, y * 64);
+		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 		gb->collectables += 1;
 	}
 	if (gb->map[y][x] == 'P')
 	{
-		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * 64, y * 64);
-		mlx_image_to_window(gb->mlx, gb->imgs->plr, x * 64, y * 64);
+		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
+		mlx_image_to_window(gb->mlx, gb->imgs->plr, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	}
 	if (gb->map[y][x] == 'E')
 	{
-		gb->exit[0] = x;
-		gb->exit[1] = y;
-		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * 64, y * 64);
+		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
+		gb->imgs->exit->enabled = 0;
 	}
 }

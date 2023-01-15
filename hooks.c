@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/14 21:54:45 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 10:48:43 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,40 +29,40 @@ void	f_move(struct mlx_key_data keypress, void *param)
 		mlx_close_window(gb->mlx);
 	if (keypress.key == MLX_KEY_UP)
 	{
-		gb->imgs->pl->instances[0].y -= 16;
-		gb->imgs->plr->instances[0].y -= 16;
+		gb->imgs->pl->instances[0].y -= gb->imgs->empty->height / 4;
+		gb->imgs->plr->instances[0].y -= gb->imgs->empty->height / 4;
 	}
 	if (keypress.key == MLX_KEY_DOWN)
 	{
-		gb->imgs->pl->instances[0].y += 16;
-		gb->imgs->plr->instances[0].y += 16;
+		gb->imgs->pl->instances[0].y += gb->imgs->empty->height / 4;
+		gb->imgs->plr->instances[0].y += gb->imgs->empty->height / 4;
 	}
 	if (keypress.key == MLX_KEY_LEFT)
 	{
-		gb->imgs->pl->instances[0].x -= 16;
-		gb->imgs->plr->instances[0].x -= 16;
-		gb->imgs->pl->instances[0].z = 1;
-		gb->imgs->plr->instances[0].z = 0;
+		gb->imgs->pl->instances[0].x -= gb->imgs->empty->width / 4;
+		gb->imgs->plr->instances[0].x -= gb->imgs->empty->width / 4;
+		gb->imgs->pl->instances[0].enabled = 1;
+		gb->imgs->plr->instances[0].enabled = 0;
 	}
 	if (keypress.key == MLX_KEY_RIGHT)
 	{
-		gb->imgs->pl->instances[0].x += 16;
-		gb->imgs->plr->instances[0].x += 16;
-		gb->imgs->pl->instances[0].z = 0;
-		gb->imgs->plr->instances[0].z = 1;
+		gb->imgs->pl->instances[0].x += gb->imgs->empty->width / 4;
+		gb->imgs->plr->instances[0].x += gb->imgs->empty->width / 4;
+		gb->imgs->pl->instances[0].enabled = 0;
+		gb->imgs->plr->instances[0].enabled = 1;
 	}
 	// little jump
 	if (keypress.key)
 	{
 		if (keypress.action == MLX_PRESS)
 		{
-			gb->imgs->pl->instances[0].y -= 2;
-			gb->imgs->plr->instances[0].y -= 2;
+			gb->imgs->pl->instances[0].y -= gb->imgs->empty->height / 20;
+			gb->imgs->plr->instances[0].y -= gb->imgs->empty->height / 20;
 		}
 		if (keypress.action == MLX_RELEASE)
 		{
-			gb->imgs->pl->instances[0].y += 2;
-			gb->imgs->plr->instances[0].y += 2;
+			gb->imgs->pl->instances[0].y += gb->imgs->empty->height / 20;
+			gb->imgs->plr->instances[0].y += gb->imgs->empty->height / 20;
 		}
 	}
 }

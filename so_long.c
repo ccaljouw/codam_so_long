@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/14 21:54:54 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 10:50:27 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,18 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 {	
 	int x;
 	int y;
-	int count;
 
 	gb->imgs = imgs;
 	gb->collectables = 0;
 	gb->moves = 0;
 	x = 0;
 	y = 0;
-	count = 0;
 	while (gb->map[y])
 	{
 		while (gb->map[y][x])
 		{
-			render_map(gb, x, y, count);
+			render_map(gb, x, y);
 			x++;
-			count++;
 		}
 		x = 0;
 		y++;
@@ -54,6 +51,8 @@ void	init_images(mlx_t *mlx, t_images *imgs)
 	collectable = mlx_load_png("./images/coll64.png");
 	exit = mlx_load_png("./images/exit64.png");
 	imgs->empty = mlx_texture_to_image(mlx, empty);
+	// imgs->empty = mlx_new_image(mlx, 64, 64);
+	// ft_memset(imgs->empty->pixels,100, imgs->empty->width * imgs->empty->height * sizeof(int));
 	imgs->wall = mlx_texture_to_image(mlx, wall);
 	imgs->pl = mlx_texture_to_image(mlx, player);
 	imgs->plr = mlx_texture_to_image(mlx, playerr);
