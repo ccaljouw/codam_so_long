@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 19:21:11 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 22:19:20 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_images(mlx_t *mlx, t_images *imgs)
 		ft_printf("error loading images");
 }
 
-int		check_input(int argc, char **argv, t_gameboard *gb)
+int		check_input(int argc, char **argv, t_map *map)
 {
 	int i;
 
@@ -59,7 +59,7 @@ int		check_input(int argc, char **argv, t_gameboard *gb)
 		i++;
 	if (ft_strncmp(argv[1] + i, ".ber", 5) != 0)
 		return (0);	
-	return (parse_map(argv[1], gb));
+	return (parse_map(argv[1], map));
 }
 
 int main(int argc, char **argv)
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 	map = malloc(sizeof(t_map));
 	gb = malloc(sizeof(t_gameboard));
 	gb->map = map;
-	if (!check_input(argc, argv, gb) || !gb || !imgs)
+	if (!check_input(argc, argv, map) || !gb || !imgs)
 		ft_printf("error in main arguments");
 	gb->mlx = mlx_init(gb->map->map_width * 64, gb->map->map_height * 64, "So long!\t\t\tmoves: 0", true);
 	if (!gb->mlx)

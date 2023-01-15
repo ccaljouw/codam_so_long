@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 19:31:45 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 22:17:55 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 
 #include "libft.h"
 #include "MLX42.h"
-
-typedef struct s_map
-{
-	char		**arr;
-	uint32_t	map_width;
-	uint32_t	map_height;
-	int			pos_x;
-	int			pos_y;
-}	t_map;
 
 typedef struct s_images
 {	
@@ -34,22 +25,33 @@ typedef struct s_images
 	mlx_image_t	*pl;
 	mlx_image_t	*plr;
 	mlx_image_t	*plrr;
+	mlx_image_t	*enemy;
 }	t_images;
+
+typedef struct s_map
+{
+	char		**arr;
+	uint32_t	map_width;
+	uint32_t	map_height;
+	int			pos_x;
+	int			pos_y;
+}	t_map;
 
 typedef struct s_gameboard
 {
-	// char		**map;
 	t_map		*map;
 	t_images	*imgs;
 	mlx_t		*mlx;
-	// uint32_t	map_width;
-	// uint32_t	map_height;
-	uint32_t	moves;
+	int			moves;
+	int			pl_x;
+	int			pl_y;
 } 	t_gameboard;
 
-int 	parse_map(char *file, t_gameboard *gb);
+int		check_input(int argc, char **argv, t_map *map);
+int		parse_map(char *file, t_map *map);
 void	render_map(t_gameboard *gb, int x, int y);
 void	hook(struct mlx_key_data keypress, void *param);
+int 	check_map_pos(t_gameboard *gb, int x, int y, int x_pl, int y_pl);
 void	change_direction(keys_t key, t_gameboard *gb);
 void	get_collectable(t_gameboard *gb, int x_pl, int y_pl);
 void	move_player(t_gameboard *gb, int pl_x, int pl_y);
