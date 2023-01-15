@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 16:56:02 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 18:51:43 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,7 @@ typedef struct s_gameboard
 int 	parse_map(char *file, t_gameboard *gb);
 void	render_map(t_gameboard *gb, int x, int y);
 void	f_move(struct mlx_key_data keypress, void *param);
+void	change_direction(keys_t key, t_gameboard *gb);
+void	get_collectable(t_gameboard *gb, int x_pl, int y_pl);
+void	move_player(t_gameboard *gb, int pl_x, int pl_y);
 #endif

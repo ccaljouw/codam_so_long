@@ -1,54 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   hooks.c                                            :+:    :+:            */
+/*   hook.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/15 16:58:01 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 18:55:29 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <math.h>
 
-void	change_direction(keys_t key, t_gameboard *gb)
-{
-	if (key == MLX_KEY_LEFT)
-	{
-		gb->imgs->pl->enabled = 1;
-		gb->imgs->plr->enabled = 0;
-	}
-	if (key == MLX_KEY_RIGHT)
-	{
-		gb->imgs->pl->enabled = 0;
-		gb->imgs->plr->enabled = 1;
-	}
-}
 int check_map_pos(t_gameboard *gb, int x, int y, int x_pl, int y_pl)
 {
-	int	i;
-	int coll;
-	
-	i = gb->imgs->coll->count - 1;
-	coll = 0;
 	ft_printf("%c", gb->map[y][x]);
 	if (gb->map[y][x] == '1')
 		return (0);
 	if (gb->map[y][x] == 'C')
-	{
-		while (i >= 0)
-		{
-			if (gb->imgs->coll->instances[i].x == x_pl && gb->imgs->coll->instances[i].y == y_pl)
-				gb->imgs->coll->instances[i].enabled = 0;
-			else
-				coll += gb->imgs->coll->instances[i].enabled;
-			i--;
-		}
-		if (coll == 0)
-			gb->imgs->exit->enabled = 1;
-	}
+		get_collectable(gb, x_pl, y_pl);
 	if (gb->map[y][x] == 'E' && gb->imgs->exit->enabled == 1)
 	{
 		gb->imgs->pl->enabled = 0;
@@ -57,13 +27,6 @@ int check_map_pos(t_gameboard *gb, int x, int y, int x_pl, int y_pl)
 	return (1);
 }
 
-void	move_player(t_gameboard *gb, int pl_x, int pl_y)
-{
-	gb->imgs->pl->instances[0].x = pl_x;
-	gb->imgs->pl->instances[0].y = pl_y;
-	gb->imgs->plr->instances[0].x = pl_x;
-	gb->imgs->plr->instances[0].y = pl_y;
-}
 int		check_move(keys_t key, t_gameboard *gb)
 {
 	int	pl_x;
