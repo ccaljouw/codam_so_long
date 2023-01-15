@@ -7,7 +7,7 @@ HOMEFLAGS	:= -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/
 LIBFT	 	:= ./libs/libft
 LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
-HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
+HEADERS		:= -I includes/ -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 
 OBJ 		:= $(addprefix obj/, so_long.o map.o hook.o actions.o)
 TEST_OBJ	:= $(addprefix obj/, test.o)
@@ -27,7 +27,7 @@ $(LIBS):
 test: $(TEST_OBJ) $(LIBS)
 	$(CC) $(CFLAGS) $(HOMEFLAGS) $^ -o $@
 
-obj/%.o : %.c
+obj/%.o : src/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $^ -o $@ $(HEADERS)
 
