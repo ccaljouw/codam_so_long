@@ -6,20 +6,20 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 22:23:51 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 22:42:00 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
 
-int check_map_pos(t_gameboard *gb, int x, int y, int x_pl, int y_pl)
+int check_map_pos(t_gameboard *gb, int x_pl, int y_pl)
 {
-	if (gb->map->arr[y][x] == '1')
+	if (gb->map->arr[gb->map->npos_y][gb->map->npos_x] == '1')
 		return (0);
-	if (gb->map->arr[y][x] == 'C')
+	if (gb->map->arr[gb->map->npos_y][gb->map->npos_x] == 'C')
 		get_collectable(gb, x_pl, y_pl);
-	if (gb->map->arr[y][x] == 'E' && gb->imgs->exit->enabled == 1)
+	if (gb->map->arr[gb->map->npos_y][gb->map->npos_x] == 'E' && gb->imgs->exit->enabled == 1)
 	{
 		gb->imgs->pl->enabled = 0;
 		gb->imgs->plr->enabled = 0;
@@ -106,5 +106,7 @@ int parse_map(char *file, t_map *map)
 	while (map->arr[j])
 		j++;
 	map->map_height = j;
+	map->npos_x = 0;
+	map->npos_y = 0;
 	return (check_map(map->arr));
 }

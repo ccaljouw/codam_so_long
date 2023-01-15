@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/15 21:46:39 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 22:32:57 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	move_player(t_gameboard *gb, int pl_x, int pl_y)
 	gb->imgs->plr->instances[0].y = pl_y;
 }
 
-void	change_direction(keys_t key, t_gameboard *gb)
+void	change_direction(keys_t key, t_images *imgs)
 {
 	if (key == MLX_KEY_LEFT)
 	{
-		gb->imgs->pl->enabled = 1;
-		gb->imgs->plr->enabled = 0;
+		imgs->pl->enabled = 1;
+		imgs->plr->enabled = 0;
 	}
 	if (key == MLX_KEY_RIGHT)
 	{
-		gb->imgs->pl->enabled = 0;
-		gb->imgs->plr->enabled = 1;
+		imgs->pl->enabled = 0;
+		imgs->plr->enabled = 1;
 	}
 }
 
