@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 10:50:27 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 16:55:45 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 	int y;
 
 	gb->imgs = imgs;
-	gb->collectables = 0;
 	gb->moves = 0;
 	x = 0;
 	y = 0;
@@ -89,7 +88,7 @@ int main(int argc, char **argv)
 		ft_printf("error");
 		exit(0);
 	}
-	gb->mlx = mlx_init(gb->map_width * 64, gb->map_height *64, "so long!", true);
+	gb->mlx = mlx_init(gb->map_width * 64, gb->map_height * 64, "So long!\t\t\tmoves: 0", true);
 	if (!gb->mlx)
 		exit(EXIT_FAILURE);
 	init_images(gb->mlx, imgs);
