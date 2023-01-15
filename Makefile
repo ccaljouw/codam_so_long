@@ -4,8 +4,8 @@ CFLAGS 		:= -Wall -Wextra -Werror
 CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 HOMEFLAGS	:= -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/
 # TEST_FLAGS 	?= -g -fsanitize=address
-LIBFT	 	:= ./libft
-LIBMLX		:= ./MLX42
+LIBFT	 	:= ./libs/libft
+LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
 HEADERS		:= -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 

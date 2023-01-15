@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/15 19:21:29 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:38:10 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int		check_move(keys_t key, t_gameboard *gb)
 {
 	int	pl_x;
 	int pl_y;
-	int map_x;
-	int	map_y;
 
 	pl_x = gb->imgs->pl->instances[0].x;
 	pl_y = gb->imgs->pl->instances[0].y;
@@ -41,7 +39,7 @@ int		check_move(keys_t key, t_gameboard *gb)
 		pl_y = gb->imgs->pl->instances[0].y + (gb->imgs->empty->height);
 	else if (key == MLX_KEY_LEFT || key == MLX_KEY_RIGHT)
 	{
-		change_direction(key, gb);	
+		change_direction(key, gb);
 		if (key == MLX_KEY_LEFT)
 			pl_x = gb->imgs->pl->instances[0].x - (gb->imgs->empty->width);
 		else
@@ -49,11 +47,11 @@ int		check_move(keys_t key, t_gameboard *gb)
 	}
 	else
 		return (0);
-	map_x = (pl_x)/ gb->imgs->empty->width;
-	map_y =(pl_y + (gb->imgs->empty->height - 1)) / gb->imgs->empty->height;
-	if (!(map_x >= 0 && map_y >= 0 && map_x < (int)gb->map->map_width && map_y < (int)gb->map->map_height))
+	gb->map->pos_x = (pl_x)/ gb->imgs->empty->width;
+	gb->map->pos_y =(pl_y + (gb->imgs->empty->height - 1)) / gb->imgs->empty->height;
+	if (!(gb->map->pos_x >= 0 && gb->map->pos_y >= 0 && gb->map->pos_x < (int)gb->map->map_width && gb->map->pos_y < (int)gb->map->map_height))
 		ft_printf("out of map range");
-	if (check_map_pos(gb, map_x, map_y, pl_x, pl_y))
+	if (check_map_pos(gb, gb->map->pos_x, gb->map->pos_y, pl_x, pl_y))
 		move_player(gb, pl_x, pl_y);
 	return (1);
 }

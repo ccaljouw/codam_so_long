@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 19:21:17 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 19:31:45 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_map
 	char		**arr;
 	uint32_t	map_width;
 	uint32_t	map_height;
-	uint32_t	pos_x;
-	uint32_t	pos_y;
+	int			pos_x;
+	int			pos_y;
 }	t_map;
 
 typedef struct s_images
