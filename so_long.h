@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 18:51:43 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/15 18:56:30 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 typedef struct s_images
 {	
-	mlx_texture_t	*player; // kan er uit
-	mlx_texture_t	*playerr; // kan er uit
 	mlx_image_t	*empty;
 	mlx_image_t	*wall;
 	mlx_image_t	*coll;
