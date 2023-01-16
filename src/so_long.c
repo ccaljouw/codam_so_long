@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/16 16:50:44 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/16 17:08:08 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 		x = 0;
 		y++;
 	}
-	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 0);
+	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 64);
 }
 
 void	init_background(mlx_t *mlx, t_images *imgs, t_map *map)
 {
 	imgs->empty_text = mlx_load_png("./images/background.png");
 	imgs->empty = mlx_texture_to_image(mlx,imgs->empty_text);
-	imgs->background = mlx_new_image(mlx, map->map_width * imgs->empty->width, map->map_height * imgs->empty->height); 
-	mlx_image_to_window(mlx, imgs->background, 0, 0);
+	imgs->background = mlx_new_image(mlx, map->map_width * imgs->empty->width, (map->map_height + 1) * imgs->empty->height); 
+	mlx_image_to_window(mlx, imgs->background, 0, 64);
 }
 
 void	init_images(mlx_t *mlx, t_images *imgs, t_map *map)
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
 	gb->map = map;
 	if (!check_input(argc, argv, map) || !gb || !imgs)
 		ft_printf("error in main arguments");
-	gb->mlx = mlx_init(gb->map->map_width * 64, gb->map->map_height * 64, "So long!\t\t\tmoves: 0", true);
+	gb->mlx = mlx_init(gb->map->map_width * 64, (gb->map->map_height+1) * 64, "So long!\t\t\tmoves: 0", true);
 	if (!gb->mlx)
 		exit(EXIT_FAILURE);
 	init_images(gb->mlx, imgs, gb->map);
