@@ -6,34 +6,43 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/15 22:43:05 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 00:17:34 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		check_move(keys_t key, t_gameboard *gb, int pl_x, int pl_y)
+// maak get new position en check move als aparte functies
+int		check_move(keys_t key, t_gameboard *gb)
 {
+	int x_npos;
+	int	y_npos;
+	int	map_x;
+	int map_y;
+	
+	x_npos = gb->player->x_pos;
+	y_npos = gb->player->y_pos;
 	if (key == MLX_KEY_UP)
-		pl_y = pl_y - gb->imgs->empty->height;
+		y_npos = gb->player->y_pos - gb->text->empty->height;
 	else if (key == MLX_KEY_DOWN)
-		pl_y = pl_y + gb->imgs->empty->height;
+		y_npos = gb->player->y_pos + gb->text->empty->height;
 	else if (key == MLX_KEY_LEFT || key == MLX_KEY_RIGHT)
 	{
-		change_direction(key, gb->imgs);
+		change_direction(key, gb->imgs, gb->text);
 		if (key == MLX_KEY_LEFT)
-			pl_x = pl_x - (gb->imgs->empty->width);
+			x_npos = gb->player->x_pos - gb->text->empty->width;
 		else
-			pl_x = pl_x + (gb->imgs->empty->width);
+			x_npos = gb->player->x_pos + gb->text->empty->width;
 	}
 	else
 		return (0);
-	gb->map->npos_x = pl_x/ gb->imgs->empty->width;
-	gb->map->npos_y = pl_y / gb->imgs->empty->height;
-	if (!(gb->map->npos_x >= 0 && gb->map->npos_y >= 0 && gb->map->npos_x < (int)gb->map->map_width && gb->map->npos_y < (int)gb->map->map_height))
+	map_x = x_npos / gb->text->empty->width;
+	map_y = y_npos / gb->text->empty->height;
+	if (map_x < 0 || map_y < 0 || map_x > gb->map->map_width || map_y > gb->map->map_height)
 		ft_printf("out of map range");
-	if (check_map_pos(gb, pl_x, pl_y))
-		move_player(gb, pl_x, pl_y);
+	if (!check_map_pos(gb, map_x, map_y))
+		return (0);
+	move_player(gb, x_npos, y_npos);
 	return (1);
 }
 
@@ -42,12 +51,12 @@ void	hook(struct mlx_key_data keypress, void *param)
 	t_gameboard *gb;
 
 	gb = param;
-	gb->pl_x = gb->imgs->pl->instances[0].x;
-	gb->pl_y = gb->imgs->pl->instances[0].y;
+	gb->player->x_pos = gb->imgs->pl->instances[0].x;
+	gb->player->y_pos = gb->imgs->pl->instances[0].y;
 	if (mlx_is_key_down(gb->mlx, keypress.key))
 	{
 		if (keypress.key == MLX_KEY_ESCAPE)
 			mlx_close_window(gb->mlx);
-		check_move(keypress.key, gb, gb->pl_x, gb->pl_y);
+		check_move(keypress.key, gb);
 	}
 }
