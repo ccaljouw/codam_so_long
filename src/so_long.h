@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/16 15:20:14 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/16 16:42:28 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_images
 	mlx_image_t		*wall;
 	mlx_image_t		*coll;
 	mlx_image_t		*exit;
-	mlx_image_t		*pl; //weghalen
-	mlx_image_t		*plr; //weghalen
+	mlx_image_t		*pl;
+	mlx_image_t		*plr;
 	mlx_image_t		*enemy;
 	
 }	t_images;

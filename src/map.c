@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/16 14:58:41 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/16 16:53:16 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	render_map(t_gameboard *gb, int x, int y)
 	if (gb->map->arr[y][x] == 'C')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
-		mlx_set_instance_depth(&gb->imgs->coll->instances[gb->imgs->coll->count - 1], 3);
+		mlx_set_instance_depth(&gb->imgs->coll->instances[gb->imgs->coll->count - 1], 2);
 	}
 	if (gb->map->arr[y][x] == 'P')
 	{
@@ -47,7 +47,7 @@ void	render_map(t_gameboard *gb, int x, int y)
 	if (gb->map->arr[y][x] == 'E')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
-		mlx_set_instance_depth(&gb->imgs->exit->instances[gb->imgs->exit->count - 1], 3);
+		mlx_set_instance_depth(&gb->imgs->exit->instances[gb->imgs->exit->count - 1], 2);
 		gb->imgs->exit->enabled = 0;
 	}
 }

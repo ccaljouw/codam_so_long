@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/16 15:55:58 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/16 16:50:44 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,26 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 		x = 0;
 		y++;
 	}
-	mlx_image_to_window(gb->mlx, gb->imgs->background, 0, 0);
-	mlx_set_instance_depth(&gb->imgs->background->instances[0], 0);
 	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 0);
-	mlx_set_instance_depth(&gb->imgs->wall->instances[0], 1);
+}
+
+void	init_background(mlx_t *mlx, t_images *imgs, t_map *map)
+{
+	imgs->empty_text = mlx_load_png("./images/background.png");
+	imgs->empty = mlx_texture_to_image(mlx,imgs->empty_text);
+	imgs->background = mlx_new_image(mlx, map->map_width * imgs->empty->width, map->map_height * imgs->empty->height); 
+	mlx_image_to_window(mlx, imgs->background, 0, 0);
 }
 
 void	init_images(mlx_t *mlx, t_images *imgs, t_map *map)
 {
-	// textures to load into the background and wall images
-	imgs->empty_text = mlx_load_png("./images/background.png");
+	init_background(mlx, imgs, map);
 	imgs->wall_text =  mlx_load_png("./images/wall.png");
-	// image to get the correct width and height for the window
-	imgs->empty = mlx_texture_to_image(mlx,imgs->empty_text);
-	
-	// player images
-	imgs->plr = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64r.png"));
-	imgs->pl = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64.png"));
-	
-	// other images
+	imgs->wall = mlx_new_image(mlx, map->map_width * imgs->empty->width, map-> map_height * imgs->empty->height); 
 	imgs->coll = mlx_texture_to_image(mlx, mlx_load_png("./images/coll64.png"));
 	imgs->exit = mlx_texture_to_image(mlx, mlx_load_png("./images/exit64.png"));
-	imgs->background = mlx_new_image(mlx, map->map_width * imgs->empty->width, map-> map_height * imgs->empty->height); 
-	imgs->wall = mlx_new_image(mlx, map->map_width * imgs->empty->width, map-> map_height * imgs->empty->height); 
+	imgs->plr = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64r.png"));
+	imgs->pl = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64.png"));
 	if (!imgs->empty || !imgs->wall || !imgs->pl || !imgs->plr || !imgs->coll || !imgs->exit || !imgs->background)
 		ft_printf("error loading images");
 }
@@ -79,8 +76,8 @@ int main(int argc, char **argv)
 	t_images	*imgs;
 	t_map		*map;
 	
-	imgs = malloc(sizeof(t_images));
 	map = malloc(sizeof(t_map));
+	imgs = malloc(sizeof(t_images));
 	gb = malloc(sizeof(t_gameboard));
 	gb->map = map;
 	if (!check_input(argc, argv, map) || !gb || !imgs)
