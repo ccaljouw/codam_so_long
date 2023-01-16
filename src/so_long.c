@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 22:19:20 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/16 14:42:27 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,25 @@ void	init_gameboard(t_gameboard *gb, t_images *imgs)
 		x = 0;
 		y++;
 	}
+	mlx_image_to_window(gb->mlx, gb->imgs->background, 0, 0);
+	mlx_set_instance_depth(&gb->imgs->background->instances[0], 0);
+	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 0);
+	mlx_set_instance_depth(&gb->imgs->wall->instances[0], 1);
 }
 
 void	init_images(mlx_t *mlx, t_images *imgs)
 {
 	// imgs->empty = mlx_new_image(mlx, 64, 64);
-	// ft_memset(imgs->empty->pixels,100, imgs->empty->width * imgs->empty->height * sizeof(int));
-	imgs->empty = mlx_texture_to_image(mlx, mlx_load_png("./images/background.png"));
-	imgs->wall = mlx_texture_to_image(mlx, mlx_load_png("./images/wall.png"));
+	imgs->empty_text = mlx_load_png("./images/background.png");
+	imgs->wall_text =  mlx_load_png("./images/wall.png");
+	imgs->empty = mlx_texture_to_image(mlx,imgs->empty_text);
 	imgs->pl = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64.png"));
 	imgs->plr = mlx_texture_to_image(mlx, mlx_load_png("./images/flashman64r.png"));
 	imgs->coll = mlx_texture_to_image(mlx, mlx_load_png("./images/coll64.png"));
 	imgs->exit = mlx_texture_to_image(mlx, mlx_load_png("./images/exit64.png"));
-	if (!imgs->empty || !imgs->wall || !imgs->pl || !imgs->plr || !imgs->coll || !imgs->exit)
+	imgs->background = mlx_new_image(mlx, 13*65, 5*65);
+	imgs->wall = mlx_new_image(mlx, 13*65, 5*65);
+	if (!imgs->empty || !imgs->wall || !imgs->pl || !imgs->plr || !imgs->coll || !imgs->exit || !imgs->background)
 		ft_printf("error loading images");
 }
 

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 22:38:00 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/16 14:21:16 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 typedef struct s_images
 {	
+	mlx_texture_t *empty_text;
+	mlx_texture_t *wall_text;
+	mlx_image_t	*background;
 	mlx_image_t	*empty;
 	mlx_image_t	*wall;
 	mlx_image_t	*coll;

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/15 22:42:00 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/16 14:58:41 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int check_map_pos(t_gameboard *gb, int x_pl, int y_pl)
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
-	mlx_image_to_window(gb->mlx, gb->imgs->empty, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
-	gb->imgs->empty->instances[gb->imgs->empty->count - 1].z = 0;
+	mlx_draw_texture(gb->imgs->background, gb->imgs->empty_text, x * gb->imgs->empty->width, y * gb->imgs->empty->height);;
 	if (gb->map->arr[y][x] == '1')
-	{
-		mlx_image_to_window(gb->mlx, gb->imgs->wall,x * gb->imgs->empty->width, y * gb->imgs->empty->height);
-	}
+		mlx_draw_texture(gb->imgs->wall, gb->imgs->wall_text, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
 	if (gb->map->arr[y][x] == 'C')
+	{
 		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
+		mlx_set_instance_depth(&gb->imgs->coll->instances[gb->imgs->coll->count - 1], 3);
+	}
 	if (gb->map->arr[y][x] == 'P')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
@@ -47,6 +47,7 @@ void	render_map(t_gameboard *gb, int x, int y)
 	if (gb->map->arr[y][x] == 'E')
 	{
 		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->imgs->empty->width, y * gb->imgs->empty->height);
+		mlx_set_instance_depth(&gb->imgs->exit->instances[gb->imgs->exit->count - 1], 3);
 		gb->imgs->exit->enabled = 0;
 	}
 }

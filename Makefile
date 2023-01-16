@@ -25,7 +25,7 @@ $(LIBS):
 	@$(MAKE) -C $(LIBMLX) 
 
 test: $(TEST_OBJ) $(LIBS)
-	$(CC) $(CFLAGS) $(HOMEFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
 
 obj/%.o : src/%.c
 	@mkdir -p $(dir $@)
