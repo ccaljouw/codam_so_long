@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/17 16:26:16 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 19:16:29 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_textures	*init_textures(void)
 		return (NULL);						//handle with error message
 	text->empty = mlx_load_png("./images/green.png");
 	text->wall = mlx_load_png("./images/wall.png");
-	text->side = mlx_load_png("./images/yellow.png");
+	text->side = mlx_load_png("./images/black.png");
 	text->bricks_to_get = mlx_load_png("./images/bricks256.png");
 	text->moves_title = mlx_load_png("./images/moves.png");
 	text->pl = mlx_load_png("./images/flashman64.png");
