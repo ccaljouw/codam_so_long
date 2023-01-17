@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 14:29:05 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 16:09:53 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ typedef struct s_textures
 	mlx_texture_t	*pl;
 	mlx_texture_t	*plr;
 	mlx_texture_t	*pll;
-	mlx_texture_t	*num_0;
-	mlx_texture_t	*num_1;
-	mlx_texture_t	*num_2;
-	mlx_texture_t	*num_3;
-	mlx_texture_t	*num_4;
-	mlx_texture_t	*num_5;
-	mlx_texture_t	*num_6;
-	mlx_texture_t	*num_7;
-	mlx_texture_t	*num_8;
-	mlx_texture_t	*num_9;
 }	t_textures;
 
 typedef struct s_images
@@ -45,6 +35,8 @@ typedef struct s_images
 	mlx_image_t		*wall;
 	mlx_image_t		*side;
 	mlx_image_t		*side_text;
+	mlx_image_t		*moves_count;
+	mlx_image_t		*coll_count;
 	mlx_image_t		*coll;
 	mlx_image_t		*exit;
 	mlx_image_t		*pl;
@@ -60,7 +52,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	mlx_image_t	**player_img;
+	mlx_texture_t	**player_img;
 	int			x_pos;
 	int			y_pos;
 	int			x_npos;
@@ -73,7 +65,7 @@ typedef struct s_gameboard
 	t_images	*imgs;
 	t_textures	*text;
 	t_player	*player;
-	t_textures	**nums;
+	mlx_texture_t	**nums;
 	mlx_t		*mlx;
 	int			coll;
 	int			moves;
@@ -89,4 +81,7 @@ int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
 void		change_direction(keys_t key, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
 void		move_player(t_gameboard *gb);
+void		init_num_sprite(t_gameboard *gb);
+void		set_collectable_score(int coll_count, t_gameboard *gb);
+void		set_moves(int moves, t_gameboard *gb);
 #endif

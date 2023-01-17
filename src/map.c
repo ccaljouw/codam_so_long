@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 13:45:26 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 16:26:04 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 	if (gb->map->arr[map_y][map_x] == 'E' && gb->imgs->exit->enabled == 1)
 		gb->imgs->pl->enabled = 0;
 	gb->moves += 1;
-	mlx_set_window_title(gb->mlx, ft_strjoin("So long!\t\t\tmoves: ", ft_itoa(gb->moves)));
+	set_moves(gb->moves, gb);
 	return (1);
 }
 
