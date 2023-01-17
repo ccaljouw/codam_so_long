@@ -1,6 +1,6 @@
 NAME 		:= so_long
 CC 			?= gcc
-CFLAGS 		:= -Wall -Wextra -Werror
+CFLAGS 		:= -Wall -Wextra #-Werror
 CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 HOMEFLAGS	:= -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/
 # TEST_FLAGS 	?= -g -fsanitize=address
@@ -9,7 +9,7 @@ LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
 HEADERS		:= -I includes/ -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 
-OBJ 		:= $(addprefix obj/, so_long.o map.o hook.o actions.o)
+OBJ 		:= $(addprefix obj/, so_long.o gameboard.o sidebar.o map.o hook.o actions.o)
 TEST_OBJ	:= $(addprefix obj/, test.o)
 
 all: $(NAME)

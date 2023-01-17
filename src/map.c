@@ -6,50 +6,12 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 00:16:35 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 10:15:28 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
-
-void	init_window(t_gameboard *gb)
-{
-	int	x;
-	int	y;
-	
-	x = 0;
-	y = 0;
-	mlx_image_to_window(gb->mlx, gb->imgs->background, 0, 0);
-	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 0);
-	while (gb->map->arr[y])
-	{
-		while (gb->map->arr[y][x])
-		{
-			render_map(gb, x, y);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
-
-void	render_map(t_gameboard *gb, int x, int y)
-{
-	mlx_draw_texture(gb->imgs->background, gb->text->empty, x * gb->text->empty->width, y * gb->text->empty->height);
-	if (gb->map->arr[y][x] == '1')
-		mlx_draw_texture(gb->imgs->wall, gb->text->wall,  x * gb->text->empty->width, y * gb->text->empty->height);
-	if (gb->map->arr[y][x] == 'C')
-		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->text->empty->width, y * gb->text->empty->height);
-	if (gb->map->arr[y][x] == 'P')
-	{
-		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->text->empty->width, y * gb->text->empty->height);
-		gb->player->x_pos = x * gb->text->empty->width;
-		gb->player->y_pos = y * gb->text->empty->width;
-	}
-	if (gb->map->arr[y][x] == 'E')
-		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->text->empty->width, y * gb->text->empty->height);
-}
 
 int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 {
@@ -70,6 +32,26 @@ int	check_map(char **arr)
 		return (1);
 	else
 		return (0);
+}
+
+void	render_map(t_gameboard *gb, int x, int y)
+{
+	mlx_draw_texture(gb->imgs->background, gb->text->empty, x * gb->text->empty->width, y * gb->text->empty->height);
+	if (gb->map->arr[y][x] == '1')
+		mlx_draw_texture(gb->imgs->wall, gb->text->wall,  x * gb->text->empty->width, y * gb->text->empty->height);
+	if (gb->map->arr[y][x] == 'C')
+		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->text->empty->width, y * gb->text->empty->height);
+	if (gb->map->arr[y][x] == 'P')
+	{
+		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->text->empty->width, y * gb->text->empty->height);
+		gb->player->x_pos = x * gb->text->empty->width;
+		gb->player->y_pos = y * gb->text->empty->width;
+	}
+	if (gb->map->arr[y][x] == 'E')
+	{
+		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->text->empty->width, y * gb->text->empty->height);
+		gb->imgs->exit->enabled = 0;	
+	}
 }
 
 char	*read_file(char *line, char *file)
@@ -100,3 +82,29 @@ char	*read_file(char *line, char *file)
 	return (line);
 }
 
+t_map	*init_map(char *file)
+{
+	t_map	*map;
+	char	*line;
+	int		i;
+	int		j;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);												//handle with error message and exit
+	line = NULL;
+	i = 0;
+	j = 0;
+	line = read_file(line, file);
+	if (!line)
+		return (NULL);
+	map->arr = ft_split(line, '\n');
+	while (map->arr[j][i])
+		i++;
+	map->map_width = i;
+	while (map->arr[j])
+		j++;
+	map->map_height = j;
+	check_map(map->arr);
+	return (map);
+}

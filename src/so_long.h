@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 00:15:43 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 13:17:54 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct s_textures
 {
 	mlx_texture_t	*empty;
 	mlx_texture_t	*wall;
+	mlx_texture_t	*side;
+	mlx_texture_t	*bricks_to_get;
 	mlx_texture_t	*enemy;
 	mlx_texture_t	*pl;
 	mlx_texture_t	*plr;
@@ -30,11 +32,12 @@ typedef struct s_images
 {	
 	mlx_image_t		*background;
 	mlx_image_t		*wall;
+	mlx_image_t		*side;
+	mlx_image_t		*side_text;
 	mlx_image_t		*coll;
 	mlx_image_t		*exit;
 	mlx_image_t		*pl;
 	mlx_image_t		*enemy;
-	
 }	t_images;
 
 typedef struct s_map
@@ -49,6 +52,8 @@ typedef struct s_player
 	mlx_image_t	**player_img;
 	int			x_pos;
 	int			y_pos;
+	int			x_npos;
+	int			y_npos;
 }	t_player;
 
 typedef struct s_gameboard
@@ -61,14 +66,14 @@ typedef struct s_gameboard
 	int			moves;
 } 	t_gameboard;
 
-// int		check_input(int argc, char **argv);
-void	init_window(t_gameboard *gb);
-char	*read_file(char *line, char *file);
-int		check_map(char **arr);
-void	render_map(t_gameboard *gb, int x, int y);
-void	hook(struct mlx_key_data keypress, void *param);
-int 	check_map_pos(t_gameboard *gb, int map_x, int map_y);
-void	change_direction(keys_t key, t_images *imgs, t_textures *text);
-void	get_collectable(t_gameboard *gb, int map_x, int map_y);
-void	move_player(t_gameboard *gb, int x_npos, int y_npos);
+t_gameboard	*init_gameboard(t_map *map);
+t_map		*init_map(char *file);
+t_player	*init_player(void);
+void		render_map(t_gameboard *gb, int x, int y);
+void		render_sidebar(t_gameboard *gb);
+void		key_hook(struct mlx_key_data keypress, void *param);
+int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
+void		change_direction(keys_t key, t_images *imgs, t_textures *text);
+void		get_collectable(t_gameboard *gb, int map_x, int map_y);
+void		move_player(t_gameboard *gb);
 #endif

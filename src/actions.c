@@ -6,16 +6,18 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/17 00:13:11 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 10:06:03 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	move_player(t_gameboard *gb, int x_npos, int y_npos)
+void	move_player(t_gameboard *gb)
 {
-	gb->imgs->pl->instances[0].x = x_npos;
-	gb->imgs->pl->instances[0].y = y_npos;
+	gb->imgs->pl->instances[0].x = gb->player->x_npos;
+	gb->imgs->pl->instances[0].y = gb->player->y_npos;
+	gb->player->x_pos = gb->player->x_npos;
+	gb->player->y_pos = gb->player->y_npos;
 }
 
 void	change_direction(keys_t key, t_images *imgs, t_textures *text)
@@ -35,7 +37,8 @@ void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 	coll = 0;
 	while (i >= 0)
 	{
-		if (gb->imgs->coll->instances[i].x == map_x && gb->imgs->coll->instances[i].y == map_y)
+
+		if (gb->imgs->coll->instances[i].x == (map_x * (int)gb->text->empty->width) && gb->imgs->coll->instances[i].y == (map_y * (int)gb->text->empty->height))
 			gb->imgs->coll->instances[i].enabled = 0;
 		else
 			coll += gb->imgs->coll->instances[i].enabled;
@@ -43,4 +46,5 @@ void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 	}
 	if (coll == 0)
 		gb->imgs->exit->enabled = 1;
+	ft_printf("%c, %d\n", gb->map->arr[map_y][map_x], coll);
 }
