@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 13:17:54 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 14:29:05 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,21 @@ typedef struct s_textures
 	mlx_texture_t	*wall;
 	mlx_texture_t	*side;
 	mlx_texture_t	*bricks_to_get;
+	mlx_texture_t	*moves_title;
 	mlx_texture_t	*enemy;
 	mlx_texture_t	*pl;
 	mlx_texture_t	*plr;
 	mlx_texture_t	*pll;
+	mlx_texture_t	*num_0;
+	mlx_texture_t	*num_1;
+	mlx_texture_t	*num_2;
+	mlx_texture_t	*num_3;
+	mlx_texture_t	*num_4;
+	mlx_texture_t	*num_5;
+	mlx_texture_t	*num_6;
+	mlx_texture_t	*num_7;
+	mlx_texture_t	*num_8;
+	mlx_texture_t	*num_9;
 }	t_textures;
 
 typedef struct s_images
@@ -62,7 +73,9 @@ typedef struct s_gameboard
 	t_images	*imgs;
 	t_textures	*text;
 	t_player	*player;
+	t_textures	**nums;
 	mlx_t		*mlx;
+	int			coll;
 	int			moves;
 } 	t_gameboard;
 

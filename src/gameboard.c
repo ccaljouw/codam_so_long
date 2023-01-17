@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/17 13:27:48 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 14:27:26 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,21 @@ t_textures	*init_textures(void)
 	text->wall = mlx_load_png("./images/wall.png");
 	text->side = mlx_load_png("./images/yellow.png");
 	text->bricks_to_get = mlx_load_png("./images/bricks256.png");
+	text->moves_title = mlx_load_png("./images/moves.png");
 	text->pl = mlx_load_png("./images/flashman64.png");
 	text->pll = mlx_load_png("./images/flashman64.png");
 	text->plr = mlx_load_png("./images/flashman64r.png");
-	if (!text->empty || !text->wall || !text->pll || !text->plr)
+	text->num_0 = mlx_load_png("./images/lego0.png");
+	text->num_1 = mlx_load_png("./images/lego1.png");
+	text->num_2 = mlx_load_png("./images/lego2.png");
+	text->num_3 = mlx_load_png("./images/lego3.png");
+	text->num_4 = mlx_load_png("./images/lego4.png");
+	text->num_5 = mlx_load_png("./images/lego5.png");
+	text->num_6 = mlx_load_png("./images/lego6.png");
+	text->num_7 = mlx_load_png("./images/lego7.png");
+	text->num_8 = mlx_load_png("./images/lego8.png");
+	text->num_9 = mlx_load_png("./images/lego9.png");
+	if (!text->empty || !text->wall || !text->pll || !text->plr) //expand
 		ft_printf("error loading textures");
 	return (text);
 }
@@ -72,6 +83,7 @@ t_gameboard	*init_gameboard(t_map *map)
 	gb->player = player;
 	gb->text = text;
 	gb->map = map;
+	gb->moves = 0;
 	gb->moves = 0;
 	gb->mlx = mlx_init((gb->map->map_width * text->empty->width) \
 		+ title_h, (gb->map->map_height * text->empty->height), \

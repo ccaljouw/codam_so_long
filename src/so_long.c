@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 13:29:00 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 13:48:41 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ void	init_window(t_gameboard *gb)
 	
 	x = 0;
 	y = 0;
-	render_sidebar(gb);
 	mlx_image_to_window(gb->mlx, gb->imgs->background, 0, 0);
 	mlx_image_to_window(gb->mlx, gb->imgs->wall, 0, 0);
-	mlx_image_to_window(gb->mlx, gb->imgs->side, gb->map->map_width * gb->text->empty->width, 0);
-	mlx_image_to_window(gb->mlx, gb->imgs->side_text, gb->map->map_width * gb->text->empty->width, 0);
 	while (gb->map->arr[y])
 	{
 		while (gb->map->arr[y][x])
@@ -62,6 +59,10 @@ void	init_window(t_gameboard *gb)
 		x = 0;
 		y++;
 	}
+	render_sidebar(gb);
+	mlx_image_to_window(gb->mlx, gb->imgs->side, gb->map->map_width * gb->text->empty->width, 0);
+	mlx_image_to_window(gb->mlx, gb->imgs->side_text, gb->map->map_width * gb->text->empty->width, 0);
+	
 }
 
 int main(int argc, char **argv)

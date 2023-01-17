@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/17 10:06:03 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/17 13:46:07 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,22 @@ void	change_direction(keys_t key, t_images *imgs, t_textures *text)
 void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 {
 	int i;
-	int coll;
 	
 	i = gb->imgs->coll->count - 1;
-	coll = 0;
+	gb->coll = 0;
 	while (i >= 0)
 	{
 
 		if (gb->imgs->coll->instances[i].x == (map_x * (int)gb->text->empty->width) && gb->imgs->coll->instances[i].y == (map_y * (int)gb->text->empty->height))
+		{
 			gb->imgs->coll->instances[i].enabled = 0;
+			ft_printf("collectables left: %d\n", gb->coll + 1);
+			// draw correct number to sidebar
+		}
 		else
-			coll += gb->imgs->coll->instances[i].enabled;
+			gb->coll += gb->imgs->coll->instances[i].enabled;
 		i--;
 	}
-	if (coll == 0)
+	if (gb->coll == 0)
 		gb->imgs->exit->enabled = 1;
-	ft_printf("%c, %d\n", gb->map->arr[map_y][map_x], coll);
 }
