@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/17 16:26:04 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/18 10:31:37 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 		return (0);
 	if (gb->map->arr[map_y][map_x] == 'C')
 		get_collectable(gb, map_x, map_y);
-	if (gb->map->arr[map_y][map_x] == 'E' && gb->imgs->exit->enabled == 1)
+	if (gb->map->arr[map_y][map_x] == 'E' && gb->coll == 0)
+	{
 		gb->imgs->pl->enabled = 0;
-	gb->moves += 1;
-	set_moves(gb->moves, gb);
+		//create image that the game has ended
+	}
+	if (gb->imgs->pl->enabled == 1)
+		gb->moves += 1;
+	set_movescore(gb->moves, gb);
 	return (1);
 }
 
@@ -36,21 +40,26 @@ int	check_map(char **arr)
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
-	mlx_draw_texture(gb->imgs->background, gb->text->empty, x * gb->text->empty->width, y * gb->text->empty->height);
+	int	x_pos;
+	int	y_pos;
+
+	x_pos = x * gb->text->empty->width;
+	y_pos = y * gb->text->empty->height;
+	mlx_draw_texture(gb->imgs->background, gb->text->empty, x_pos, y_pos);
 	if (gb->map->arr[y][x] == '1')
-		mlx_draw_texture(gb->imgs->wall, gb->text->wall,  x * gb->text->empty->width, y * gb->text->empty->height);
+		mlx_draw_texture(gb->imgs->wall, gb->text->wall, x_pos, y_pos);
 	if (gb->map->arr[y][x] == 'C')
-		mlx_image_to_window(gb->mlx, gb->imgs->coll, x * gb->text->empty->width, y * gb->text->empty->height);
+		mlx_image_to_window(gb->mlx, gb->imgs->coll, x_pos, y_pos);
 	if (gb->map->arr[y][x] == 'P')
 	{
-		mlx_image_to_window(gb->mlx, gb->imgs->pl, x * gb->text->empty->width, y * gb->text->empty->height);
-		gb->player->x_pos = x * gb->text->empty->width;
-		gb->player->y_pos = y * gb->text->empty->width;
+		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
+		gb->player->x_pos = x_pos;
+		gb->player->y_pos = y_pos;
 	}
 	if (gb->map->arr[y][x] == 'E')
 	{
-		mlx_image_to_window(gb->mlx, gb->imgs->exit, x * gb->text->empty->width, y * gb->text->empty->height);
-		gb->imgs->exit->enabled = 0;	
+		mlx_image_to_window(gb->mlx, gb->imgs->exit, x_pos, y_pos);
+		mlx_set_instance_depth(&gb->imgs->exit->instances[0], 2);
 	}
 }
 
