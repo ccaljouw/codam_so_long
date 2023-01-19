@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/18 10:31:03 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/18 17:56:04 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_new_position(keys_t key, t_gameboard *gb)
 {
 	int	movesize;
 
-	movesize = gb->text->empty->height / 2;
+	movesize = gb->text->empty->height;
 	gb->player->x_npos = gb->player->x_pos;
 	gb->player->y_npos = gb->player->y_pos;
 	if (key == MLX_KEY_UP)
@@ -65,4 +65,55 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 			mlx_close_window(gb->mlx);
 		check_move(keypress.key, gb);
 	}
+}
+void	move_patrol(t_gameboard *gb)
+{
+	mlx_draw_texture(gb->imgs->patrol, gb->text->fire[gb->imgs->fire_state], \
+	gb->patrol->x_pos, gb->patrol->y_pos);
+	if (gb->imgs->fire_state == 9)
+		gb->imgs->fire_state = 0;
+	else
+		gb->imgs->fire_state += 1;
+	// ft_printf("xpos: %d, x_npos: %d, y_pos: %d, y_npos: %d\n", gb->patrol->x_pos, gb->patrol->x_npos, gb->patrol->y_pos, gb->patrol->y_npos);
+	
+	if (gb->patrol->x_npos == 0)
+		gb->patrol->x_pos++;
+	else
+		gb->patrol->x_pos--;
+	
+	if (gb->patrol->x_pos >= (int)gb->imgs->patrol->width - 36)
+	{
+		gb->patrol->x_npos = 1;
+		if (gb->patrol->y_npos == 0)
+			gb->patrol->y_pos += 4;
+		else
+			gb->patrol->y_pos -= 4;
+	}
+	if (gb->patrol->x_pos <= 4)
+	{
+		gb->patrol->x_npos = 0;
+		if (gb->patrol->y_npos == 0)
+			gb->patrol->y_pos++;
+		else
+			gb->patrol->y_pos--;
+	}
+	if (gb->patrol->y_pos >= (int)gb->imgs->patrol->height - 36)
+		gb->patrol->y_npos = 1;
+	if (gb->patrol->y_pos <= 4)
+		gb->patrol->y_npos = 0;		
+}
+
+void	hook(void *param)
+{
+	t_gameboard	*gb;
+	
+	gb = param;
+	move_patrol(gb);
+	// mlx_draw_texture(gb->imgs->coll, gb->text->coll[gb->imgs->col_state], 0, 0);
+	// if (gb->imgs->col_state == 15)
+	// 	gb->imgs->col_state = 0;
+	// else
+	// 	gb->imgs->col_state += 1;
+
+	
 }

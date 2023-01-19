@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/18 10:31:37 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/19 16:39:50 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 	return (1);
 }
 
-int	check_map(char **arr)
-{
-	if (arr)
-		return (1);
-	else
-		return (0);
-}
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
@@ -48,19 +41,23 @@ void	render_map(t_gameboard *gb, int x, int y)
 	mlx_draw_texture(gb->imgs->background, gb->text->empty, x_pos, y_pos);
 	if (gb->map->arr[y][x] == '1')
 		mlx_draw_texture(gb->imgs->wall, gb->text->wall, x_pos, y_pos);
-	if (gb->map->arr[y][x] == 'C')
-		mlx_image_to_window(gb->mlx, gb->imgs->coll, x_pos, y_pos);
-	if (gb->map->arr[y][x] == 'P')
+	else if (gb->map->arr[y][x] == 'C')
 	{
+		mlx_image_to_window(gb->mlx, gb->imgs->coll, x_pos, y_pos);
+		//change patrol hook
+		mlx_image_to_window(gb->mlx, gb->imgs->patrol, x_pos, y_pos);
+	}
+	else if (gb->map->arr[y][x] == 'P')
+	{
+		check_map(gb, x, y);
 		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
 		gb->player->x_pos = x_pos;
 		gb->player->y_pos = y_pos;
 	}
-	if (gb->map->arr[y][x] == 'E')
-	{
+	else if (gb->map->arr[y][x] == 'E')
 		mlx_image_to_window(gb->mlx, gb->imgs->exit, x_pos, y_pos);
-		mlx_set_instance_depth(&gb->imgs->exit->instances[0], 2);
-	}
+	else if (gb->map->arr[y][x] != '0')
+		ft_printf("Invallid map");
 }
 
 char	*read_file(char *line, char *file)
@@ -88,6 +85,7 @@ char	*read_file(char *line, char *file)
 		if (!line || !*buffer)
 			return (NULL);
 	}
+	close(fd);
 	return (line);
 }
 
@@ -98,6 +96,7 @@ t_map	*init_map(char *file)
 	int		i;
 	int		j;
 
+	//check map is rectangular here?
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);												//handle with error message and exit
@@ -114,6 +113,8 @@ t_map	*init_map(char *file)
 	while (map->arr[j])
 		j++;
 	map->map_height = j;
-	check_map(map->arr);
+	map->coll_count = 0;
+	map->start_count = 1;
+	map->exit_count = 0;
 	return (map);
 }

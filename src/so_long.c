@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/18 10:33:41 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/18 15:11:45 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ t_player	*init_player(void)
 	player->y_pos = 0;
 	player->x_npos = 0;
 	player->y_npos = 0;
-	// init_player_left_sprite(player);
-	// init_player_right_sprite(player);
 	player->cur_dir = 'L';
 	return (player);
 	// handle errors
@@ -54,6 +52,7 @@ int	main(int argc, char **argv)
 	map = init_map(argv[1]);
 	gb = init_gameboard(map);
 	init_window(gb);
+	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);

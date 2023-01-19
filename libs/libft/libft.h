@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 11:56:55 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/11 15:59:43 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/19 15:37:23 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;	
 }					t_list;
+
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
