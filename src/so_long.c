@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 16:52:07 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 18:39:08 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,41 @@ static char	*error_msg(t_errno val)
 	message[16] = "Invallid map: invallid character in map.";
 	return (message[val]);
 };
-
+void	free_all(t_gameboard*gb);
 void	error(t_errno val, t_gameboard *gb)
 {
 	if (val == 0)
 		return ;
 	ft_printf("\nError\n%s\n\n", error_msg(val));
+	free_all(gb);
 	if (gb)
-		ft_printf("Free gb!!");
+	{
+		mlx_terminate(gb->mlx);
+		if (gb->map)
+		{
+			free(gb->map->arr);
+			free(gb->map);
+		}
+		if (gb->imgs)
+		{
+			free(gb->imgs->sprites);
+			free(gb->imgs);
+		}
+		if (gb->text)
+		{
+			free(gb->text->player);
+			free(gb->text->patrol);
+			free(gb->text->nums);	
+			free(gb->text);
+		}
+		if (gb->player)
+			free(gb->player);
+		if (gb->patrol)
+			free(gb->patrol);
+		if (gb->mlx)
+			free(gb->mlx);
+		free(gb);
+	}
 	exit (1);
 };
 
@@ -57,6 +84,7 @@ int	check_input(int argc, char **argv)
 	i = 0;
 	if (argc < 2)
 		error(FT_NOFILE, NULL);
+	// change check to look from end of file
 	while (argv[1][i] != '.')
 		i++;
 	if (ft_strncmp(argv[1] + i, ".ber", 5) != 0)
@@ -92,5 +120,6 @@ int	main(int argc, char **argv)
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx); 
+	system("leaks so_long");
 	return (0);
 }
