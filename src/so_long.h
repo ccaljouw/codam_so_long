@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/19 14:57:44 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 09:44:49 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_textures
 {
-	mlx_texture_t	**fire;
+	mlx_texture_t	**patrol;
 	mlx_texture_t	**coll;
 	mlx_texture_t	**nums;
 	mlx_texture_t	*empty;
@@ -44,10 +44,9 @@ typedef struct s_images
 	mlx_image_t		*coll;
 	mlx_image_t		*exit;
 	mlx_image_t		*pl;
-	mlx_image_t		*enemy;
 	mlx_image_t		*side_text;
 	mlx_image_t		*moves_count;
-	mlx_image_t		*coll_count;
+	mlx_image_t		*lives_count;
 }	t_images;
 
 typedef struct s_map
@@ -69,6 +68,7 @@ typedef struct s_pos
 typedef struct s_player
 {
 	char			cur_dir;
+	int				lives;
 	int				x_pos;
 	int				y_pos;
 	int				x_npos;
@@ -94,7 +94,7 @@ t_map		*init_map(char *file);
 t_player	*init_player(void);
 void		init_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
-void		init_fire_sprite(t_gameboard *gb);
+void		init_patrol_sprite(t_gameboard *gb);
 void		init_coll_sprite(t_gameboard *gb);
 void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);

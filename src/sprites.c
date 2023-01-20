@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/18 15:01:37 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 09:45:56 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,29 @@ void	init_num_sprite(t_gameboard *gb)
 	// error check
 }
 
-void	init_fire_sprite(t_gameboard *gb)
+void	init_patrol_sprite(t_gameboard *gb)
 {
-	gb->text->fire = malloc(sizeof(mlx_texture_t *) * 20);
-	if (!gb->text->fire)
+	gb->text->patrol = malloc(sizeof(mlx_texture_t *) * 20);
+	if (!gb->text->patrol)
 		ft_printf("malloc error");
-	gb->text->fire[0] = mlx_load_png("./images/fire/1.png");
-	gb->text->fire[1] = mlx_load_png("./images/fire/3.png");
-	gb->text->fire[2] = mlx_load_png("./images/fire/5.png");
-	gb->text->fire[3] = mlx_load_png("./images/fire/7.png");
-	gb->text->fire[4] = mlx_load_png("./images/fire/9.png");
-	gb->text->fire[5] = mlx_load_png("./images/fire/11.png");
-	gb->text->fire[6] = mlx_load_png("./images/fire/13.png");
-	gb->text->fire[7] = mlx_load_png("./images/fire/15.png");
-	gb->text->fire[8] = mlx_load_png("./images/fire/17.png");
-	gb->text->fire[9] = mlx_load_png("./images/fire/19.png");
-	gb->text->fire[10] = mlx_load_png("./images/fire/21.png");
-	gb->text->fire[11] = mlx_load_png("./images/fire/23.png");
-	gb->text->fire[12] = mlx_load_png("./images/fire/25.png");
-	gb->text->fire[13] = mlx_load_png("./images/fire/27.png");
-	gb->text->fire[15] = mlx_load_png("./images/fire/29.png");
-	gb->text->fire[17] = mlx_load_png("./images/fire/31.png");
-	gb->text->fire[18] = mlx_load_png("./images/fire/33.png");
-	gb->text->fire[19] = NULL;
+	gb->text->patrol[0] = mlx_load_png("./images/patrol1/1.png");
+	gb->text->patrol[1] = mlx_load_png("./images/patrol1/3.png");
+	gb->text->patrol[2] = mlx_load_png("./images/patrol1/5.png");
+	gb->text->patrol[3] = mlx_load_png("./images/patrol1/7.png");
+	gb->text->patrol[4] = mlx_load_png("./images/patrol1/9.png");
+	gb->text->patrol[5] = mlx_load_png("./images/patrol1/11.png");
+	gb->text->patrol[6] = mlx_load_png("./images/patrol1/13.png");
+	gb->text->patrol[7] = mlx_load_png("./images/patrol1/15.png");
+	gb->text->patrol[8] = mlx_load_png("./images/patrol1/17.png");
+	gb->text->patrol[9] = mlx_load_png("./images/patrol1/19.png");
+	gb->text->patrol[10] = mlx_load_png("./images/patrol1/21.png");
+	gb->text->patrol[11] = mlx_load_png("./images/patrol1/23.png");
+	gb->text->patrol[12] = mlx_load_png("./images/patrol1/25.png");
+	gb->text->patrol[13] = mlx_load_png("./images/patrol1/27.png");
+	gb->text->patrol[15] = mlx_load_png("./images/patrol1/29.png");
+	gb->text->patrol[17] = mlx_load_png("./images/patrol1/31.png");
+	gb->text->patrol[18] = mlx_load_png("./images/patrol1/33.png");
+	gb->text->patrol[19] = NULL;
 	// error check
 }
 

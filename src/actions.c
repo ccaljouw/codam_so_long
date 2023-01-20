@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/18 10:29:25 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 09:26:26 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 	}
 	if (gb->coll == 0)
 		mlx_draw_texture(gb->imgs->exit, gb->text->exit_open, 0, 0);
-	set_collectable_score(gb->coll, gb);
 }
