@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 19:50:05 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 22:13:25 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,4 +142,5 @@ void		error(t_errno val, t_gameboard *gb);
 void		end_game(t_gameboard *gb, int result);
 void		free_all(t_gameboard *gb);
 void		delete_content(void *param);
+void		delete_list_pointer(void);
 #endif

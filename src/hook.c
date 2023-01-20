@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 17:23:29 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 21:13:21 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,5 @@ void	hook(void *param)
 	t_gameboard	*gb;
 	
 	gb = param;
-	move_patrol(gb);
-	// mlx_draw_texture(gb->imgs->coll, gb->text->coll[gb->imgs->col_state], 0, 0);
-	// if (gb->imgs->col_state == 15)
-	// 	gb->imgs->col_state = 0;
-	// else
-	// 	gb->imgs->col_state += 1;
-
-	
+	move_patrol(gb);	
 }

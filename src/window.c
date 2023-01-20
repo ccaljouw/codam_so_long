@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 19:30:32 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 22:29:02 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_movescore(int moves, t_gameboard *gb)
 		mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[num[ft_strlen(num) - i] - '0'], gb->text->nums[0]->width * (3 - i) + ((gb->text->nums[0]->width - gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2), 0);
 		i--;
 	}
+	free(num);
 }
 
 // sidebarwidth is 3x width of background texture. 

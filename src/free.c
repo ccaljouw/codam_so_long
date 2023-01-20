@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 19:51:42 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 22:14:12 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	delete_content(void *param)
 	content = param;
 	if (content)
 		free(content);
+}
+
+void	delete_list_pointer(void)
+{
+	return ;
 }
 
 void	free_textures(t_textures *text)

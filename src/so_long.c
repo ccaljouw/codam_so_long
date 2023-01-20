@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 20:06:48 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 22:29:56 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ int	main(int argc, char **argv)
 	gb = init_gameboard();
 	init_map(argv[1], gb);
 	init_textures(gb);
-	init_window(gb); // 1 leak, no malloc only mlx_init??
+	init_window(gb); // 1 leak, uit mlx_init?? soms wel en soms niet...
 	init_images(gb);
 	init_characters(gb);
-	render_window(gb); // leaks in linked lists
-	mlx_loop_hook(gb->mlx, hook, gb); // 1 leak
+	render_window(gb);
+	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
-	mlx_loop(gb->mlx); // 1 leak
+	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx); 
 	system("leaks home");
 	return (0);

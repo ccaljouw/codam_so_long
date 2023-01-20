@@ -36,6 +36,7 @@ void	hook(void *param)
 		g_img->instances[0].x -= 5;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		g_img->instances[0].x += 5;
+	free(mlx);
 }
 
 int32_t	main(void)
