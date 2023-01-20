@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 09:33:43 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 11:18:26 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	render_sidebar(t_gameboard *gb)
 	int	width;
 	int	offset;
 	
-	heigth = gb->height / gb->text->side->height;
-	width = gb->imgs->side->width / gb->text->side->width;
+	heigth = (gb->height / gb->text->side->height) - 1;
+	width = (gb->imgs->side->width / gb->text->side->width) - 1;
 	offset = gb->height / 20;
 	while (heigth >= 0)
 	{

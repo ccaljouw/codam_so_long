@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 10:15:23 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 11:45:21 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	init_player_sprite(t_gameboard *gb)
 	gb->text->player[3] = mlx_load_png("./images/player/flashman64blackr.png");
 	gb->text->player[4] = mlx_load_png("./images/player/flashman64grey.png");
 	gb->text->player[5] = mlx_load_png("./images/player/flashman64greyr.png");
-	gb->text->player[6] = 0;
+	gb->text->player[6] = NULL;
 
 	// error check
 }

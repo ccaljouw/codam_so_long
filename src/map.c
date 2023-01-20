@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 10:13:05 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 11:20:20 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 		gb->imgs->pl->enabled = 0;
 		//create image that the game has ended
 	}
-	// if (gb->map->arr[map_y][map_x] == 'X')
-	// 	hit_patrol(gb, map_x, map_y);
+	if (gb->map->arr[map_y][map_x] == 'X')
+		hit_patrol(gb, map_x, map_y);
 	if (gb->imgs->pl->enabled == 1)
 		gb->moves += 1;
 	set_movescore(gb->moves, gb);

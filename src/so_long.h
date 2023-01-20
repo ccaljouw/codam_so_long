@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 10:15:41 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 11:41:14 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_textures
 typedef struct s_images
 {	
 	int				fire_state;
+	int				player_state;
 	int				col_state;
 	mlx_image_t		*background;
 	mlx_image_t		*patrol;
@@ -98,7 +99,7 @@ void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		hook(void *param);
 int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
-void		change_direction(int cur_dir, t_images *imgs, t_textures *text);
+void		change_direction(keys_t key, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
 void		hit_patrol(t_gameboard *gb, int map_x, int map_y);
 void		move_player(t_gameboard *gb);

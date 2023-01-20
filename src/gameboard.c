@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 10:15:15 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 11:28:11 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 		ft_printf("error loading images");
 	gb->imgs = imgs;
 	gb->imgs->fire_state = 0;
+	gb->imgs->player_state = 0;
 	gb->imgs->col_state = 0;
 	gb->patrol->x_pos = 0;
 	gb->patrol->y_pos = 0;
