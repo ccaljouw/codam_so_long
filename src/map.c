@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 11:20:20 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 15:01:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,27 @@ char	*read_file(char *line, char *file)
 			return (line);
 		buffer[count] = '\0';
 		line = ft_strjoin_free_s1(line, buffer);
-		if (!line || !*buffer)
-			return (NULL);
 	}
 	close(fd);
 	return (line);
 }
 
-t_map	*init_map(char *file)
+void	init_map(char *file, t_gameboard *gb)
 {
 	t_map	*map;
 	char	*line;
 	int		i;
 	int		j;
 
-	//check map is rectangular here?
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);												//handle with error message and exit
 	line = NULL;
 	i = 0;
 	j = 0;
+	map = malloc(sizeof(t_map));
+	if (!map)
+		error(FT_MEMFAIL, gb);												//handle with error message and exit
 	line = read_file(line, file);
 	if (!line)
-		return (NULL);
+		error(FT_INVFILE, gb);
 	map->arr = ft_split(line, '\n');
 	while (map->arr[j][i])
 		i++;
@@ -116,5 +113,5 @@ t_map	*init_map(char *file)
 	map->coll_count = 0;
 	map->start_count = 1;
 	map->exit_count = 0;
-	return (map);
+	gb->map = map;
 }

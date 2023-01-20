@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 11:41:14 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 15:14:33 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,22 @@
 
 #include "libft.h"
 #include "MLX42.h"
+
+// The error codes used to idenfity the correct error message.
+typedef enum s_errno
+{
+	FT_SUCCESS = 0,	// No Errors
+	FT_NOFILE,		// No file provided as program argument.
+	FT_INVEXT,		// File has an invalid extension.
+	FT_INVFILE,		// File was invalid / does not exist.
+	FT_INVPNG,		// Something is wrong the given PNG file.
+	FT_INVPOS,		// The specified X/Y positions are out of bounds.
+	FT_INVIMG,		// The provided image is invalid, might indicate mismanagement of images.
+	FT_MEMFAIL,		// Dynamic memory allocation has failed.
+	FT_WINFAIL,		// Failed to create a window.
+	FT_ARRTOBIG,	// The array is too big to be drawn.
+	FT_ERRMAX,		// Error count
+}	t_errno;
 
 typedef struct s_textures
 {
@@ -75,6 +91,7 @@ typedef struct s_player
 
 typedef struct s_gameboard
 {
+	char			**errors;
 	t_map			*map;
 	t_images		*imgs;
 	t_textures		*text;
@@ -87,10 +104,13 @@ typedef struct s_gameboard
 	int				height;
 } 	t_gameboard;
 
-t_gameboard	*init_gameboard(t_map *map);
-t_map		*init_map(char *file);
+t_gameboard	*init_gameboard(void);
 t_player	*init_player(void);
+void		init_map(char *file, t_gameboard *gb);
 void		init_window(t_gameboard *gb);
+void		init_images(t_gameboard *gb);
+void		load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb);
+void		render_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
 void		init_player_sprite(t_gameboard *gb);
 void		init_patrol_sprite(t_gameboard *gb);
@@ -105,4 +125,5 @@ void		hit_patrol(t_gameboard *gb, int map_x, int map_y);
 void		move_player(t_gameboard *gb);
 void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
+void		error(t_errno val, t_gameboard *gb);
 #endif

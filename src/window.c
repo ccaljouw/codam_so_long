@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 11:18:26 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 15:15:59 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ void	render_sidebar(t_gameboard *gb)
 }
 
 void	init_window(t_gameboard *gb)
+{
+	gb->width = gb->map->map_width * gb->text->empty->width;
+	gb->height = gb->map->map_height * gb->text->empty->height;
+	gb->mlx = mlx_init(gb->width + (gb->text->empty->width * 2), \
+									gb->height, "So long!", false);
+	if (!gb->mlx)
+		error(FT_WINFAIL, gb);		
+}
+
+void	render_window(t_gameboard *gb)
 {
 	int	x;
 	int	y;

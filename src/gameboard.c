@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 11:28:11 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 15:11:39 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_textures	*init_textures()
 	return (text);
 }
 
-void	init_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
+void	load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 {
 	t_images	*imgs;
 
@@ -58,30 +58,19 @@ void	init_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 	gb->patrol->y_pos = 0;
 }
 
-t_gameboard	*init_gameboard(t_map *map)
+t_gameboard	*init_gameboard(void)
 {	
 	t_gameboard	*gb;
 	
 	gb = malloc(sizeof(t_gameboard));
 	if (!gb)
-		return (NULL);											//handle with error message and exit
+		error(FT_MEMFAIL, NULL);											//handle with error message and exit
 	gb->text = init_textures();
 	gb->player = init_player();
 	gb->patrol = init_player();
 	gb->player->lives = 3;
-	gb->map = map;
 	gb->moves = 0;
 	gb->coll = 0;
-	gb->width = gb->map->map_width * gb->text->empty->width;
-	gb->height = gb->map->map_height * gb->text->empty->height;
-	gb->mlx = mlx_init(gb->width + (gb->text->empty->width * 2), \
-									gb->height, "So long!", false);
-	if (!gb->mlx)
-		exit(EXIT_FAILURE);											//handle with error message and exit
-	init_num_sprite(gb);
-	init_patrol_sprite(gb);
-	init_coll_sprite(gb);
-	init_player_sprite(gb);
-	init_images(gb->mlx, gb->text, gb);
+									//handle with error me
 	return (gb);
 }

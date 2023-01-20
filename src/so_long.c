@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 10:10:33 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 15:16:24 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,24 @@ int	check_input(int argc, char **argv)
 	int	i;
 
 	i = 0;
-	if (argc > 2)
-		return (0);
+	if (argc < 2)
+		error(FT_NOFILE, NULL);
 	while (argv[1][i] != '.')
 		i++;
 	if (ft_strncmp(argv[1] + i, ".ber", 5) != 0)
-		return (0);
-	return (1);
+		error(FT_INVEXT, NULL);
+	return (MLX_SUCCESS);
 }
+
+void	init_images(t_gameboard *gb)
+{
+	init_num_sprite(gb);
+	init_patrol_sprite(gb);
+	init_coll_sprite(gb);
+	init_player_sprite(gb);
+	load_images(gb->mlx, gb->text, gb);
+}
+
 
 t_player	*init_player(void)
 {
@@ -44,13 +54,13 @@ t_player	*init_player(void)
 int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
-	t_map		*map;
 
-	if (!check_input(argc, argv))
-		return (ft_printf("incorrect arguments"));
-	map = init_map(argv[1]);
-	gb = init_gameboard(map);
+	check_input(argc, argv);
+	gb = init_gameboard();
+	init_map(argv[1], gb);
 	init_window(gb);
+	init_images(gb);
+	render_window(gb);
 	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
