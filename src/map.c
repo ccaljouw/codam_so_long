@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 16:22:36 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 17:20:25 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 	if (gb->map->arr[map_y][map_x] == 'C')
 		get_collectable(gb, map_x, map_y);
 	if (gb->map->arr[map_y][map_x] == 'E' && gb->coll == 0)
-	{
-		gb->imgs->pl->enabled = 0;
-		//create image that the game has ended
-	}
+		end_game(gb, 1);
 	if (gb->map->arr[map_y][map_x] == 'X')
-		hit_patrol(gb, map_x, map_y);
+		hit_patrol(gb);
 	if (gb->imgs->pl->enabled == 1)
 		gb->moves += 1;
+	if (gb->moves > 999)
+		end_game(gb, 3);
 	set_movescore(gb->moves, gb);
 	return (1);
 }

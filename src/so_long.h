@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 16:48:50 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 17:25:59 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void		init_map(char *file, t_gameboard *gb);
 void		init_window(t_gameboard *gb);
 void		init_images(t_gameboard *gb);
 void		init_textures(t_gameboard *gb);
-void		load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb);
 void		init_characters(t_gameboard *gb);
 void		render_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
@@ -135,9 +134,10 @@ void		hook(void *param);
 int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
 void		change_direction(keys_t key, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
-void		hit_patrol(t_gameboard *gb, int map_x, int map_y);
-void		move_player(t_gameboard *gb);
+void		hit_patrol(t_gameboard *gb);
+void		move_player(t_gameboard *gb, mlx_image_t *image);
 void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
 void		error(t_errno val, t_gameboard *gb);
+void		end_game(t_gameboard *gb, int result);
 #endif

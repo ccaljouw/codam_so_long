@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 16:48:12 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 17:23:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_move(keys_t key, t_gameboard *gb)
 		ft_printf("out of map range");
 	if (!check_map_pos(gb, map_x, map_y))
 		return (0);
-	move_player(gb);
+	move_player(gb, gb->imgs->pl);
 	return (1);
 }
 

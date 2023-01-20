@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 16:50:33 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:55:39 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ void	init_sprites(t_gameboard *gb)
 }
 
 // what happens if load fails...
-void	load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
+void	load_images(t_gameboard *gb)
 {
 	t_images	*imgs;
 
 	imgs = malloc(sizeof(t_images));
 	if (!imgs)
 		error(FT_MEMFAIL, gb);
-	imgs->patrol = mlx_new_image(mlx, text->empty->width, text->empty->height);
-	imgs->coll = mlx_texture_to_image(mlx, text->coll);
-	imgs->exit = mlx_texture_to_image(mlx,text->exit_closed);
-	imgs->pl = mlx_texture_to_image(mlx, text->player[0]);
-	imgs->side = mlx_new_image(mlx, text->empty->width * 2, gb->height);
-	imgs->side_text = mlx_new_image(mlx, text->empty->width * 2, gb->height);
-	imgs->moves_count = mlx_new_image(mlx, gb->text->nums[0]->width * 3, gb->text->nums[0]->height);
-	imgs->lives_count = mlx_new_image(mlx, gb->text->nums[0]->width, gb->text->nums[0]->height);
-	imgs->wall = mlx_new_image(mlx, gb->width, gb->height);
-	imgs->background = mlx_new_image(mlx, gb->width, gb->height);
+	imgs->patrol = mlx_new_image(gb->mlx, gb->text->empty->width, gb->text->empty->height);
+	imgs->coll = mlx_texture_to_image(gb->mlx, gb->text->coll);
+	imgs->exit = mlx_texture_to_image(gb->mlx,gb->text->exit_closed);
+	imgs->pl = mlx_texture_to_image(gb->mlx,gb-> text->player[0]);
+	imgs->side = mlx_new_image(gb->mlx, gb->text->empty->width * 2, gb->height);
+	imgs->side_text = mlx_new_image(gb->mlx, gb->text->empty->width * 2, gb->height);
+	imgs->moves_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width * 3, gb->text->nums[0]->height);
+	imgs->lives_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width, gb->text->nums[0]->height);
+	imgs->wall = mlx_new_image(gb->mlx, gb->width, gb->height);
+	imgs->background = mlx_new_image(gb->mlx, gb->width, gb->height);
 	gb->imgs = imgs;
 	init_sprites(gb);
 }
@@ -69,5 +69,5 @@ void	init_images(t_gameboard *gb)
 	init_num_sprite(gb);
 	init_patrol_sprite(gb);
 	init_player_sprite(gb);
-	load_images(gb->mlx, gb->text, gb);
+	load_images(gb);
 }
