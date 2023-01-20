@@ -6,11 +6,49 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 15:16:24 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:52:07 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static char	*error_msg(t_errno val)
+{
+	static char *message[FT_ERRMAX];
+
+	if (val > FT_ERRMAX)
+		return ("Error index out of bound");
+	if (val < 0)
+		return ("Error index must be positive");
+	message[0] = "No Errors";
+	message[1] = "No file provided as program argument.";
+	message[2] = "File has an invalid extension.";
+	message[3] = "File was invalid / does not exist.";
+	message[4] = "Something is wrong the given PNG file.";
+	message[5] = "The specified X/Y positions are out of bounds.";
+	message[6] = "The provided image is invalid, might indicate mismanagement of images.";
+	message[7] = "Dynamic memory allocation has failed.";
+	message[8] = "Failed to create a window.";
+	message[9] = "The array is too big to be drawn.";
+	message[10] = "Invallid map: not rectangular.";
+	message[11] = "Invallid map: not enclosed.";
+	message[12] = "Invallid map: no collectables.";
+	message[13] = "Invallid map: no startposition / more than one start position.";
+	message[14] = "Invallid map: no exit / more than one exit.";
+	message[15] = "Invallid map: no valid path.";
+	message[16] = "Invallid map: invallid character in map.";
+	return (message[val]);
+};
+
+void	error(t_errno val, t_gameboard *gb)
+{
+	if (val == 0)
+		return ;
+	ft_printf("\nError\n%s\n\n", error_msg(val));
+	if (gb)
+		ft_printf("Free gb!!");
+	exit (1);
+};
 
 int	check_input(int argc, char **argv)
 {
@@ -26,29 +64,16 @@ int	check_input(int argc, char **argv)
 	return (MLX_SUCCESS);
 }
 
-void	init_images(t_gameboard *gb)
-{
-	init_num_sprite(gb);
-	init_patrol_sprite(gb);
-	init_coll_sprite(gb);
-	init_player_sprite(gb);
-	load_images(gb->mlx, gb->text, gb);
-}
-
-
-t_player	*init_player(void)
-{
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	player->x_pos = 0;
-	player->y_pos = 0;
-	player->x_npos = 0;
-	player->y_npos = 0;
-	return (player);
-	// handle errors
+t_gameboard	*init_gameboard(void)
+{	
+	t_gameboard	*gb;
+	
+	gb = malloc(sizeof(t_gameboard));
+	if (!gb)
+		error(FT_MEMFAIL, NULL);
+	gb->moves = 0;
+	gb->coll = 0;
+	return (gb);
 }
 
 int	main(int argc, char **argv)
@@ -58,12 +83,14 @@ int	main(int argc, char **argv)
 	check_input(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);
+	init_textures(gb);
 	init_window(gb);
 	init_images(gb);
+	init_characters(gb);
 	render_window(gb);
 	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
-	mlx_terminate(gb->mlx);
+	mlx_terminate(gb->mlx); 
 	return (0);
 }

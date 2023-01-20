@@ -1,45 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   gameboard.c                                        :+:    :+:            */
+/*   images.c                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
+/*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 15:11:39 by ccaljouw      ########   odam.nl         */
+/*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
+/*   Updated: 2023/01/20 16:50:33 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_textures	*init_textures()
+// what happens if load fails...
+void	init_textures(t_gameboard *gb)
 {
 	t_textures	*text;
-
+	
 	text = malloc(sizeof(t_textures));
 	if (!text)
-		return (NULL);						//handle with error message
+		error(FT_MEMFAIL, gb);
+	text->side = mlx_load_png("./images/red.png");
+	text->lives_title = mlx_load_png("./images/lives.png");
+	text->moves_title = mlx_load_png("./images/moves.png");
 	text->empty = mlx_load_png("./images/green.png");
 	text->wall = mlx_load_png("./images/wall.png");
-	text->side = mlx_load_png("./images/red.png");
-	text->bricks_to_get = mlx_load_png("./images/lives.png");
-	text->moves_title = mlx_load_png("./images/moves.png");
+	text->coll = mlx_load_png("./images/bricks/0.png");
 	text->exit_open = mlx_load_png("./images/exito.png");
-	if (!text->empty || !text->wall || !text->exit_open) //expand
-		ft_printf("error loading textures");
-	return (text);
+	text->exit_closed = mlx_load_png("./images/exitc.png");
+	gb->text = text;
+}
+void	init_sprites(t_gameboard *gb)
+{
+	t_sprites *sprite_states;
+	
+	sprite_states = malloc(sizeof(sprite_states));
+	if (!sprite_states)
+		error(FT_MEMFAIL, gb);
+	sprite_states->patrol = 0;
+	sprite_states->player = 0;
+	gb->imgs->sprites = sprite_states;
 }
 
+// what happens if load fails...
 void	load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 {
 	t_images	*imgs;
 
 	imgs = malloc(sizeof(t_images));
 	if (!imgs)
-		ft_printf("error initiating ims"); 												//handle with error message and exit
+		error(FT_MEMFAIL, gb);
 	imgs->patrol = mlx_new_image(mlx, text->empty->width, text->empty->height);
-	imgs->coll = mlx_texture_to_image(mlx, mlx_load_png("./images/bricks/0.png"));
-	imgs->exit = mlx_texture_to_image(mlx, mlx_load_png("./images/exitc.png"));
+	imgs->coll = mlx_texture_to_image(mlx, text->coll);
+	imgs->exit = mlx_texture_to_image(mlx,text->exit_closed);
 	imgs->pl = mlx_texture_to_image(mlx, text->player[0]);
 	imgs->side = mlx_new_image(mlx, text->empty->width * 2, gb->height);
 	imgs->side_text = mlx_new_image(mlx, text->empty->width * 2, gb->height);
@@ -47,30 +60,14 @@ void	load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 	imgs->lives_count = mlx_new_image(mlx, gb->text->nums[0]->width, gb->text->nums[0]->height);
 	imgs->wall = mlx_new_image(mlx, gb->width, gb->height);
 	imgs->background = mlx_new_image(mlx, gb->width, gb->height);
-	if (!imgs->background || !imgs->wall || !imgs->pl || !imgs->coll \
-									|| !imgs->exit)
-		ft_printf("error loading images");
 	gb->imgs = imgs;
-	gb->imgs->fire_state = 0;
-	gb->imgs->player_state = 0;
-	gb->imgs->col_state = 0;
-	gb->patrol->x_pos = 0;
-	gb->patrol->y_pos = 0;
+	init_sprites(gb);
 }
 
-t_gameboard	*init_gameboard(void)
-{	
-	t_gameboard	*gb;
-	
-	gb = malloc(sizeof(t_gameboard));
-	if (!gb)
-		error(FT_MEMFAIL, NULL);											//handle with error message and exit
-	gb->text = init_textures();
-	gb->player = init_player();
-	gb->patrol = init_player();
-	gb->player->lives = 3;
-	gb->moves = 0;
-	gb->coll = 0;
-									//handle with error me
-	return (gb);
+void	init_images(t_gameboard *gb)
+{
+	init_num_sprite(gb);
+	init_patrol_sprite(gb);
+	init_player_sprite(gb);
+	load_images(gb->mlx, gb->text, gb);
 }

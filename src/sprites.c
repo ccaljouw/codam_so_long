@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 11:45:21 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:37:31 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,6 @@ void	init_patrol_sprite(t_gameboard *gb)
 	gb->text->patrol[17] = mlx_load_png("./images/patrol1/31.png");
 	gb->text->patrol[18] = mlx_load_png("./images/patrol1/33.png");
 	gb->text->patrol[19] = NULL;
-	// error check
-}
-
-void	init_coll_sprite(t_gameboard *gb)
-{
-	gb->text->coll = malloc(sizeof(mlx_texture_t *) * 17);
-	if (!gb->text->coll)
-		ft_printf("malloc error");
-
-	gb->text->coll[0] = mlx_load_png("./images/bricks/3.png");
-	gb->text->coll[1] = mlx_load_png("./images/bricks/3.png");
-	gb->text->coll[2] = mlx_load_png("./images/bricks/4.png");
-	gb->text->coll[3] = mlx_load_png("./images/bricks/4.png");
-	gb->text->coll[4] = mlx_load_png("./images/bricks/5.png");
-	gb->text->coll[5] = mlx_load_png("./images/bricks/5.png");
-	gb->text->coll[6] = mlx_load_png("./images/bricks/6.png");
-	gb->text->coll[7] = mlx_load_png("./images/bricks/6.png");
-	gb->text->coll[8] = mlx_load_png("./images/bricks/7.png");
-	gb->text->coll[9] = mlx_load_png("./images/bricks/7.png");
-	gb->text->coll[10] = mlx_load_png("./images/bricks/6.png");
-	gb->text->coll[11] = mlx_load_png("./images/bricks/6.png");
-	gb->text->coll[12] = mlx_load_png("./images/bricks/5.png");
-	gb->text->coll[13] = mlx_load_png("./images/bricks/5.png");
-	gb->text->coll[14] = mlx_load_png("./images/bricks/4.png");
-	gb->text->coll[15] = mlx_load_png("./images/bricks/4.png");
-	gb->text->coll[16] = NULL;
 	// error check
 }
 

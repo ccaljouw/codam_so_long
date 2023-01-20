@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 15:15:59 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:51:27 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	render_sidebar(t_gameboard *gb)
 		width = gb->imgs->side->width / gb->text->side->width;
 		heigth--;
 	}
-	mlx_draw_texture(gb->imgs->side_text, gb->text->bricks_to_get, (gb->imgs->side->width - gb->text->bricks_to_get->width) / 2, offset * 2);
+	mlx_draw_texture(gb->imgs->side_text, gb->text->lives_title, (gb->imgs->side->width - gb->text->lives_title->width) / 2, offset * 2);
 	mlx_draw_texture(gb->imgs->side_text, gb->text->moves_title, (gb->imgs->side->width - gb->text->moves_title->width) / 2, offset * 12);
 	mlx_image_to_window(gb->mlx, gb->imgs->side_text, gb->width + (gb->imgs->side->width - gb->imgs->side_text->width) / 2, 0);
 	mlx_image_to_window(gb->mlx, gb->imgs->lives_count, gb->width + ((gb->imgs->side->width - gb->imgs->lives_count->width) / 2), offset * 6);
@@ -71,7 +71,7 @@ void	render_window(t_gameboard *gb)
 {
 	int	x;
 	int	y;
-	
+
 	x = 0;
 	y = 0;
 	mlx_image_to_window(gb->mlx, gb->imgs->side, gb->width, 0);
@@ -90,4 +90,5 @@ void	render_window(t_gameboard *gb)
 	render_sidebar(gb);
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, gb->text->nums[gb->player->lives], 0, 0);
+
 }

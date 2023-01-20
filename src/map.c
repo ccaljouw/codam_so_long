@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 15:01:29 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:22:36 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	init_map(char *file, t_gameboard *gb)
 	j = 0;
 	map = malloc(sizeof(t_map));
 	if (!map)
-		error(FT_MEMFAIL, gb);												//handle with error message and exit
+		error(FT_MEMFAIL, gb);
 	line = read_file(line, file);
 	if (!line)
 		error(FT_INVFILE, gb);

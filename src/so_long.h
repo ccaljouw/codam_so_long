@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 15:14:33 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:48:50 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,41 @@ typedef enum s_errno
 	FT_MEMFAIL,		// Dynamic memory allocation has failed.
 	FT_WINFAIL,		// Failed to create a window.
 	FT_ARRTOBIG,	// The array is too big to be drawn.
-	FT_ERRMAX,		// Error count
+	FT_INVMAPSH,	// Invallid map: not rectangular.
+	FT_INVMAPW,		// Invallid map: not enclosed.
+	FT_INVMAPC,		// Invallid map: no collectables.
+	FT_INVMAPP,		// Invallid map: no startposition / more than one start position.
+	FT_INVMAPE,		// Invallid map: no exit / more than one exit.
+	FT_INVMAPR,		// Invallid map: no valid path.
+	FT_INVMAPCH,	// Invallid map: invallid character in map.
+	FT_ERRMAX,		// Error count.
+	
 }	t_errno;
 
 typedef struct s_textures
 {
 	mlx_texture_t	**player;
 	mlx_texture_t	**patrol;
-	mlx_texture_t	**coll;
 	mlx_texture_t	**nums;
-	mlx_texture_t	*empty;
-	mlx_texture_t	*wall;
 	mlx_texture_t	*side;
-	mlx_texture_t	*bricks_to_get;
+	mlx_texture_t	*lives_title;
 	mlx_texture_t	*moves_title;
+	mlx_texture_t	*empty;
+	mlx_texture_t	*coll;
+	mlx_texture_t	*wall;
 	mlx_texture_t	*enemy;
 	mlx_texture_t	*exit_open;
+	mlx_texture_t	*exit_closed;
 }	t_textures;
+
+typedef struct s_sprites
+{
+	int				patrol;
+	int				player;
+}	t_sprites;
 
 typedef struct s_images
 {	
-	int				fire_state;
-	int				player_state;
-	int				col_state;
 	mlx_image_t		*background;
 	mlx_image_t		*patrol;
 	mlx_image_t		*wall;
@@ -62,6 +74,7 @@ typedef struct s_images
 	mlx_image_t		*side_text;
 	mlx_image_t		*moves_count;
 	mlx_image_t		*lives_count;
+	t_sprites		*sprites;
 }	t_images;
 
 typedef struct s_map
@@ -105,11 +118,12 @@ typedef struct s_gameboard
 } 	t_gameboard;
 
 t_gameboard	*init_gameboard(void);
-t_player	*init_player(void);
 void		init_map(char *file, t_gameboard *gb);
 void		init_window(t_gameboard *gb);
 void		init_images(t_gameboard *gb);
+void		init_textures(t_gameboard *gb);
 void		load_images(mlx_t *mlx, t_textures *text, t_gameboard *gb);
+void		init_characters(t_gameboard *gb);
 void		render_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
 void		init_player_sprite(t_gameboard *gb);

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 11:42:29 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 16:48:12 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 }
 void	move_patrol(t_gameboard *gb)
 {
-	mlx_draw_texture(gb->imgs->patrol, gb->text->patrol[gb->imgs->fire_state], \
+	mlx_draw_texture(gb->imgs->patrol, gb->text->patrol[gb->imgs->sprites->patrol], \
 	gb->patrol->x_pos, gb->patrol->y_pos);
-	if (gb->imgs->fire_state == 9)
-		gb->imgs->fire_state = 0;
+	if (gb->imgs->sprites->patrol == 9)
+		gb->imgs->sprites->patrol= 0;
 	else
-		gb->imgs->fire_state += 1;
+		gb->imgs->sprites->patrol += 1;
 	// ft_printf("xpos: %d, x_npos: %d, y_pos: %d, y_npos: %d\n", gb->patrol->x_pos, gb->patrol->x_npos, gb->patrol->y_pos, gb->patrol->y_npos);
 	
 	if (gb->patrol->x_npos == 0)
