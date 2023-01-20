@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/19 17:09:27 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 19:54:52 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	bfs(t_map *map, t_list *frontier, t_list *reached)
 {
 	t_pos	*pos;
 	
-	if (!map || !frontier)
+	if (!frontier)
 		return ;
 	pos = frontier->content;
 	frontier = frontier->next;
@@ -86,14 +86,17 @@ int	check_map(t_gameboard *gb, int x, int y)
 	t_list	*reached;
 	t_pos	*pos;
 
-	pos = (t_pos *)malloc(sizeof(pos));
-	pos->x = x;
-	pos->y = y;
-	frontier = NULL;
-	reached = NULL;
-	ft_lstadd_back(&reached, ft_lstnew(pos));
-	ft_lstadd_back(&frontier, ft_lstnew(pos));
-	bfs(gb->map, frontier, reached);
-	ft_printf("p: %d, c: %d, e: %d\n", gb->map->start_count, gb->map->coll_count, gb->map->exit_count);
+	// pos = malloc(sizeof(pos));
+	// pos->x = x;
+	// pos->y = y;
+	// frontier = NULL;
+	// reached = NULL;
+	// ft_lstadd_back(&reached, ft_lstnew(pos));
+	// ft_lstadd_back(&frontier, ft_lstnew(pos));
+	// bfs(gb->map, frontier, reached);
+	// // free(frontier);
+	// // ft_lstclear(reached, delete_content);
+	// free(pos);
+	// ft_printf("p: %d, c: %d, e: %d\n", gb->map->start_count, gb->map->coll_count, gb->map->exit_count);
 	return (1);
 }

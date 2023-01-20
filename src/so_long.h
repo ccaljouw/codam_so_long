@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 17:25:59 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 19:50:05 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,6 @@ void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
 void		error(t_errno val, t_gameboard *gb);
 void		end_game(t_gameboard *gb, int result);
+void		free_all(t_gameboard *gb);
+void		delete_content(void *param);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 17:20:25 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/20 19:33:51 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,5 @@ void	init_map(char *file, t_gameboard *gb)
 	map->start_count = 1;
 	map->exit_count = 0;
 	gb->map = map;
+	free(line);
 }
