@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/18 15:11:45 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 10:10:33 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_player	*init_player(void)
 	player->y_pos = 0;
 	player->x_npos = 0;
 	player->y_npos = 0;
-	player->cur_dir = 'L';
 	return (player);
 	// handle errors
 }

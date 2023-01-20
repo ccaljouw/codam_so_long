@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 09:44:49 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 10:15:41 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct s_textures
 {
+	mlx_texture_t	**player;
 	mlx_texture_t	**patrol;
 	mlx_texture_t	**coll;
 	mlx_texture_t	**nums;
@@ -27,9 +28,6 @@ typedef struct s_textures
 	mlx_texture_t	*bricks_to_get;
 	mlx_texture_t	*moves_title;
 	mlx_texture_t	*enemy;
-	mlx_texture_t	*pl;
-	mlx_texture_t	*plr;
-	mlx_texture_t	*pll;
 	mlx_texture_t	*exit_open;
 }	t_textures;
 
@@ -67,7 +65,6 @@ typedef struct s_pos
 
 typedef struct s_player
 {
-	char			cur_dir;
 	int				lives;
 	int				x_pos;
 	int				y_pos;
@@ -94,16 +91,17 @@ t_map		*init_map(char *file);
 t_player	*init_player(void);
 void		init_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
+void		init_player_sprite(t_gameboard *gb);
 void		init_patrol_sprite(t_gameboard *gb);
 void		init_coll_sprite(t_gameboard *gb);
 void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		hook(void *param);
 int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
-void		change_direction(keys_t key, t_images *imgs, t_textures *text);
+void		change_direction(int cur_dir, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
+void		hit_patrol(t_gameboard *gb, int map_x, int map_y);
 void		move_player(t_gameboard *gb);
-void		set_collectable_score(int coll_count, t_gameboard *gb);
 void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
 #endif

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 09:45:23 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 10:15:15 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ t_textures	*init_textures()
 	text->side = mlx_load_png("./images/red.png");
 	text->bricks_to_get = mlx_load_png("./images/lives.png");
 	text->moves_title = mlx_load_png("./images/moves.png");
-	text->pl = mlx_load_png("./images/flashman64.png");
-	text->pll = mlx_load_png("./images/flashman64.png");
-	text->plr = mlx_load_png("./images/flashman64r.png");
 	text->exit_open = mlx_load_png("./images/exito.png");
-	if (!text->empty || !text->wall || !text->pll || !text->plr || !text->exit_open) //expand
+	if (!text->empty || !text->wall || !text->exit_open) //expand
 		ft_printf("error loading textures");
 	return (text);
 }
@@ -43,7 +40,7 @@ void	init_images(mlx_t *mlx, t_textures *text, t_gameboard *gb)
 	imgs->patrol = mlx_new_image(mlx, text->empty->width, text->empty->height);
 	imgs->coll = mlx_texture_to_image(mlx, mlx_load_png("./images/bricks/0.png"));
 	imgs->exit = mlx_texture_to_image(mlx, mlx_load_png("./images/exitc.png"));
-	imgs->pl = mlx_texture_to_image(mlx, text->pl);
+	imgs->pl = mlx_texture_to_image(mlx, text->player[0]);
 	imgs->side = mlx_new_image(mlx, text->empty->width * 2, gb->height);
 	imgs->side_text = mlx_new_image(mlx, text->empty->width * 2, gb->height);
 	imgs->moves_count = mlx_new_image(mlx, gb->text->nums[0]->width * 3, gb->text->nums[0]->height);
@@ -83,6 +80,7 @@ t_gameboard	*init_gameboard(t_map *map)
 	init_num_sprite(gb);
 	init_patrol_sprite(gb);
 	init_coll_sprite(gb);
+	init_player_sprite(gb);
 	init_images(gb->mlx, gb->text, gb);
 	return (gb);
 }

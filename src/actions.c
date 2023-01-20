@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 09:26:26 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 10:17:43 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	move_player(t_gameboard *gb)
 	gb->player->y_pos = gb->player->y_npos;
 }
 
-void	change_direction(keys_t key, t_images *imgs, t_textures *text)
+void	change_direction(int cur_dir, t_images *imgs, t_textures *text)
 {
-	if (key == MLX_KEY_LEFT)
-		mlx_draw_texture(imgs->pl, text->pll, 0, 0);
-	if (key == MLX_KEY_RIGHT)
-		mlx_draw_texture(imgs->pl, text->plr, 0, 0);
+	if (cur_dir == 0)
+		mlx_draw_texture(imgs->pl, text->player[0], 0, 0);
+	if (cur_dir == 1)
+		mlx_draw_texture(imgs->pl, text->player[1], 0, 0);
 }
 
 void	get_collectable(t_gameboard *gb, int map_x, int map_y)
@@ -48,3 +48,15 @@ void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 	if (gb->coll == 0)
 		mlx_draw_texture(gb->imgs->exit, gb->text->exit_open, 0, 0);
 }
+
+// void	hit_patrol(t_gameboard *gb, int map_x, int map_y)
+// {
+// 	gb->player->lives -= 1;
+// 	mlx_draw_texture(gb->imgs->lives_count, gb->text->nums[gb->player->lives], 0, 0);
+// 	if (gb->player->lives == 2)
+// 	{
+// 		//free?
+// 		gb->text->pll = 
+		
+// 	}
+// }

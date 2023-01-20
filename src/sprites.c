@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 09:45:56 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/20 10:15:23 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_patrol_sprite(t_gameboard *gb)
 void	init_coll_sprite(t_gameboard *gb)
 {
 	gb->text->coll = malloc(sizeof(mlx_texture_t *) * 17);
-	if (!gb->text->nums)
+	if (!gb->text->coll)
 		ft_printf("malloc error");
 
 	gb->text->coll[0] = mlx_load_png("./images/bricks/3.png");
@@ -83,3 +83,19 @@ void	init_coll_sprite(t_gameboard *gb)
 	// error check
 }
 
+void	init_player_sprite(t_gameboard *gb)
+{
+	gb->text->player = malloc(sizeof(mlx_texture_t *) * 7);
+	if (!gb->text->player)
+		ft_printf("malloc error");
+
+	gb->text->player[0] = mlx_load_png("./images/player/flashman64.png");
+	gb->text->player[1] = mlx_load_png("./images/player/flashman64r.png");
+	gb->text->player[2] = mlx_load_png("./images/player/flashman64black.png");
+	gb->text->player[3] = mlx_load_png("./images/player/flashman64blackr.png");
+	gb->text->player[4] = mlx_load_png("./images/player/flashman64grey.png");
+	gb->text->player[5] = mlx_load_png("./images/player/flashman64greyr.png");
+	gb->text->player[6] = 0;
+
+	// error check
+}
