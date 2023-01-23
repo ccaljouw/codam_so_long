@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 21:13:21 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:40:08 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 		check_move(keypress.key, gb);
 	}
 }
+
 void	move_patrol(t_gameboard *gb)
 {
 	mlx_draw_texture(gb->imgs->patrol, gb->text->patrol[gb->imgs->sprites->patrol], \

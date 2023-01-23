@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 21:29:43 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:40:31 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ void	init_textures(t_gameboard *gb)
 	text->exit_closed = mlx_load_png("./images/exitc.png");
 	gb->text = text;
 }
+
 void	init_sprites(t_gameboard *gb)
 {
-	t_sprites *sprite_states;
-	
-	// sprite_states = malloc(sizeof(sprite_states));
-	// if (!sprite_states)
-	// 	error(FT_MEMFAIL, gb);
-	sprite_states->patrol = 0;
-	sprite_states->player = 0;
-	gb->imgs->sprites = sprite_states;
+	// free somewhere..	
+	gb->imgs->sprites = malloc(sizeof(t_sprites));
+	if (!gb->imgs->sprites)
+		error(FT_MEMFAIL, gb);
+	gb->imgs->sprites->patrol = 0;
+	gb->imgs->sprites->player = 0;
 }
 
 // what happens if load fails...

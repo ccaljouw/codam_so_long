@@ -6,57 +6,74 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 22:14:12 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:58:17 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
 void	free_map(t_map *map)
 {
+	int	i;
+
+	i = 0;
+	while (map->arr[i])
+	{
+		free(map->arr[i]);
+		i++;
+	}
 	free(map->arr);
 	free(map);
 }
 
-void	delete_content(void *param)
-{
-	t_pos	*content;
-
-	content = param;
-	if (content)
-		free(content);
-}
-
-void	delete_list_pointer(void)
-{
-	return ;
-}
-
 void	free_textures(t_textures *text)
 {
-	free(text->player);
-	free(text->patrol);
-	free(text->nums);	
+	free_sprite(text->player);
+	free_sprite(text->patrol);
+	free_sprite(text->nums);
 	free(text);
+}
+
+void	free_sprite(mlx_texture_t **sprite)
+{
+	int	i;
+
+	i = 0;
+	while (sprite[i])
+	{
+		free(sprite[i]);
+		i++;
+	}
+	free(sprite);
+}
+
+void	free_images(t_images *imgs)
+{
+	if (imgs->sprites)
+		free(imgs->sprites);
+	free(imgs);
 }
 
 void	free_all(t_gameboard *gb)
 {
 	if (gb)
 	{
-		if (gb->mlx)
-			mlx_terminate(gb->mlx);
+		if (gb->errors) // static variable does not need to be freed?
+			free(gb->errors);
 		if (gb->map)
 			free_map(gb->map);
 		if (gb->imgs)
-			free(gb->imgs);
-		if (gb->text)
-			free_textures(gb->text);
+			free_images(gb->imgs);
 		if (gb->player)
 			free(gb->player);
 		if (gb->patrol)
 			free(gb->patrol);
-		if (gb->mlx)
-			free(gb->mlx);
-		free(gb);
+		// if (gb->text)
+		// 	free_textures(gb->text);
+		// if (gb->player)
+		// 	free(gb->player);
+		// if (gb->patrol)
+		// 	free(gb->patrol);
+		// free(gb);
 	}
 }

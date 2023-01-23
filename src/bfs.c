@@ -6,26 +6,30 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 22:25:14 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:54:21 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_coord(t_map *map, t_pos *pos)
+
+void	delete_content(void *param)
 {
-	//moet hier gb nog beschikbaar zijn voor free?
-	if (!ft_strchr("0CPE1", map->arr[pos->y][pos->x]))
-		error(FT_INVMAPCH, NULL);
-	if (map->arr[pos->y][pos->x] == '1')
-		return (0);
-	if (map->arr[pos->y][pos->x] == 'C')
-		map->coll_count += 1;
-	if (map->arr[pos->y][pos->x] == 'P')
-		map->start_count += 1;
-	if (map->arr[pos->y][pos->x] == 'E')
-		map->exit_count += 1;
-	return (1);
+	t_pos	*content;
+
+	content = param;
+	if (content)
+	{
+		free(content);
+		content = NULL;
+	}
+}
+
+void	delete_list_pointer(void *param)
+{
+	//how to free without pointless funtion?
+	param++;
+	return ;
 }
 
 int	check_set(t_map *map, t_list *set, int x, int y)

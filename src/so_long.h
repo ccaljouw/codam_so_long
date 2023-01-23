@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 22:13:25 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:39:06 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_textures
 	mlx_texture_t	*empty;
 	mlx_texture_t	*coll;
 	mlx_texture_t	*wall;
-	mlx_texture_t	*enemy;
 	mlx_texture_t	*exit_open;
 	mlx_texture_t	*exit_closed;
 }	t_textures;
@@ -127,7 +126,6 @@ void		render_window(t_gameboard *gb);
 void		init_num_sprite(t_gameboard *gb);
 void		init_player_sprite(t_gameboard *gb);
 void		init_patrol_sprite(t_gameboard *gb);
-void		init_coll_sprite(t_gameboard *gb);
 void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		hook(void *param);
@@ -138,9 +136,13 @@ void		hit_patrol(t_gameboard *gb);
 void		move_player(t_gameboard *gb, mlx_image_t *image);
 void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
+int			check_coord(t_map *map, t_pos *pos);
 void		error(t_errno val, t_gameboard *gb);
 void		end_game(t_gameboard *gb, int result);
 void		free_all(t_gameboard *gb);
 void		delete_content(void *param);
-void		delete_list_pointer(void);
+void		delete_list_pointer(void *param);
+void		free_sprite(mlx_texture_t **sprite);
+void		free_textures(t_textures *text);
+void		free_images(t_images *imgs);
 #endif

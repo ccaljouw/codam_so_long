@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 22:29:56 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:53:35 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,17 @@ t_gameboard	*init_gameboard(void)
 	gb = malloc(sizeof(t_gameboard));
 	if (!gb)
 		error(FT_MEMFAIL, NULL);
-	gb->moves = 0;
+	gb->errors = NULL;
+	gb->map = NULL;
+	gb->imgs = NULL;
+	gb->text = NULL;
+	gb->mlx = NULL;
+	gb->player = NULL;
+	gb->patrol = NULL;
 	gb->coll = 0;
+	gb->moves = 0;
+	gb->width = 0;
+	gb->height = 0;
 	return (gb);
 }
 
@@ -83,15 +92,16 @@ int	main(int argc, char **argv)
 	check_input(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);
-	init_textures(gb);
-	init_window(gb); // 1 leak, uit mlx_init?? soms wel en soms niet...
+	init_textures(gb); //freeing creates more leaks?
+	init_window(gb); // 1 leak, uit mlx_init?? 
 	init_images(gb);
-	init_characters(gb);
+	init_characters(gb); // cannot free characters because pointer nog allocated?
 	render_window(gb);
 	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx); 
+	free_all(gb);
 	system("leaks home");
 	return (0);
 }

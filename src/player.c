@@ -6,19 +6,19 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 16:26:19 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/23 20:53:11 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_player	*init_player(t_gameboard *gb)
+t_player	*init_player(void)
 {
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
-		error(FT_MEMFAIL, gb);
+		return (NULL);
 	player->lives = 3;
 	player->x_pos = 0;
 	player->y_pos = 0;
@@ -29,6 +29,8 @@ t_player	*init_player(t_gameboard *gb)
 
 void	init_characters(t_gameboard *gb)
 {
-	gb->player = init_player(gb);
-	gb->patrol = init_player(gb);
+	gb->player = init_player();
+	gb->patrol = init_player();
+	if (!gb->player || !gb->patrol)
+		error(FT_MEMFAIL, gb);
 }

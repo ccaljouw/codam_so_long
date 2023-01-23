@@ -1,9 +1,9 @@
 NAME 		:= so_long
 CC 			?= gcc
-CFLAGS 		:= -Wall -Wextra #-Werror
+CFLAGS 		:= -Wall -Wextra -Werror
 CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 HOMEFLAGS	:= -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/
-# TEST_FLAGS 	?= -g -fsanitize=address
+TEST_FLAGS 	?= #-g -fsanitize=address
 LIBFT	 	:= ./libs/libft
 LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
@@ -29,7 +29,7 @@ test: $(TEST_OBJ) $(LIBS)
 
 obj/%.o : src/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $^ -o $@ $(HEADERS)
+	$(CC) $(CFLAGS) $(TEST_FLAGS) -c $^ -o $@ $(HEADERS)
 
 clean:
 	rm -rf obj/

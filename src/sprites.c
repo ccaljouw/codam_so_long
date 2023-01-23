@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 16:37:31 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/22 19:59:53 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_num_sprite(t_gameboard *gb)
 
 void	init_patrol_sprite(t_gameboard *gb)
 {
-	gb->text->patrol = malloc(sizeof(mlx_texture_t *) * 20);
+	gb->text->patrol = malloc(sizeof(mlx_texture_t *) * 18);
 	if (!gb->text->patrol)
 		ft_printf("malloc error");
 	gb->text->patrol[0] = mlx_load_png("./images/patrol1/1.png");
@@ -50,10 +50,10 @@ void	init_patrol_sprite(t_gameboard *gb)
 	gb->text->patrol[11] = mlx_load_png("./images/patrol1/23.png");
 	gb->text->patrol[12] = mlx_load_png("./images/patrol1/25.png");
 	gb->text->patrol[13] = mlx_load_png("./images/patrol1/27.png");
-	gb->text->patrol[15] = mlx_load_png("./images/patrol1/29.png");
-	gb->text->patrol[17] = mlx_load_png("./images/patrol1/31.png");
-	gb->text->patrol[18] = mlx_load_png("./images/patrol1/33.png");
-	gb->text->patrol[19] = NULL;
+	gb->text->patrol[14] = mlx_load_png("./images/patrol1/29.png");
+	gb->text->patrol[15] = mlx_load_png("./images/patrol1/31.png");
+	gb->text->patrol[16] = mlx_load_png("./images/patrol1/33.png");
+	gb->text->patrol[17] = NULL;
 	// error check
 }
 

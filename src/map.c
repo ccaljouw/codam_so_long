@@ -6,12 +6,28 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/20 21:15:22 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/23 20:38:30 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
+
+int	check_coord(t_map *map, t_pos *pos)
+{
+	//moet hier gb nog beschikbaar zijn voor free?
+	if (!ft_strchr("0CPE1", map->arr[pos->y][pos->x]))
+		error(FT_INVMAPCH, NULL);
+	if (map->arr[pos->y][pos->x] == '1')
+		return (0);
+	if (map->arr[pos->y][pos->x] == 'C')
+		map->coll_count += 1;
+	if (map->arr[pos->y][pos->x] == 'P')
+		map->start_count += 1;
+	if (map->arr[pos->y][pos->x] == 'E')
+		map->exit_count += 1;
+	return (1);
+}
 
 int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 {
@@ -93,10 +109,11 @@ void	init_map(char *file, t_gameboard *gb)
 	int		i;
 	int		j;
 
-	line = NULL;
 	i = 0;
 	j = 0;
+	line = NULL;
 	map = malloc(sizeof(t_map));
+	map->arr = NULL;
 	if (!map)
 		error(FT_MEMFAIL, gb);
 	line = read_file(line, file);
