@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 16:34:29 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 18:12:00 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	main(int argc, char **argv)
 	t_gameboard	*gb;
 
 	// check for max window size
-	// check map is rectangular
 	// why is player not visible in mini map?
+	// make end screens
 	atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();

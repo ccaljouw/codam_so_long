@@ -6,19 +6,18 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:17:14 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 17:50:45 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <math.h>
 
 void	move_player(t_gameboard *gb, mlx_image_t *image)
 {
 	check_collision(gb);
 	image->instances[0].x = gb->player->x_npos;
 	image->instances[0].y = gb->player->y_npos;
-	if (gb->moves % (gb->imgs->coll->count * 2) == 0)
+	if (gb->moves % (gb->imgs->coll->count) == 0)
 		mlx_image_to_window(gb->mlx, gb->imgs->patrol, \
 				gb->player->x_pos, gb->player->y_pos);
 	gb->player->x_pos = gb->player->x_npos;
