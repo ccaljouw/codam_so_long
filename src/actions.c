@@ -6,35 +6,23 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 15:45:46 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:17:14 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <math.h>
 
-void	check_collision(t_gameboard *gb)
+void	move_player(t_gameboard *gb, mlx_image_t *image)
 {
-	int	i;
-
-	i = gb->imgs->patrol->count - 1;
-	while (i >= 0)
-	{
-		if (gb->imgs->patrol->instances[i].x == gb->player->x_npos \
-			&& gb->imgs->patrol->instances[i].y == gb->player->y_npos)
-		{
-			gb->player->lives -= 1;
-			if (gb->player->lives > 0)
-				gb->imgs->sprites->player += 2;
-			else
-				end_game(gb, 0);
-			mlx_draw_texture(gb->imgs->lives_count, \
-					gb->text->nums[gb->player->lives], 0, 0);
-			mlx_draw_texture(gb->imgs->pl, \
-					gb->text->player[gb->imgs->sprites->player], 0, 0);
-		}
-		i--;
-	}
+	check_collision(gb);
+	image->instances[0].x = gb->player->x_npos;
+	image->instances[0].y = gb->player->y_npos;
+	if (gb->moves % (gb->imgs->coll->count * 2) == 0)
+		mlx_image_to_window(gb->mlx, gb->imgs->patrol, \
+				gb->player->x_pos, gb->player->y_pos);
+	gb->player->x_pos = gb->player->x_npos;
+	gb->player->y_pos = gb->player->y_npos;
 }
 
 // create screens
@@ -47,18 +35,6 @@ void	end_game(t_gameboard *gb, int result)
 		ft_printf("No more lives, you lose....");
 	if (result == 3)
 		ft_printf("Too many moves, you lose....");
-}
-
-void	move_player(t_gameboard *gb, mlx_image_t *image)
-{
-	check_collision(gb);
-	image->instances[0].x = gb->player->x_npos;
-	image->instances[0].y = gb->player->y_npos;
-	if (gb->moves % (gb->imgs->coll->count * 2) == 0)
-		mlx_image_to_window(gb->mlx, gb->imgs->patrol, \
-				gb->player->x_pos, gb->player->y_pos);
-	gb->player->x_pos = gb->player->x_npos;
-	gb->player->y_pos = gb->player->y_npos;
 }
 
 void	change_direction(keys_t key, t_images *imgs, t_textures *text)
@@ -89,4 +65,29 @@ void	get_collectable(t_gameboard *gb, int map_x, int map_y)
 	}
 	if (gb->coll == 0)
 		mlx_draw_texture(gb->imgs->exit, gb->text->exit_open, 0, 0);
+}
+
+void	set_movescore(int moves, t_gameboard *gb)
+{
+	int		i;
+	char	*num;
+
+	num = ft_itoa(moves);
+	if (!num)
+		error(FT_MEMFAIL, gb);
+	i = ft_strlen(num);
+	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], 0, 0);
+	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], \
+												gb->text->nums[0]->width, 0);
+	while (i)
+	{
+		mlx_draw_texture(gb->imgs->moves_count, \
+			gb->text->nums[num[ft_strlen(num) - i] - '0'] \
+			, gb->text->nums[0]->width * (3 - i) \
+				+ ((gb->text->nums[0]->width \
+				- gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2) \
+			, 0);
+		i--;
+	}
+	free(num);
 }

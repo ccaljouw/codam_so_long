@@ -9,7 +9,7 @@ LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
 HEADERS		:= -I includes/ -I $(LIBFT) -I $(LIBMLX)/include -I $(LIBMLX)/include/MLX42
 
-OBJ 		:= $(addprefix obj/, so_long.o player.o window.o images.o sprites.o map.o bfs.o hook.o actions.o free.o)
+OBJ 		:= $(addprefix obj/, so_long.o player.o window.o images.o sprites.o init_map.o check_map.o hook.o actions.o free.o)
 TEST_OBJ	:= $(addprefix obj/, test.o)
 
 all: $(NAME)

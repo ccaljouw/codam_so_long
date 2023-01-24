@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 13:22:15 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:07:41 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	free_sprite(mlx_texture_t **sprite)
 
 	i = 0;
 	if (!sprite)
-		return;
+		return ;
 	while (sprite[i])
 	{
 		mlx_delete_texture(sprite[i]);

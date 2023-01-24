@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bfs.c                                              :+:    :+:            */
+/*   check_map.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 14:12:07 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:37:42 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,49 @@ int	check_set(t_gameboard *gb, t_list *set, int x, int y)
 		list = list->next;
 	}
 	return (0);
+}
+void	check_rectangle(t_gameboard *gb)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (gb->map->arr[j][i])
+		i++;
+	gb->map->map_width = i;
+	i = 0;
+	while (gb->map->arr[j])
+	{
+		while (gb->map->arr[j][i])
+			i++;
+		if (i != gb->map->map_width)
+			error(FT_INVMAPR, gb);
+		else
+			i = 0;
+		j++;
+	}
+	gb->map->map_height = j;
+}
+
+int	check_map(t_gameboard *gb, int x, int y)
+{
+	t_list	*frontier;
+	t_list	*reached;
+	t_pos	*pos;
+
+	pos = malloc(sizeof(pos));
+	if (!pos)
+		error(FT_MEMFAIL, gb);
+	pos->x = x;
+	pos->y = y;
+	frontier = NULL;
+	reached = NULL;
+	ft_lstadd_back(&reached, ft_lstnew(pos));
+	ft_lstadd_back(&frontier, ft_lstnew(pos));
+	bfs(gb, frontier, reached);
+	ft_lstclear(&reached, delete_content);
+	return (1);
 }
 
 int	check_neighbor(t_gameboard *gb, t_list **reached, int x, int y)
@@ -81,24 +124,4 @@ void	bfs(t_gameboard *gb, t_list *frontier, t_list *reached)
 	frontier = frontier->next;
 	free(temp);
 	bfs(gb, frontier, reached);
-}
-
-int	check_map(t_gameboard *gb, int x, int y)
-{
-	t_list	*frontier;
-	t_list	*reached;
-	t_pos	*pos;
-
-	pos = malloc(sizeof(pos));
-	if (!pos)
-		error(FT_MEMFAIL, gb);
-	pos->x = x;
-	pos->y = y;
-	frontier = NULL;
-	reached = NULL;
-	ft_lstadd_back(&reached, ft_lstnew(pos));
-	ft_lstadd_back(&frontier, ft_lstnew(pos));
-	bfs(gb, frontier, reached);
-	ft_lstclear(&reached, delete_content);
-	return (1);
 }

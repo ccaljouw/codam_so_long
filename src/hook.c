@@ -6,32 +6,11 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 15:31:06 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:08:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	get_new_position(keys_t key, t_gameboard *gb)
-{
-	gb->player->x_npos = gb->player->x_pos;
-	gb->player->y_npos = gb->player->y_pos;
-	if (key == MLX_KEY_UP)
-		gb->player->y_npos = gb->player->y_pos - SIZE;
-	else if (key == MLX_KEY_DOWN)
-		gb->player->y_npos = gb->player->y_pos + SIZE;
-	else if (key == MLX_KEY_LEFT || key == MLX_KEY_RIGHT)
-	{
-		if (key == MLX_KEY_LEFT)
-			gb->player->x_npos = gb->player->x_pos - SIZE;
-		else
-			gb->player->x_npos = gb->player->x_pos + SIZE;
-		change_direction(key, gb->imgs, gb->text);
-	}
-	else
-		return (0);
-	return (1);
-}
 
 int	move(keys_t key, t_gameboard *gb)
 {
@@ -64,46 +43,24 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 	}
 }
 
-void	movement_patrol(t_gameboard *gb)
+void	frame_hook(void *param)
 {
-	mlx_draw_texture(gb->imgs->patrol, gb->text->patrol[gb->imgs->sprites->patrol], \
-	gb->patrol->x_pos, gb->patrol->y_pos);
+	t_gameboard	*gb;
+
+	gb = param;
+	mlx_draw_texture(gb->imgs->patrol, \
+		gb->text->patrol[gb->imgs->sprites->patrol], \
+		gb->patrol->x_pos, (SIZE - gb->text->patrol[0]->height) / 2);
 	if (gb->imgs->sprites->patrol == 9)
-		gb->imgs->sprites->patrol= 0;
+		gb->imgs->sprites->patrol = 0;
 	else
 		gb->imgs->sprites->patrol += 1;
-	// ft_printf("xpos: %d, x_npos: %d, y_pos: %d, y_npos: %d\n", gb->patrol->x_pos, gb->patrol->x_npos, gb->patrol->y_pos, gb->patrol->y_npos);
 	if (gb->patrol->x_npos == 0)
 		gb->patrol->x_pos++;
 	else
 		gb->patrol->x_pos--;
-	
-	if (gb->patrol->x_pos >= (int)gb->imgs->patrol->width - 36)
-	{
+	if (gb->patrol->x_pos >= SIZE - 32)
 		gb->patrol->x_npos = 1;
-		if (gb->patrol->y_npos == 0)
-			gb->patrol->y_pos += 4;
-		else
-			gb->patrol->y_pos -= 4;
-	}
-	if (gb->patrol->x_pos <= 4)
-	{
+	if (gb->patrol->x_pos <= 0)
 		gb->patrol->x_npos = 0;
-		if (gb->patrol->y_npos == 0)
-			gb->patrol->y_pos++;
-		else
-			gb->patrol->y_pos--;
-	}
-	if (gb->patrol->y_pos >= (int)gb->imgs->patrol->height - 36)
-		gb->patrol->y_npos = 1;
-	if (gb->patrol->y_pos <= 4)
-		gb->patrol->y_npos = 0;		
-}
-
-void	frame_hook(void *param)
-{
-	t_gameboard	*gb;
-	
-	gb = param;
-	movement_patrol(gb);	
 }

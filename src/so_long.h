@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 15:17:34 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:33:12 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 * @param FT_INVMAPC Invallid map: no collectables.
 * @param FT_INVMAPP Invallid map: no or more than one start position.
 * @param FT_INVMAPE Invallid map: no exit / more than one exit.
-* @param FT_INVMAPR Invallid map: no valid path.
+* @param FT_INVMAPR Map is not rectangular.
 * @param FT_INVMAPCH Invallid map: invallid character in map.
+* @param FT_INVPATH Invallid map: no valid path.
 * @param FT_ERRMAX Error count.
 */
 
@@ -59,6 +60,7 @@ typedef enum s_errno
 	FT_INVMAPE,
 	FT_INVMAPR,
 	FT_INVMAPCH,
+	FT_INVPATH,
 	FT_ERRMAX,
 }	t_errno;
 
@@ -167,5 +169,8 @@ void		delete_content(void *param);
 void		free_sprite(mlx_texture_t **sprite);
 void		free_textures(t_textures *text);
 void		free_images(t_images *imgs);
-void		move_patrol(t_gameboard *gb, mlx_image_t *image);
+int			get_new_position(keys_t key, t_gameboard *gb);
+void		bfs(t_gameboard *gb, t_list *frontier, t_list *reached);
+void		check_collision(t_gameboard *gb);
+void		check_rectangle(t_gameboard *gb);
 #endif

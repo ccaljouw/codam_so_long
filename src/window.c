@@ -6,36 +6,11 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 14:19:54 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:15:54 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	set_movescore(int moves, t_gameboard *gb)
-{
-	int		i;
-	char	*num;
-
-	num = ft_itoa(moves);
-	if (!num)
-		error(FT_MEMFAIL, gb);
-	i = ft_strlen(num);
-	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], 0, 0);
-	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], \
-												gb->text->nums[0]->width, 0);
-	while (i)
-	{
-		mlx_draw_texture(gb->imgs->moves_count, \
-			gb->text->nums[num[ft_strlen(num) - i] - '0'] \
-			, gb->text->nums[0]->width * (3 - i) \
-				+ ((gb->text->nums[0]->width \
-				- gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2) \
-			, 0);
-		i--;
-	}
-	free(num);
-}
 
 void	draw_sidebar(t_gameboard *gb, int offset)
 {
@@ -78,13 +53,31 @@ void	render_sidebar(t_gameboard *gb)
 	draw_sidebar(gb, offset);
 }
 
-void	init_window(t_gameboard *gb)
+
+void	render_map(t_gameboard *gb, int x, int y)
 {
-	gb->width = gb->map->map_width * SIZE;
-	gb->height = gb->map->map_height * SIZE;
-	gb->mlx = mlx_init(gb->width + SIDE, gb->height, "So long!", false);
-	if (!gb->mlx)
-		error(FT_WINFAIL, gb);
+	int	x_pos;
+	int	y_pos;
+
+	x_pos = x * SIZE;
+	y_pos = y * SIZE;
+	mlx_draw_texture(gb->imgs->background, gb->text->empty, x_pos, y_pos);
+	if (gb->map->arr[y][x] == '1')
+		mlx_draw_texture(gb->imgs->wall, gb->text->wall, x_pos, y_pos);
+	else if (gb->map->arr[y][x] == 'C')
+		mlx_image_to_window(gb->mlx, gb->imgs->coll, x_pos, y_pos);
+	else if (gb->map->arr[y][x] == 'P')
+	{
+		check_map(gb, x, y);
+		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
+		mlx_set_instance_depth(&gb->imgs->pl->instances[0], 10);
+		gb->player->x_pos = x_pos;
+		gb->player->y_pos = y_pos;
+	}
+	else if (gb->map->arr[y][x] == 'E')
+		mlx_image_to_window(gb->mlx, gb->imgs->exit, x_pos, y_pos);
+	else if (gb->map->arr[y][x] != '0')
+		error(FT_INVMAPCH, gb);
 }
 
 void	render_window(t_gameboard *gb)
@@ -111,4 +104,13 @@ void	render_window(t_gameboard *gb)
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, \
 			gb->text->nums[gb->player->lives], 0, 0);
+}
+
+void	init_window(t_gameboard *gb)
+{
+	gb->width = gb->map->map_width * SIZE;
+	gb->height = gb->map->map_height * SIZE;
+	gb->mlx = mlx_init(gb->width + SIDE, gb->height, "So long!", false);
+	if (!gb->mlx)
+		error(FT_WINFAIL, gb);
 }

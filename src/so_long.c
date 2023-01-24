@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 15:35:40 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:34:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ static char	*error_msg(t_errno val)
 	message[12] = "Invallid map: no collectables.";
 	message[13] = "Invallid map: no or more than one start position.";
 	message[14] = "Invallid map: no exit / more than one exit.";
-	message[15] = "Invallid map: no valid path.";
+	message[15] = "Invallid map: not rectangular.";
 	message[16] = "Invallid map: invallid character in map.";
+	message[17] = "Invallid map: no valid path.";
 	return (message[val]);
 }
 
@@ -83,7 +84,7 @@ t_gameboard	*init_gameboard(void)
 	return (gb);
 }
 
-void system_leaks(void)
+void	system_leaks(void)
 {
 	system("leaks so_long");
 }

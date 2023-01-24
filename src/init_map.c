@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.c                                              :+:    :+:            */
+/*   init_map.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 15:46:58 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 16:28:22 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,6 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 	return (1);
 }
 
-void	render_map(t_gameboard *gb, int x, int y)
-{
-	int	x_pos;
-	int	y_pos;
-
-	x_pos = x * SIZE;
-	y_pos = y * SIZE;
-	mlx_draw_texture(gb->imgs->background, gb->text->empty, x_pos, y_pos);
-	if (gb->map->arr[y][x] == '1')
-		mlx_draw_texture(gb->imgs->wall, gb->text->wall, x_pos, y_pos);
-	else if (gb->map->arr[y][x] == 'C')
-		mlx_image_to_window(gb->mlx, gb->imgs->coll, x_pos, y_pos);
-	else if (gb->map->arr[y][x] == 'P')
-	{
-		check_map(gb, x, y);
-		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
-		mlx_set_instance_depth(&gb->imgs->pl->instances[0], 10);
-		gb->player->x_pos = x_pos;
-		gb->player->y_pos = y_pos;
-	}
-	else if (gb->map->arr[y][x] == 'E')
-		mlx_image_to_window(gb->mlx, gb->imgs->exit, x_pos, y_pos);
-	else if (gb->map->arr[y][x] != '0')
-		error(FT_INVMAPCH, gb);
-}
-
 char	*read_file(char *line, char *file)
 {
 	char	buffer[BUFFER_SIZE + 1];
@@ -100,31 +74,23 @@ char	*read_file(char *line, char *file)
 void	init_map(char *file, t_gameboard *gb)
 {
 	char	*line;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	line = NULL;
 	gb->map = malloc(sizeof(t_map));
 	gb->map->arr = NULL;
 	if (!gb->map)
 		error(FT_MEMFAIL, gb);
+	gb->map->coll_count = 0;
+	gb->map->start_count = 1;
+	gb->map->exit_count = 0;
+	gb->map->map_width = 0;
+	gb->map->map_height = 0;
 	line = read_file(line, file);
 	if (!line)
 		error(FT_INVFILE, gb);
 	gb->map->arr = ft_split(line, '\n');
 	if (!gb->map->arr)
 		error(FT_MEMFAIL, gb);
-	// move these?
-	while (gb->map->arr[j][i])
-		i++;
-	gb->map->map_width = i;
-	while (gb->map->arr[j])
-		j++;
-	gb->map->map_height = j;
-	gb->map->coll_count = 0;
-	gb->map->start_count = 1;
-	gb->map->exit_count = 0;
+	check_rectangle(gb);
 	free(line);
 }
