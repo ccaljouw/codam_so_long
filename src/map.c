@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 09:48:21 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 11:10:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	check_coord(t_map *map, t_pos *pos)
 {
 	//moet hier gb nog beschikbaar zijn voor free?
-	if (!ft_strchr("0CPE1", map->arr[pos->y][pos->x]))
+	if (!ft_strchr("0CPE1X", map->arr[pos->y][pos->x]))
 		error(FT_INVMAPCH, NULL);
 	if (map->arr[pos->y][pos->x] == '1')
 		return (0);

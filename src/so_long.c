@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 09:53:03 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 11:42:33 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,20 @@ t_gameboard	*init_gameboard(void)
 	return (gb);
 }
 
+void system_leaks(void)
+{
+	system("leaks so_long");
+}
+
 int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
+	atexit(system_leaks);
 	check_input(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);
-	init_textures(gb); //freeing creates more leaks?
+	init_textures(gb);
 	init_window(gb); // 1 leak, uit mlx_init?? 
 	init_images(gb);
 	init_characters(gb); // cannot free characters because pointer nog allocated?
@@ -101,6 +107,5 @@ int	main(int argc, char **argv)
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);
 	free_all(gb);
-	system("leaks home");
 	return (0);
 }

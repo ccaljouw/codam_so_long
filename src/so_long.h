@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 10:20:21 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 11:46:26 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_textures
 	mlx_texture_t	*wall;
 	mlx_texture_t	*exit_open;
 	mlx_texture_t	*exit_closed;
+	mlx_texture_t	*test;
 }	t_textures;
 
 typedef struct s_sprites

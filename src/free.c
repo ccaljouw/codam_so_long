@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/23 20:58:17 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 11:51:51 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ void	free_textures(t_textures *text)
 	free_sprite(text->player);
 	free_sprite(text->patrol);
 	free_sprite(text->nums);
+	mlx_delete_texture(text->side);
+	mlx_delete_texture(text->lives_title);
+	mlx_delete_texture(text->moves_title);
+	mlx_delete_texture(text->empty);
+	mlx_delete_texture(text->coll);
+	mlx_delete_texture(text->wall);
+	mlx_delete_texture(text->exit_open);
+	mlx_delete_texture(text->exit_closed);
 	free(text);
 }
 
@@ -41,7 +49,7 @@ void	free_sprite(mlx_texture_t **sprite)
 	i = 0;
 	while (sprite[i])
 	{
-		free(sprite[i]);
+		mlx_delete_texture(sprite[i]);
 		i++;
 	}
 	free(sprite);
@@ -58,8 +66,6 @@ void	free_all(t_gameboard *gb)
 {
 	if (gb)
 	{
-		if (gb->errors) // static variable does not need to be freed?
-			free(gb->errors);
 		if (gb->map)
 			free_map(gb->map);
 		if (gb->imgs)
@@ -68,12 +74,8 @@ void	free_all(t_gameboard *gb)
 			free(gb->player);
 		if (gb->patrol)
 			free(gb->patrol);
-		// if (gb->text)
-		// 	free_textures(gb->text);
-		// if (gb->player)
-		// 	free(gb->player);
-		// if (gb->patrol)
-		// 	free(gb->patrol);
-		// free(gb);
+		if (gb->text)
+			free_textures(gb->text);
+		free(gb);
 	}
 }
