@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:37:42 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 18:26:50 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	check_set(t_gameboard *gb, t_list *set, int x, int y)
 	}
 	return (0);
 }
+
 void	check_rectangle(t_gameboard *gb)
 {
 	int		i;
@@ -51,6 +52,8 @@ void	check_rectangle(t_gameboard *gb)
 	j = 0;
 	while (gb->map->arr[j][i])
 		i++;
+	if (i > MAX_X)
+		error(FT_INVMAPB, gb);
 	gb->map->map_width = i;
 	i = 0;
 	while (gb->map->arr[j])
@@ -64,7 +67,10 @@ void	check_rectangle(t_gameboard *gb)
 		j++;
 	}
 	gb->map->map_height = j;
+	if (j > MAX_Y)
+		error(FT_INVMAPB, gb);
 }
+
 
 int	check_map(t_gameboard *gb, int x, int y)
 {

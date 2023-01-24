@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 18:12:00 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 18:28:07 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static char	*error_msg(t_errno val)
 {
 	static char	*message[FT_ERRMAX];
 
-	if (val > FT_ERRMAX)
+	if (val > FT_ERRMAX || val < 0)
 		return ("Error index out of bound");
-	if (val < 0)
-		return ("Error index must be positive");
 	message[0] = "No Errors";
 	message[1] = "No file provided as program argument.";
 	message[2] = "File has an invalid extension.";
@@ -38,6 +36,7 @@ static char	*error_msg(t_errno val)
 	message[15] = "Invallid map: not rectangular.";
 	message[16] = "Invallid map: invallid character in map.";
 	message[17] = "Invallid map: no valid path.";
+	message[18]	= "Invallid map: too big for monitor.";
 	return (message[val]);
 }
 
@@ -93,7 +92,7 @@ int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
-	// check for max window size
+	// fix map checks
 	// why is player not visible in mini map?
 	// make end screens
 	atexit(system_leaks);

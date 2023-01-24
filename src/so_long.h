@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 18:18:15 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 18:25:11 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 * @param FT_INVMAPR Map is not rectangular.
 * @param FT_INVMAPCH Invallid map: invallid character in map.
 * @param FT_INVPATH Invallid map: no valid path.
+* @param FT_INVMAPB Invallid map: too big for monitor.
 * @param FT_ERRMAX Error count.
 */
 
@@ -63,6 +64,7 @@ typedef enum s_errno
 	FT_INVMAPR,
 	FT_INVMAPCH,
 	FT_INVPATH,
+	FT_INVMAPB,
 	FT_ERRMAX,
 }	t_errno;
 
