@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 10:06:07 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 10:18:59 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,37 @@ void	set_movescore(int moves, t_gameboard *gb)
 	num = ft_itoa(moves);
 	i = ft_strlen(num);
 	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], 0, 0);
-	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], gb->text->nums[0]->width, 0);
+	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], \
+												gb->text->nums[0]->width, 0);
 	while (i)
 	{
-		mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[num[ft_strlen(num) - i] - '0'], gb->text->nums[0]->width * (3 - i) + ((gb->text->nums[0]->width - gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2), 0);
+		mlx_draw_texture(gb->imgs->moves_count, \
+			gb->text->nums[num[ft_strlen(num) - i] - '0'] \
+			, gb->text->nums[0]->width * (3 - i) \
+				+ ((gb->text->nums[0]->width \
+				- gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2) \
+			, 0);
 		i--;
 	}
 	free(num);
+}
+
+void	draw_sidebar(t_gameboard *gb, int offset)
+{
+	mlx_draw_texture(gb->imgs->side_text, gb->text->lives_title, \
+		(gb->imgs->side->width - gb->text->lives_title->width) / 2, \
+		offset * 2);
+	mlx_draw_texture(gb->imgs->side_text, gb->text->moves_title, \
+		(gb->imgs->side->width - gb->text->moves_title->width) / 2, \
+		offset * 12);
+	mlx_image_to_window(gb->mlx, gb->imgs->side_text, gb->width \
+		+ (gb->imgs->side->width - gb->imgs->side_text->width) / 2, 0);
+	mlx_image_to_window(gb->mlx, gb->imgs->lives_count, gb->width \
+		+ ((gb->imgs->side->width - gb->imgs->lives_count->width) / 2), \
+		offset * 6);
+	mlx_image_to_window(gb->mlx, gb->imgs->moves_count, gb->width \
+		+ ((gb->imgs->side->width - gb->imgs->moves_count->width) / 2), \
+		offset * 16);
 }
 
 void	render_sidebar(t_gameboard *gb)
@@ -42,17 +66,14 @@ void	render_sidebar(t_gameboard *gb)
 	{
 		while (width >= 0)
 		{
-			mlx_draw_texture(gb->imgs->side, gb->text->side, width * gb->text->side->width, heigth * gb->text->side->height);
+			mlx_draw_texture(gb->imgs->side, gb->text->side, \
+				width * gb->text->side->width, heigth * gb->text->side->height);
 			width--;
 		}
 		width = gb->imgs->side->width / gb->text->side->width;
 		heigth--;
 	}
-	mlx_draw_texture(gb->imgs->side_text, gb->text->lives_title, (gb->imgs->side->width - gb->text->lives_title->width) / 2, offset * 2);
-	mlx_draw_texture(gb->imgs->side_text, gb->text->moves_title, (gb->imgs->side->width - gb->text->moves_title->width) / 2, offset * 12);
-	mlx_image_to_window(gb->mlx, gb->imgs->side_text, gb->width + (gb->imgs->side->width - gb->imgs->side_text->width) / 2, 0);
-	mlx_image_to_window(gb->mlx, gb->imgs->lives_count, gb->width + ((gb->imgs->side->width - gb->imgs->lives_count->width) / 2), offset * 6);
-	mlx_image_to_window(gb->mlx, gb->imgs->moves_count, gb->width + ((gb->imgs->side->width - gb->imgs->moves_count->width) / 2), offset * 16);
+	draw_sidebar(gb, offset);
 }
 
 void	init_window(t_gameboard *gb)
@@ -87,5 +108,6 @@ void	render_window(t_gameboard *gb)
 	}
 	render_sidebar(gb);
 	set_movescore(0, gb);
-	mlx_draw_texture(gb->imgs->lives_count, gb->text->nums[gb->player->lives], 0, 0);
+	mlx_draw_texture(gb->imgs->lives_count, \
+			gb->text->nums[gb->player->lives], 0, 0);
 }

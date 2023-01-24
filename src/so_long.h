@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 10:01:58 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 10:20:21 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "MLX42.h"
+# define SIZE 64		//pixel widht and hight per map position
+# define SIDE 192		//pixel widht of sidebar
 
 /**
 *  The error codes used to idenfity the correct error message.
