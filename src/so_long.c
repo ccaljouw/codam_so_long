@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 11:42:33 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 14:14:48 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*error_msg(t_errno val)
 	message[1] = "No file provided as program argument.";
 	message[2] = "File has an invalid extension.";
 	message[3] = "File was invalid / does not exist.";
-	message[4] = "Something is wrong the given PNG file.";
+	message[4] = "Something is wrong a PNG file.";
 	message[5] = "The specified X/Y positions are out of bounds.";
 	message[6] = "The provided image is invalid.";
 	message[7] = "Dynamic memory allocation has failed.";
@@ -49,7 +49,7 @@ void	error(t_errno val, t_gameboard *gb)
 	exit (1);
 }
 
-int	check_input(int argc, char **argv)
+void	check_args(int argc, char **argv)
 {
 	int	i;
 
@@ -60,7 +60,6 @@ int	check_input(int argc, char **argv)
 		i++;
 	if (ft_strncmp(argv[1] + (i - 4), ".ber", 5) != 0)
 		error(FT_INVEXT, NULL);
-	return (MLX_SUCCESS);
 }
 
 t_gameboard	*init_gameboard(void)
@@ -94,15 +93,15 @@ int	main(int argc, char **argv)
 	t_gameboard	*gb;
 
 	atexit(system_leaks);
-	check_input(argc, argv);
+	check_args(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);
 	init_textures(gb);
-	init_window(gb); // 1 leak, uit mlx_init?? 
+	init_window(gb);
 	init_images(gb);
-	init_characters(gb); // cannot free characters because pointer nog allocated?
+	init_characters(gb);
 	render_window(gb);
-	mlx_loop_hook(gb->mlx, hook, gb);
+	// mlx_loop_hook(gb->mlx, frame_hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);

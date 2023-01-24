@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 11:46:26 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 14:14:16 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "MLX42.h"
 # define SIZE 64		//pixel widht and hight per map position
-# define SIDE 192		//pixel widht of sidebar
+# define SIDE 128		//pixel widht of sidebar
 
 /**
 *  The error codes used to idenfity the correct error message.
@@ -145,13 +145,14 @@ void		init_window(t_gameboard *gb);
 void		init_images(t_gameboard *gb);
 void		init_textures(t_gameboard *gb);
 void		init_characters(t_gameboard *gb);
+void		render_map(t_gameboard *gb, int x, int y);
 void		render_window(t_gameboard *gb);
+int			check_coord(t_gameboard *gb, t_pos *pos);
 void		init_num_sprite(t_gameboard *gb);
 void		init_player_sprite(t_gameboard *gb);
 void		init_patrol_sprite(t_gameboard *gb);
-void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
-void		hook(void *param);
+void		frame_hook(void *param);
 int			check_map_pos(t_gameboard *gb, int map_x, int map_y);
 void		change_direction(keys_t key, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
@@ -159,12 +160,10 @@ void		hit_patrol(t_gameboard *gb);
 void		move_player(t_gameboard *gb, mlx_image_t *image);
 void		set_movescore(int moves, t_gameboard *gb);
 int			check_map(t_gameboard *gb, int x, int y);
-int			check_coord(t_map *map, t_pos *pos);
 void		error(t_errno val, t_gameboard *gb);
 void		end_game(t_gameboard *gb, int result);
 void		free_all(t_gameboard *gb);
 void		delete_content(void *param);
-void		delete_list_pointer(void *param);
 void		free_sprite(mlx_texture_t **sprite);
 void		free_textures(t_textures *text);
 void		free_images(t_images *imgs);

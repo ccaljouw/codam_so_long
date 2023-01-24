@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 11:51:51 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 13:22:15 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	free_map(t_map *map)
 	int	i;
 
 	i = 0;
-	while (map->arr[i])
+	if (map->arr)
 	{
-		free(map->arr[i]);
-		i++;
+		while (map->arr[i])
+		{
+			free(map->arr[i]);
+			i++;
+		}
+		free(map->arr);
 	}
-	free(map->arr);
 	free(map);
 }
 
@@ -31,14 +34,22 @@ void	free_textures(t_textures *text)
 	free_sprite(text->player);
 	free_sprite(text->patrol);
 	free_sprite(text->nums);
-	mlx_delete_texture(text->side);
-	mlx_delete_texture(text->lives_title);
-	mlx_delete_texture(text->moves_title);
-	mlx_delete_texture(text->empty);
-	mlx_delete_texture(text->coll);
-	mlx_delete_texture(text->wall);
-	mlx_delete_texture(text->exit_open);
-	mlx_delete_texture(text->exit_closed);
+	if (text->side)
+		mlx_delete_texture(text->side);
+	if (text->lives_title)
+		mlx_delete_texture(text->lives_title);
+	if (text->moves_title)
+		mlx_delete_texture(text->moves_title);
+	if (text->empty)
+		mlx_delete_texture(text->empty);
+	if (text->coll)
+		mlx_delete_texture(text->coll);
+	if (text->wall)
+		mlx_delete_texture(text->wall);
+	if (text->exit_open)
+		mlx_delete_texture(text->exit_open);
+	if (text->exit_closed)
+		mlx_delete_texture(text->exit_closed);
 	free(text);
 }
 
@@ -47,6 +58,8 @@ void	free_sprite(mlx_texture_t **sprite)
 	int	i;
 
 	i = 0;
+	if (!sprite)
+		return;
 	while (sprite[i])
 	{
 		mlx_delete_texture(sprite[i]);

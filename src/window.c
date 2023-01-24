@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 10:18:59 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 14:19:54 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	set_movescore(int moves, t_gameboard *gb)
 	char	*num;
 
 	num = ft_itoa(moves);
+	if (!num)
+		error(FT_MEMFAIL, gb);
 	i = ft_strlen(num);
 	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], 0, 0);
 	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], \
@@ -78,10 +80,9 @@ void	render_sidebar(t_gameboard *gb)
 
 void	init_window(t_gameboard *gb)
 {
-	gb->width = gb->map->map_width * gb->text->empty->width;
-	gb->height = gb->map->map_height * gb->text->empty->height;
-	gb->mlx = mlx_init(gb->width + (gb->text->empty->width * 2), \
-									gb->height, "So long!", false);
+	gb->width = gb->map->map_width * SIZE;
+	gb->height = gb->map->map_height * SIZE;
+	gb->mlx = mlx_init(gb->width + SIDE, gb->height, "So long!", false);
 	if (!gb->mlx)
 		error(FT_WINFAIL, gb);
 }

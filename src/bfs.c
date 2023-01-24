@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 09:42:54 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 14:12:07 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void	delete_content(void *param)
 	}
 }
 
-int	check_set(t_map *map, t_list *set, int x, int y)
+int	check_set(t_gameboard *gb, t_list *set, int x, int y)
 {
 	t_pos	*pos;
 	t_list	*list;
 
 	list = set;
-	if (x > map->map_width - 1 || y > map->map_height -1 \
+	if (x > gb->map->map_width - 1 || y > gb->map->map_height - 1 \
 		|| x < 0 || y < 0)
-		error(FT_INVPOS, NULL);
-	// improve error handling
+		error(FT_INVPOS, gb);
 	while (list)
 	{
 		pos = list->content;
@@ -44,12 +43,11 @@ int	check_set(t_map *map, t_list *set, int x, int y)
 	return (0);
 }
 
-void	check_neighbor(t_map *map, t_list **reached, \
-							t_list **frontier, int x, int y)
+int	check_neighbor(t_gameboard *gb, t_list **reached, int x, int y)
 {
 	t_pos	*pos;
 
-	if (!check_set(map, *reached, x, y))
+	if (!check_set(gb, *reached, x, y))
 	{
 		pos = malloc(sizeof(t_pos));
 		if (!pos)
@@ -57,12 +55,13 @@ void	check_neighbor(t_map *map, t_list **reached, \
 		pos->x = x;
 		pos->y = y;
 		ft_lstadd_back(reached, ft_lstnew(pos));
-		if (check_coord(map, pos))
-			ft_lstadd_back(frontier, ft_lstnew(pos));
+		if (check_coord(gb, pos))
+			return (1);
 	}
+	return (0);
 }
 
-void	bfs(t_map *map, t_list *frontier, t_list *reached)
+void	bfs(t_gameboard *gb, t_list *frontier, t_list *reached)
 {
 	t_pos	*pos;
 	t_list	*temp;
@@ -70,14 +69,18 @@ void	bfs(t_map *map, t_list *frontier, t_list *reached)
 	if (!frontier)
 		return ;
 	pos = frontier->content;
-	check_neighbor(map, &reached, &frontier, pos->x + 1, pos->y);
-	check_neighbor(map, &reached, &frontier, pos->x - 1, pos->y);
-	check_neighbor(map, &reached, &frontier, pos->x, pos->y + 1);
-	check_neighbor(map, &reached, &frontier, pos->x, pos->y - 1);
+	if (check_neighbor(gb, &reached, pos->x + 1, pos->y))
+		ft_lstadd_back(&frontier, ft_lstnew(ft_lstlast(reached)->content));
+	if (check_neighbor(gb, &reached, pos->x - 1, pos->y))
+		ft_lstadd_back(&frontier, ft_lstnew(ft_lstlast(reached)->content));
+	if (check_neighbor(gb, &reached, pos->x, pos->y + 1))
+		ft_lstadd_back(&frontier, ft_lstnew(ft_lstlast(reached)->content));
+	if (check_neighbor(gb, &reached, pos->x, pos->y - 1))
+		ft_lstadd_back(&frontier, ft_lstnew(ft_lstlast(reached)->content));
 	temp = frontier;
 	frontier = frontier->next;
 	free(temp);
-	bfs(map, frontier, reached);
+	bfs(gb, frontier, reached);
 }
 
 int	check_map(t_gameboard *gb, int x, int y)
@@ -95,7 +98,7 @@ int	check_map(t_gameboard *gb, int x, int y)
 	reached = NULL;
 	ft_lstadd_back(&reached, ft_lstnew(pos));
 	ft_lstadd_back(&frontier, ft_lstnew(pos));
-	bfs(gb->map, frontier, reached);
+	bfs(gb, frontier, reached);
 	ft_lstclear(&reached, delete_content);
 	return (1);
 }
