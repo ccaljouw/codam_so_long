@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 14:19:21 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 15:46:58 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 		get_collectable(gb, map_x, map_y);
 	if (gb->map->arr[map_y][map_x] == 'E' && gb->coll == 0)
 		end_game(gb, 1);
-	// change this
-	if (gb->map->arr[map_y][map_x] == 'X')
-		hit_patrol(gb);
 	if (gb->imgs->pl->enabled == 1)
 		gb->moves += 1;
 	if (gb->moves > 999)
@@ -63,13 +60,12 @@ void	render_map(t_gameboard *gb, int x, int y)
 	{
 		check_map(gb, x, y);
 		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
+		mlx_set_instance_depth(&gb->imgs->pl->instances[0], 10);
 		gb->player->x_pos = x_pos;
 		gb->player->y_pos = y_pos;
 	}
 	else if (gb->map->arr[y][x] == 'E')
 		mlx_image_to_window(gb->mlx, gb->imgs->exit, x_pos, y_pos);
-	else if (gb->map->arr[y][x] == 'X')
-		mlx_image_to_window(gb->mlx, gb->imgs->patrol, x_pos, y_pos);
 	else if (gb->map->arr[y][x] != '0')
 		error(FT_INVMAPCH, gb);
 }

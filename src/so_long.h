@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 14:14:16 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 15:17:34 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,5 @@ void		delete_content(void *param);
 void		free_sprite(mlx_texture_t **sprite);
 void		free_textures(t_textures *text);
 void		free_images(t_images *imgs);
+void		move_patrol(t_gameboard *gb, mlx_image_t *image);
 #endif

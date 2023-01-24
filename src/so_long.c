@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 14:14:48 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 15:35:40 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
+	// check for max window size
+	// check map is rectangular
+	// why is player not visible in mini map?
 	atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();
@@ -101,7 +104,7 @@ int	main(int argc, char **argv)
 	init_images(gb);
 	init_characters(gb);
 	render_window(gb);
-	// mlx_loop_hook(gb->mlx, frame_hook, gb);
+	mlx_loop_hook(gb->mlx, frame_hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
 	mlx_terminate(gb->mlx);
