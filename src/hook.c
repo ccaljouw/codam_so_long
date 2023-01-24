@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/23 20:40:08 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 09:43:44 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	move_patrol(t_gameboard *gb)
 	else
 		gb->imgs->sprites->patrol += 1;
 	// ft_printf("xpos: %d, x_npos: %d, y_pos: %d, y_npos: %d\n", gb->patrol->x_pos, gb->patrol->x_npos, gb->patrol->y_pos, gb->patrol->y_npos);
-	
 	if (gb->patrol->x_npos == 0)
 		gb->patrol->x_pos++;
 	else

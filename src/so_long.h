@@ -6,38 +6,58 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/23 20:39:06 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 10:01:58 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "libft.h"
-#include "MLX42.h"
+# include "libft.h"
+# include "MLX42.h"
 
-// The error codes used to idenfity the correct error message.
+/**
+*  The error codes used to idenfity the correct error message.
+* @param FT_SUCCESS No Errors
+* @param FT_NOFILE No file provided as program argument.
+* @param FT_INVEXT File has an invalid extension.
+* @param FT_INVFILE File was invalid / does not exist.
+* @param FT_INVPNG Something is wrong the given PNG file.
+* @param FT_INVPOS The specified X/Y positions are out of bounds.
+* @param FT_INVIMG The provided image is invalid.
+* @param FT_MEMFAIL Dynamic memory allocation has failed.
+* @param FT_WINFAIL Failed to create a window.
+* @param FT_ARRTOBIG The array is too big to be drawn.
+* @param FT_INVMAPSH Invallid map: not rectangular.
+* @param FT_INVMAPW Invallid map: not enclosed.
+* @param FT_INVMAPC Invallid map: no collectables.
+* @param FT_INVMAPP Invallid map: no or more than one start position.
+* @param FT_INVMAPE Invallid map: no exit / more than one exit.
+* @param FT_INVMAPR Invallid map: no valid path.
+* @param FT_INVMAPCH Invallid map: invallid character in map.
+* @param FT_ERRMAX Error count.
+*/
+
 typedef enum s_errno
 {
-	FT_SUCCESS = 0,	// No Errors
-	FT_NOFILE,		// No file provided as program argument.
-	FT_INVEXT,		// File has an invalid extension.
-	FT_INVFILE,		// File was invalid / does not exist.
-	FT_INVPNG,		// Something is wrong the given PNG file.
-	FT_INVPOS,		// The specified X/Y positions are out of bounds.
-	FT_INVIMG,		// The provided image is invalid, might indicate mismanagement of images.
-	FT_MEMFAIL,		// Dynamic memory allocation has failed.
-	FT_WINFAIL,		// Failed to create a window.
-	FT_ARRTOBIG,	// The array is too big to be drawn.
-	FT_INVMAPSH,	// Invallid map: not rectangular.
-	FT_INVMAPW,		// Invallid map: not enclosed.
-	FT_INVMAPC,		// Invallid map: no collectables.
-	FT_INVMAPP,		// Invallid map: no startposition / more than one start position.
-	FT_INVMAPE,		// Invallid map: no exit / more than one exit.
-	FT_INVMAPR,		// Invallid map: no valid path.
-	FT_INVMAPCH,	// Invallid map: invallid character in map.
-	FT_ERRMAX,		// Error count.
-	
+	FT_SUCCESS = 0,
+	FT_NOFILE,
+	FT_INVEXT,
+	FT_INVFILE,
+	FT_INVPNG,
+	FT_INVPOS,
+	FT_INVIMG,
+	FT_MEMFAIL,
+	FT_WINFAIL,
+	FT_ARRTOBIG,
+	FT_INVMAPSH,
+	FT_INVMAPW,
+	FT_INVMAPC,
+	FT_INVMAPP,
+	FT_INVMAPE,
+	FT_INVMAPR,
+	FT_INVMAPCH,
+	FT_ERRMAX,
 }	t_errno;
 
 typedef struct s_textures
@@ -89,7 +109,7 @@ typedef struct s_map
 typedef struct s_pos
 {
 	int	x;
-	int y;
+	int	y;
 }	t_pos;
 
 typedef struct s_player
@@ -114,7 +134,7 @@ typedef struct s_gameboard
 	int				moves;
 	int				width;
 	int				height;
-} 	t_gameboard;
+}	t_gameboard;
 
 t_gameboard	*init_gameboard(void);
 void		init_map(char *file, t_gameboard *gb);
@@ -129,7 +149,7 @@ void		init_patrol_sprite(t_gameboard *gb);
 void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		hook(void *param);
-int 		check_map_pos(t_gameboard *gb, int map_x, int map_y);
+int			check_map_pos(t_gameboard *gb, int map_x, int map_y);
 void		change_direction(keys_t key, t_images *imgs, t_textures *text);
 void		get_collectable(t_gameboard *gb, int map_x, int map_y);
 void		hit_patrol(t_gameboard *gb);

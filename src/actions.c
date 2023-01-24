@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/20 17:27:21 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 09:40:17 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	change_direction(keys_t key, t_images *imgs, t_textures *text)
 		return ;
 	if (key == MLX_KEY_LEFT && imgs->sprites->player % 2 == 1)
 		imgs->sprites->player -= 1;
-	if (key == MLX_KEY_RIGHT && imgs->sprites->player  % 2 == 0)
+	if (key == MLX_KEY_RIGHT && imgs->sprites->player % 2 == 0)
 		imgs->sprites->player += 1;
 	mlx_draw_texture(imgs->pl, text->player[imgs->sprites->player], 0, 0);
 }
@@ -71,6 +71,8 @@ void	hit_patrol(t_gameboard *gb)
 		gb->imgs->sprites->player += 2;
 	else
 		end_game(gb, 0);
-	mlx_draw_texture(gb->imgs->lives_count, gb->text->nums[gb->player->lives], 0, 0);
-	mlx_draw_texture(gb->imgs->pl, gb->text->player[gb->imgs->sprites->player], 0, 0);
+	mlx_draw_texture(gb->imgs->lives_count, \
+			gb->text->nums[gb->player->lives], 0, 0);
+	mlx_draw_texture(gb->imgs->pl, \
+			gb->text->player[gb->imgs->sprites->player], 0, 0);
 }

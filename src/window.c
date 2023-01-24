@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/23 19:29:23 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 10:06:07 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	set_movescore(int moves, t_gameboard *gb)
 {
-	int	i;
-	char *num;
-	
+	int		i;
+	char	*num;
+
 	num = ft_itoa(moves);
 	i = ft_strlen(num);
 	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], 0, 0);
 	mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[0], gb->text->nums[0]->width, 0);
-	while(i)
+	while (i)
 	{
 		mlx_draw_texture(gb->imgs->moves_count, gb->text->nums[num[ft_strlen(num) - i] - '0'], gb->text->nums[0]->width * (3 - i) + ((gb->text->nums[0]->width - gb->text->nums[num[ft_strlen(num) - i] - '0']->width) / 2), 0);
 		i--;
@@ -29,15 +29,12 @@ void	set_movescore(int moves, t_gameboard *gb)
 	free(num);
 }
 
-// sidebarwidth is 3x width of background texture. 
-// If textures are bigger than image size that they are loaded to the image will can not
-// be loaded
 void	render_sidebar(t_gameboard *gb)
 {
 	int	heigth;
 	int	width;
 	int	offset;
-	
+
 	heigth = (gb->height / gb->text->side->height) - 1;
 	width = (gb->imgs->side->width / gb->text->side->width) - 1;
 	offset = gb->height / 20;
@@ -91,5 +88,4 @@ void	render_window(t_gameboard *gb)
 	render_sidebar(gb);
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, gb->text->nums[gb->player->lives], 0, 0);
-
 }

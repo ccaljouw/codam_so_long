@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/23 20:53:35 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 09:53:03 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*error_msg(t_errno val)
 {
-	static char *message[FT_ERRMAX];
+	static char	*message[FT_ERRMAX];
 
 	if (val > FT_ERRMAX)
 		return ("Error index out of bound");
@@ -26,19 +26,19 @@ static char	*error_msg(t_errno val)
 	message[3] = "File was invalid / does not exist.";
 	message[4] = "Something is wrong the given PNG file.";
 	message[5] = "The specified X/Y positions are out of bounds.";
-	message[6] = "The provided image is invalid, might indicate mismanagement of images.";
+	message[6] = "The provided image is invalid.";
 	message[7] = "Dynamic memory allocation has failed.";
 	message[8] = "Failed to create a window.";
 	message[9] = "The array is too big to be drawn.";
 	message[10] = "Invallid map: not rectangular.";
 	message[11] = "Invallid map: not enclosed.";
 	message[12] = "Invallid map: no collectables.";
-	message[13] = "Invallid map: no startposition / more than one start position.";
+	message[13] = "Invallid map: no or more than one start position.";
 	message[14] = "Invallid map: no exit / more than one exit.";
 	message[15] = "Invallid map: no valid path.";
 	message[16] = "Invallid map: invallid character in map.";
 	return (message[val]);
-};
+}
 
 void	error(t_errno val, t_gameboard *gb)
 {
@@ -47,7 +47,7 @@ void	error(t_errno val, t_gameboard *gb)
 	ft_printf("\nError\n%s\n\n", error_msg(val));
 	free_all(gb);
 	exit (1);
-};
+}
 
 int	check_input(int argc, char **argv)
 {
@@ -56,10 +56,9 @@ int	check_input(int argc, char **argv)
 	i = 0;
 	if (argc < 2)
 		error(FT_NOFILE, NULL);
-	// change check to look from end of file
-	while (argv[1][i] != '.')
+	while (argv[1][i] != '\0')
 		i++;
-	if (ft_strncmp(argv[1] + i, ".ber", 5) != 0)
+	if (ft_strncmp(argv[1] + (i - 4), ".ber", 5) != 0)
 		error(FT_INVEXT, NULL);
 	return (MLX_SUCCESS);
 }
@@ -67,7 +66,7 @@ int	check_input(int argc, char **argv)
 t_gameboard	*init_gameboard(void)
 {	
 	t_gameboard	*gb;
-	
+
 	gb = malloc(sizeof(t_gameboard));
 	if (!gb)
 		error(FT_MEMFAIL, NULL);
@@ -100,7 +99,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(gb->mlx, hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);
-	mlx_terminate(gb->mlx); 
+	mlx_terminate(gb->mlx);
 	free_all(gb);
 	system("leaks home");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/23 20:38:30 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 09:48:21 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 	set_movescore(gb->moves, gb);
 	return (1);
 }
-
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
@@ -104,7 +103,6 @@ char	*read_file(char *line, char *file)
 
 void	init_map(char *file, t_gameboard *gb)
 {
-	t_map	*map;
 	char	*line;
 	int		i;
 	int		j;
@@ -112,23 +110,21 @@ void	init_map(char *file, t_gameboard *gb)
 	i = 0;
 	j = 0;
 	line = NULL;
-	map = malloc(sizeof(t_map));
-	map->arr = NULL;
-	if (!map)
+	gb->map = malloc(sizeof(t_map));
+	if (!gb->map)
 		error(FT_MEMFAIL, gb);
 	line = read_file(line, file);
 	if (!line)
 		error(FT_INVFILE, gb);
-	map->arr = ft_split(line, '\n');
-	while (map->arr[j][i])
+	gb->map->arr = ft_split(line, '\n');
+	while (gb->map->arr[j][i])
 		i++;
-	map->map_width = i;
-	while (map->arr[j])
+	gb->map->map_width = i;
+	while (gb->map->arr[j])
 		j++;
-	map->map_height = j;
-	map->coll_count = 0;
-	map->start_count = 1;
-	map->exit_count = 0;
-	gb->map = map;
+	gb->map->map_height = j;
+	gb->map->coll_count = 0;
+	gb->map->start_count = 1;
+	gb->map->exit_count = 0;
 	free(line);
 }

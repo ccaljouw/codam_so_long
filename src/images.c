@@ -6,17 +6,17 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/23 20:40:31 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 09:46:22 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// what happens if load fails...
 void	init_textures(t_gameboard *gb)
 {
+	//error if load fails...
 	t_textures	*text;
-	
+
 	text = malloc(sizeof(t_textures));
 	if (!text)
 		error(FT_MEMFAIL, gb);
@@ -49,14 +49,19 @@ void	load_images(t_gameboard *gb)
 	imgs = malloc(sizeof(t_images));
 	if (!imgs)
 		error(FT_MEMFAIL, gb);
-	imgs->patrol = mlx_new_image(gb->mlx, gb->text->empty->width, gb->text->empty->height);
+	imgs->patrol = mlx_new_image(gb->mlx, gb->text->empty->width, \
+										gb->text->empty->height);
 	imgs->coll = mlx_texture_to_image(gb->mlx, gb->text->coll);
-	imgs->exit = mlx_texture_to_image(gb->mlx,gb->text->exit_closed);
-	imgs->pl = mlx_texture_to_image(gb->mlx,gb-> text->player[0]);
-	imgs->side = mlx_new_image(gb->mlx, gb->text->empty->width * 2, gb->height);
-	imgs->side_text = mlx_new_image(gb->mlx, gb->text->empty->width * 2, gb->height);
-	imgs->moves_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width * 3, gb->text->nums[0]->height);
-	imgs->lives_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width, gb->text->nums[0]->height);
+	imgs->exit = mlx_texture_to_image(gb->mlx, gb->text->exit_closed);
+	imgs->pl = mlx_texture_to_image(gb->mlx, gb->text->player[0]);
+	imgs->side = mlx_new_image(gb->mlx, gb->text->empty->width * 2, \
+										gb->height);
+	imgs->side_text = mlx_new_image(gb->mlx, gb->text->empty->width * 2, \
+										gb->height);
+	imgs->moves_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width * 3, \
+										gb->text->nums[0]->height);
+	imgs->lives_count = mlx_new_image(gb->mlx, gb->text->nums[0]->width, \
+										gb->text->nums[0]->height);
 	imgs->wall = mlx_new_image(gb->mlx, gb->width, gb->height);
 	imgs->background = mlx_new_image(gb->mlx, gb->width, gb->height);
 	gb->imgs = imgs;

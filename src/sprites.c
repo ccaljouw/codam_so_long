@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/22 19:59:53 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 10:02:24 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	init_player_sprite(t_gameboard *gb)
 	gb->text->player = malloc(sizeof(mlx_texture_t *) * 7);
 	if (!gb->text->player)
 		ft_printf("malloc error");
-
 	gb->text->player[0] = mlx_load_png("./images/player/flashman64.png");
 	gb->text->player[1] = mlx_load_png("./images/player/flashman64r.png");
 	gb->text->player[2] = mlx_load_png("./images/player/flashman64black.png");
@@ -70,6 +69,5 @@ void	init_player_sprite(t_gameboard *gb)
 	gb->text->player[4] = mlx_load_png("./images/player/flashman64grey.png");
 	gb->text->player[5] = mlx_load_png("./images/player/flashman64greyr.png");
 	gb->text->player[6] = NULL;
-
 	// error check
 }

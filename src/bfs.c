@@ -6,12 +6,11 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/23 20:54:21 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/24 09:42:54 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	delete_content(void *param)
 {
@@ -25,13 +24,6 @@ void	delete_content(void *param)
 	}
 }
 
-void	delete_list_pointer(void *param)
-{
-	//how to free without pointless funtion?
-	param++;
-	return ;
-}
-
 int	check_set(t_map *map, t_list *set, int x, int y)
 {
 	t_pos	*pos;
@@ -40,7 +32,8 @@ int	check_set(t_map *map, t_list *set, int x, int y)
 	list = set;
 	if (x > map->map_width - 1 || y > map->map_height -1 \
 		|| x < 0 || y < 0)
-		ft_printf("invallid map");
+		error(FT_INVPOS, NULL);
+	// improve error handling
 	while (list)
 	{
 		pos = list->content;
@@ -51,9 +44,11 @@ int	check_set(t_map *map, t_list *set, int x, int y)
 	return (0);
 }
 
-void	check_neighbor(t_map *map, t_list **reached, t_list **frontier, int x, int y)
+void	check_neighbor(t_map *map, t_list **reached, \
+							t_list **frontier, int x, int y)
 {
 	t_pos	*pos;
+
 	if (!check_set(map, *reached, x, y))
 	{
 		pos = malloc(sizeof(t_pos));
@@ -70,7 +65,8 @@ void	check_neighbor(t_map *map, t_list **reached, t_list **frontier, int x, int 
 void	bfs(t_map *map, t_list *frontier, t_list *reached)
 {
 	t_pos	*pos;
-	
+	t_list	*temp;
+
 	if (!frontier)
 		return ;
 	pos = frontier->content;
@@ -78,7 +74,9 @@ void	bfs(t_map *map, t_list *frontier, t_list *reached)
 	check_neighbor(map, &reached, &frontier, pos->x - 1, pos->y);
 	check_neighbor(map, &reached, &frontier, pos->x, pos->y + 1);
 	check_neighbor(map, &reached, &frontier, pos->x, pos->y - 1);
+	temp = frontier;
 	frontier = frontier->next;
+	free(temp);
 	bfs(map, frontier, reached);
 }
 
@@ -96,9 +94,8 @@ int	check_map(t_gameboard *gb, int x, int y)
 	frontier = NULL;
 	reached = NULL;
 	ft_lstadd_back(&reached, ft_lstnew(pos));
-	ft_lstadd_back(&frontier,ft_lstnew(pos));
+	ft_lstadd_back(&frontier, ft_lstnew(pos));
 	bfs(gb->map, frontier, reached);
 	ft_lstclear(&reached, delete_content);
-	ft_lstclear(&frontier, delete_list_pointer);
 	return (1);
 }
