@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 10:14:07 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/25 11:31:58 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,16 @@ t_gameboard	*init_gameboard(void)
 
 void	system_leaks(void)
 {
-	system("leaks home");
+	system("leaks so_long");
 }
 
 int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
-	// why is player not visible in mini map on exit and game ands whithous all collectables?
 	// change enemy position and movement
 	
-	// atexit(system_leaks);
+	atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);

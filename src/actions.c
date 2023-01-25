@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 10:22:55 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/25 11:23:05 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	move_player(t_gameboard *gb, mlx_image_t *image)
 	gb->player->y_pos = gb->player->y_npos;
 }
 
-// create screens
 void	end_game(t_gameboard *gb, int result)
 {
 	gb->imgs->pl->enabled = 0;
+	ft_printf("%d\n", gb->coll);
 	if (result == 1)
 		mlx_image_to_window(gb->mlx, gb->imgs->win, 0, 0);
 	if (result == 0)

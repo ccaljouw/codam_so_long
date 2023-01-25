@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 21:39:14 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/25 11:31:24 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	render_window(t_gameboard *gb)
 		x = 0;
 		y++;
 	}
+	gb->coll = gb->imgs->coll->count;
 	render_sidebar(gb);
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, \
