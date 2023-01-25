@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 16:28:22 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 22:16:31 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ char	*read_file(char *line, char *file)
 	close(fd);
 	return (line);
 }
+void	check_map_content(t_gameboard *gb)
+{
+	if (gb->map->coll_count != gb->imgs->coll->count ||
+			gb->imgs->exit->count != gb->map->exit_count)
+		error(FT_INVPATH, gb);
+	if (gb->map->start_count != 1)
+		error(FT_INVMAPP, gb);
+	if (gb->map->exit_count != 1)
+		error(FT_INVMAPE, gb);
+	if (gb->map->coll_count < 1)
+		error(FT_INVMAPC, gb);
+}
 
 void	init_map(char *file, t_gameboard *gb)
 {
@@ -91,6 +103,6 @@ void	init_map(char *file, t_gameboard *gb)
 	gb->map->arr = ft_split(line, '\n');
 	if (!gb->map->arr)
 		error(FT_MEMFAIL, gb);
-	check_rectangle(gb);
+	check_rectangular(gb);
 	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 18:28:07 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 10:14:07 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*error_msg(t_errno val)
 	message[13] = "Invallid map: no or more than one start position.";
 	message[14] = "Invallid map: no exit / more than one exit.";
 	message[15] = "Invallid map: not rectangular.";
-	message[16] = "Invallid map: invallid character in map.";
+	message[16] = "Invallid map: invalid character in map.";
 	message[17] = "Invallid map: no valid path.";
 	message[18]	= "Invallid map: too big for monitor.";
 	return (message[val]);
@@ -46,7 +46,7 @@ void	error(t_errno val, t_gameboard *gb)
 		return ;
 	ft_printf("\nError\n%s\n\n", error_msg(val));
 	free_all(gb);
-	exit (1);
+	exit (val);
 }
 
 void	check_args(int argc, char **argv)
@@ -85,17 +85,17 @@ t_gameboard	*init_gameboard(void)
 
 void	system_leaks(void)
 {
-	system("leaks so_long");
+	system("leaks home");
 }
 
 int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
-	// fix map checks
-	// why is player not visible in mini map?
-	// make end screens
-	atexit(system_leaks);
+	// why is player not visible in mini map on exit and game ands whithous all collectables?
+	// change enemy position and movement
+	
+	// atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();
 	init_map(argv[1], gb);
@@ -104,6 +104,7 @@ int	main(int argc, char **argv)
 	init_images(gb);
 	init_characters(gb);
 	render_window(gb);
+	check_map_content(gb);
 	mlx_loop_hook(gb->mlx, frame_hook, gb);
 	mlx_key_hook(gb->mlx, key_hook, gb);
 	mlx_loop(gb->mlx);

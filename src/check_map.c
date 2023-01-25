@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 18:26:50 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 21:50:38 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	delete_content(void *param)
 
 	content = param;
 	if (content)
-	{
 		free(content);
-		content = NULL;
-	}
 }
 
 int	check_set(t_gameboard *gb, t_list *set, int x, int y)
@@ -32,7 +29,7 @@ int	check_set(t_gameboard *gb, t_list *set, int x, int y)
 	list = set;
 	if (x > gb->map->map_width - 1 || y > gb->map->map_height - 1 \
 		|| x < 0 || y < 0)
-		error(FT_INVPOS, gb);
+		error(FT_INVMAPW, gb);
 	while (list)
 	{
 		pos = list->content;
@@ -43,7 +40,7 @@ int	check_set(t_gameboard *gb, t_list *set, int x, int y)
 	return (0);
 }
 
-void	check_rectangle(t_gameboard *gb)
+void	check_rectangular(t_gameboard *gb)
 {
 	int		i;
 	int		j;

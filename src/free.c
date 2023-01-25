@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:07:41 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 09:29:30 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void	free_textures(t_textures *text)
 		mlx_delete_texture(text->exit_open);
 	if (text->exit_closed)
 		mlx_delete_texture(text->exit_closed);
+	if (text->win)
+		mlx_delete_texture(text->win);
+	if (text->lose)
+		mlx_delete_texture(text->lose);
+	if (text->moves_exc)
+		mlx_delete_texture(text->moves_exc);
 	free(text);
 }
 

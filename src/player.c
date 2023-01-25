@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:17:08 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 10:11:12 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ void	check_collision(t_gameboard *gb)
 				gb->imgs->sprites->player += 2;
 			else
 				end_game(gb, 0);
-			mlx_draw_texture(gb->imgs->lives_count, \
-					gb->text->nums[gb->player->lives], 0, 0);
-			mlx_draw_texture(gb->imgs->pl, \
-					gb->text->player[gb->imgs->sprites->player], 0, 0);
+			if (gb->player->lives >= 0)
+			{
+				mlx_draw_texture(gb->imgs->lives_count, \
+						gb->text->nums[gb->player->lives], 0, 0);
+				mlx_draw_texture(gb->imgs->pl, \
+						gb->text->player[gb->imgs->sprites->player], 0, 0);
+			}
 		}
 		i--;
 	}

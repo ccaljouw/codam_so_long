@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:08:29 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 10:23:04 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	move(keys_t key, t_gameboard *gb)
 
 	if (!get_new_position(key, gb))
 		return (0);
-	map_x = gb->player->x_npos / gb->text->empty->width;
-	map_y = gb->player->y_npos / gb->text->empty->height;
+	map_x = gb->player->x_npos / SIZE;
+	map_y = gb->player->y_npos / SIZE;
 	if (map_x < 0 || map_y < 0 || map_x > gb->map->map_width || \
 									map_y > gb->map->map_height)
 		error(FT_INVPOS, gb);
@@ -60,7 +60,13 @@ void	frame_hook(void *param)
 	else
 		gb->patrol->x_pos--;
 	if (gb->patrol->x_pos >= SIZE - 32)
+	{
+		// check move to right	
 		gb->patrol->x_npos = 1;
+	}
 	if (gb->patrol->x_pos <= 0)
+	{
+		// check move to left
 		gb->patrol->x_npos = 0;
+	}
 }

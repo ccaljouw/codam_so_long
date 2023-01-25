@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/24 18:25:11 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 10:20:54 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@
 # include "libft.h"
 # include "MLX42.h"
 # define SIZE 64		//pixel widht and hight per map position
-# define SIDE 128		//pixel widht of sidebar
+# define SIDE 192		//pixel widht of sidebar
 # define MAX_X 38		//max x positions in map
 # define MAX_Y 22		//max y positions in map
-
 /**
 *  The error codes used to idenfity the correct error message.
 * @param FT_SUCCESS No Errors
@@ -38,7 +37,7 @@
 * @param FT_INVMAPP Invallid map: no or more than one start position.
 * @param FT_INVMAPE Invallid map: no exit / more than one exit.
 * @param FT_INVMAPR Map is not rectangular.
-* @param FT_INVMAPCH Invallid map: invallid character in map.
+* @param FT_INVMAPCH Invallid map: invalid character in map.
 * @param FT_INVPATH Invallid map: no valid path.
 * @param FT_INVMAPB Invallid map: too big for monitor.
 * @param FT_ERRMAX Error count.
@@ -81,7 +80,9 @@ typedef struct s_textures
 	mlx_texture_t	*wall;
 	mlx_texture_t	*exit_open;
 	mlx_texture_t	*exit_closed;
-	mlx_texture_t	*test;
+	mlx_texture_t	*win;
+	mlx_texture_t	*lose;
+	mlx_texture_t	*moves_exc;
 }	t_textures;
 
 typedef struct s_sprites
@@ -102,6 +103,9 @@ typedef struct s_images
 	mlx_image_t		*side_text;
 	mlx_image_t		*moves_count;
 	mlx_image_t		*lives_count;
+	mlx_image_t		*win;
+	mlx_image_t		*lose;
+	mlx_image_t		*moves_exc;
 	t_sprites		*sprites;
 }	t_images;
 
@@ -137,6 +141,7 @@ typedef struct s_gameboard
 	t_images		*imgs;
 	t_textures		*text;
 	mlx_t			*mlx;
+	mlx_t			*mlx2;
 	t_player		*player;
 	t_player		*patrol;
 	int				coll;
@@ -157,6 +162,7 @@ int			check_coord(t_gameboard *gb, t_pos *pos);
 void		init_num_sprite(t_gameboard *gb);
 void		init_player_sprite(t_gameboard *gb);
 void		init_patrol_sprite(t_gameboard *gb);
+void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		frame_hook(void *param);
 int			check_map_pos(t_gameboard *gb, int map_x, int map_y);
@@ -170,11 +176,14 @@ void		error(t_errno val, t_gameboard *gb);
 void		end_game(t_gameboard *gb, int result);
 void		free_all(t_gameboard *gb);
 void		delete_content(void *param);
+void		delete_list_pointer(void *param);
 void		free_sprite(mlx_texture_t **sprite);
 void		free_textures(t_textures *text);
 void		free_images(t_images *imgs);
 int			get_new_position(keys_t key, t_gameboard *gb);
 void		bfs(t_gameboard *gb, t_list *frontier, t_list *reached);
 void		check_collision(t_gameboard *gb);
-void		check_rectangle(t_gameboard *gb);
+void		check_rectangular(t_gameboard *gb);
+void		check_map_content(t_gameboard *gb);
+void		close_game(struct mlx_key_data keypress, void *param);
 #endif

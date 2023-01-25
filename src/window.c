@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 16:15:54 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/24 21:39:14 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	render_map(t_gameboard *gb, int x, int y)
 	else if (gb->map->arr[y][x] == 'P')
 	{
 		check_map(gb, x, y);
-		mlx_image_to_window(gb->mlx, gb->imgs->pl, x_pos, y_pos);
-		mlx_set_instance_depth(&gb->imgs->pl->instances[0], 10);
 		gb->player->x_pos = x_pos;
 		gb->player->y_pos = y_pos;
 	}
@@ -104,6 +102,7 @@ void	render_window(t_gameboard *gb)
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, \
 			gb->text->nums[gb->player->lives], 0, 0);
+	mlx_image_to_window(gb->mlx, gb->imgs->pl, gb->player->x_pos, gb->player->y_pos);
 }
 
 void	init_window(t_gameboard *gb)
