@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 11:31:58 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:40:45 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*error_msg(t_errno val)
 	message[15] = "Invallid map: not rectangular.";
 	message[16] = "Invallid map: invalid character in map.";
 	message[17] = "Invallid map: no valid path.";
-	message[18]	= "Invallid map: too big for monitor.";
+	message[18] = "Invallid map: too big for monitor.";
 	return (message[val]);
 }
 
@@ -93,7 +93,6 @@ int	main(int argc, char **argv)
 	t_gameboard	*gb;
 
 	// change enemy position and movement
-	
 	atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();

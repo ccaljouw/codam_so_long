@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 09:26:13 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/25 16:39:28 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	init_textures(t_gameboard *gb)
 	gb->text->coll = mlx_load_png("./images/bricks/0.png");
 	gb->text->exit_open = mlx_load_png("./images/exito.png");
 	gb->text->exit_closed = mlx_load_png("./images/exitc.png");
-	gb->text->win =  mlx_load_png("./images/win.png");
+	gb->text->win = mlx_load_png("./images/win.png");
 	gb->text->lose = mlx_load_png("./images/lose.png");
 	gb->text->moves_exc = mlx_load_png("./images/moves_exc.png");
 	if (!gb->text->side || !gb->text->lives_title || !gb->text->moves_title \
 			|| !gb->text->empty || !gb->text->wall || !gb->text->coll \
-			|| !gb->text->exit_open || !gb->text->exit_closed || !gb->text->win\
+			|| !gb->text->exit_open || !gb->text->exit_closed || !gb->text->win \
 			|| !gb->text->lose || !gb->text->moves_exc)
 		error(FT_INVPNG, gb);
 }

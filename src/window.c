@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 12:39:26 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 11:31:24 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:41:29 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	render_sidebar(t_gameboard *gb)
 	}
 	draw_sidebar(gb, offset);
 }
-
 
 void	render_map(t_gameboard *gb, int x, int y)
 {
@@ -103,7 +102,8 @@ void	render_window(t_gameboard *gb)
 	set_movescore(0, gb);
 	mlx_draw_texture(gb->imgs->lives_count, \
 			gb->text->nums[gb->player->lives], 0, 0);
-	mlx_image_to_window(gb->mlx, gb->imgs->pl, gb->player->x_pos, gb->player->y_pos);
+	mlx_image_to_window(gb->mlx, gb->imgs->pl, \
+			gb->player->x_pos, gb->player->y_pos);
 }
 
 void	init_window(t_gameboard *gb)

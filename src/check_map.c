@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 11:30:30 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:36:59 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	check_rectangular(t_gameboard *gb)
 	if (j > MAX_Y)
 		error(FT_INVMAPB, gb);
 }
-
 
 int	check_map(t_gameboard *gb, int x, int y)
 {

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 11:29:50 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:39:50 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ char	*read_file(char *line, char *file)
 	close(fd);
 	return (line);
 }
+
 void	check_map_content(t_gameboard *gb)
 {
-	if (gb->map->coll_count != gb->imgs->coll->count ||
+	if (gb->map->coll_count != gb->imgs->coll->count || \
 			gb->imgs->exit->count != gb->map->exit_count)
 		error(FT_INVPATH, gb);
 	if (gb->map->start_count != 1)

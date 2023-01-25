@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/24 10:02:24 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/25 16:41:00 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	init_num_sprite(t_gameboard *gb)
 	gb->text->nums[8] = mlx_load_png("./images/numbers/lego8.png");
 	gb->text->nums[9] = mlx_load_png("./images/numbers/lego9.png");
 	gb->text->nums[10] = NULL;
-	// error check
 }
 
 void	init_patrol_sprite(t_gameboard *gb)
@@ -54,7 +53,6 @@ void	init_patrol_sprite(t_gameboard *gb)
 	gb->text->patrol[15] = mlx_load_png("./images/patrol1/31.png");
 	gb->text->patrol[16] = mlx_load_png("./images/patrol1/33.png");
 	gb->text->patrol[17] = NULL;
-	// error check
 }
 
 void	init_player_sprite(t_gameboard *gb)
@@ -69,5 +67,4 @@ void	init_player_sprite(t_gameboard *gb)
 	gb->text->player[4] = mlx_load_png("./images/player/flashman64grey.png");
 	gb->text->player[5] = mlx_load_png("./images/player/flashman64greyr.png");
 	gb->text->player[6] = NULL;
-	// error check
 }
