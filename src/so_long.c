@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 16:40:45 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:52:07 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
+	// segfault if image file not found
+	// vallid path check nog working if more than one start position
+	// empty map gives error  "file was invallid or does nog exist"
 	// change enemy position and movement
 	atexit(system_leaks);
 	check_args(argc, argv);

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 11:23:05 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/25 16:51:00 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ void	end_game(t_gameboard *gb, int result)
 	gb->imgs->pl->enabled = 0;
 	ft_printf("%d\n", gb->coll);
 	if (result == 1)
-		mlx_image_to_window(gb->mlx, gb->imgs->win, 0, 0);
+		mlx_image_to_window(gb->mlx, gb->imgs->win, \
+				(gb->width - gb->imgs->win->width) / 2, \
+				(gb->height - gb->imgs->win->height) / 2);
 	if (result == 0)
-		mlx_image_to_window(gb->mlx, gb->imgs->lose, 0, 0);
+		mlx_image_to_window(gb->mlx, gb->imgs->lose,  \
+				(gb->width - gb->imgs->lose->width) / 2, \
+				(gb->height - gb->imgs->lose->height) / 2);
 	if (result == 3)
-		mlx_image_to_window(gb->mlx, gb->imgs->moves_exc, 0, 0);
+		mlx_image_to_window(gb->mlx, gb->imgs->moves_exc, \
+				(gb->width - gb->imgs->moves_exc->width) / 2, \
+				(gb->height - gb->imgs->moves_exc->height) / 2);
 }
 
 void	change_direction(keys_t key, t_images *imgs, t_textures *text)
