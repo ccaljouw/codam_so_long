@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 11:22:01 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 14:24:00 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ static char	*error_msg(t_errno val)
 
 void	error(t_errno val, t_gameboard *gb)
 {
-	if (val == 0)
-		return ;
 	ft_printf("\nError\n%s\n\n", error_msg(val));
+	mlx_terminate(gb->mlx);
 	free_all(gb);
 	exit (val);
 }

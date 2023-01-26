@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 13:18:06 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 14:22:56 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 	if (mlx_is_key_down(gb->mlx, keypress.key))
 	{
 		if (keypress.key == MLX_KEY_ESCAPE)
-			mlx_close_window(gb->mlx);
+			error(FT_SUCCESS, gb);
 		if (gb->imgs->pl->enabled == 1)
 			move(keypress.key, gb);
 	}
