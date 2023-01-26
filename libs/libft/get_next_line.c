@@ -6,12 +6,12 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/12 14:24:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/13 09:19:16 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/26 18:41:05 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-# include <stdlib.h>
+#include <stdlib.h>
 
 char	*get_remaining_buf(char *str, char **remaining_buf)
 {

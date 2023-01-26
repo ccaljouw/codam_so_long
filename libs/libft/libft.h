@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/10 11:56:55 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/19 15:37:23 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/26 18:40:49 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,4 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_free_s1(char *s1, char *s2);
-
 #endif
-
