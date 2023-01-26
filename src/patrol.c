@@ -6,48 +6,89 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/26 12:56:07 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 13:19:39 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 16:32:24 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	move_patrol_h(t_gameboard *gb, int i)
+int	check_move(t_gameboard *gb, int instance, int dir)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	
-	x = (gb->imgs->patrol->instances[i].x + 20) / SIZE;
-	y = gb->imgs->patrol->instances[i].y / SIZE;
-	if (!ft_strchr("0CP", gb->map->arr[y][x]))
+	if (dir == 1)
 	{
-		if (gb->patrol->dir == 0)
-			gb->patrol->dir = 1;
-		else
-			gb->patrol->dir = 0;
+		x = (gb->imgs->patrol->instances[instance].x + 32) / SIZE;
+		y = (gb->imgs->patrol->instances[instance].y + 32) / SIZE;
+		if (!ft_strchr("0CP", gb->map->arr[y][x]))
+			dir = 0;
+	}	
+	else
+	{
+		x = (gb->imgs->patrol->instances[instance].x) / SIZE;
+		y = (gb->imgs->patrol->instances[instance].y) / SIZE;
+		if (!ft_strchr("0CP", gb->map->arr[y][x]))
+			dir = 1;
 	}
-	if (gb->patrol->dir == 0)
+	return (dir);
+}
+void	move_h(t_gameboard *gb, int dir, int i)
+{
+	if (dir == 1)
 		gb->imgs->patrol->instances[i].x++;
 	else
 		gb->imgs->patrol->instances[i].x--;
 }
 
-void	move_patrol_v(t_gameboard *gb, int i)
+void	move_v(t_gameboard *gb, int dir, int i)
 {
-	int x;
-	int y;
-	
-	x = (gb->imgs->patrol->instances[i].x) / SIZE;
-	y = (gb->imgs->patrol->instances[i].y - 20) / SIZE;
-	if (!ft_strchr("0CP", gb->map->arr[y][x]))
-	{
-		if (gb->patrol->dir == 0)
-			gb->patrol->dir = 1;
-		else
-			gb->patrol->dir = 0;
-	}
-	if (gb->patrol->dir == 0)
+	if (dir == 1)
 		gb->imgs->patrol->instances[i].y++;
 	else
 		gb->imgs->patrol->instances[i].y--;
 }
+
+void	move_x(t_gameboard *gb, int dir, int i)
+{
+	if (dir == 1)
+	{
+		gb->imgs->patrol->instances[i].x++;
+		gb->imgs->patrol->instances[i].y++;
+	}
+	else
+	{
+		gb->imgs->patrol->instances[i].x--;
+		gb->imgs->patrol->instances[i].y--;
+	}
+}
+
+void	move_patrol(t_gameboard *gb)
+{
+	int	i;
+	
+	i = 0;
+	while (i < gb->imgs->patrol->count)
+	{
+		if (i % 3 == 0)
+		{
+			gb->patrol->dir = check_move(gb, i, gb->patrol->dir);
+			move_h(gb, gb->patrol->dir, i);
+			check_collision(gb, i, gb->patrol->dir);
+		}
+		if (i % 3 == 1)
+		{
+			gb->patrol->dir1 = check_move(gb, i, gb->patrol->dir1);
+			move_v(gb, gb->patrol->dir1, i);
+			check_collision(gb, i, gb->patrol->dir1);
+		}
+		if (i % 3 == 2)
+		{
+			gb->patrol->dir2 = check_move(gb, i, gb->patrol->dir2);
+			move_x(gb, gb->patrol->dir2, i);
+			check_collision(gb, i, gb->patrol->dir2);
+		}
+		i++;
+	}
+}
+

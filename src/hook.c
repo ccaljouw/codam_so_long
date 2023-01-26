@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 14:22:56 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 16:10:25 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,6 @@ void	frame_hook(void *param)
 		gb->imgs->sprites->patrol = 0;
 	else
 		gb->imgs->sprites->patrol += 1;
-	while (i < gb->imgs->patrol->count)
-	{
-		if (i % 2== 0)
-			move_patrol_h(gb, i);
-		else
-			move_patrol_v(gb, i);
-		i++;
-	}
-
+	if (gb->imgs->patrol->count > 0)
+		move_patrol(gb);
 }

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 12:49:22 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 16:41:14 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ t_player	*init_player(void)
 	player->x_npos = 0;
 	player->y_npos = 0;
 	player->dir = 0;
+	player->dir1 = 0;
+	player->dir2 = 0;
+	player->dir3 = 0;
 	return (player);
 }
 
@@ -57,29 +60,28 @@ int	get_new_position(keys_t key, t_gameboard *gb)
 	return (1);
 }
 
-void	check_collision(t_gameboard *gb)
+void	check_collision(t_gameboard *gb, int i, int dir)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = gb->imgs->patrol->count - 1;
-	while (i >= 0)
+	x = (gb->imgs->patrol->instances[i].x + (dir * 32)) / SIZE;
+	y = (gb->imgs->patrol->instances[i].y + (dir * 32)) / SIZE;
+	if (x == gb->imgs->pl->instances[0].x / SIZE \
+		&& y == gb->imgs->pl->instances[0].y / SIZE)
 	{
-		if (gb->patrol->x_pos == gb->player->x_npos \
-			&& gb->patrol->y_pos == gb->player->y_npos)
+		ft_printf("collision");
+		gb->player->lives -= 1;
+		if (gb->player->lives > 0)
+			gb->imgs->sprites->player += 2;
+		else
+			end_game(gb, 0);
+		if (gb->player->lives >= 0)
 		{
-			gb->player->lives -= 1;
-			if (gb->player->lives > 0)
-				gb->imgs->sprites->player += 2;
-			else
-				end_game(gb, 0);
-			if (gb->player->lives >= 0)
-			{
-				mlx_draw_texture(gb->imgs->lives_count, \
-						gb->text->nums[gb->player->lives], 0, 0);
-				mlx_draw_texture(gb->imgs->pl, \
-						gb->text->player[gb->imgs->sprites->player], 0, 0);
-			}
+			mlx_draw_texture(gb->imgs->lives_count, \
+					gb->text->nums[gb->player->lives], 0, 0);
+			mlx_draw_texture(gb->imgs->pl, \
+					gb->text->player[gb->imgs->sprites->player], 0, 0);
 		}
-		i--;
 	}
 }

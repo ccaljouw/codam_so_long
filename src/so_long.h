@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 13:18:21 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 16:29:07 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,9 @@ typedef struct s_player
 	int				x_npos;
 	int				y_npos;
 	int				dir;
+	int				dir1;
+	int				dir2;
+	int				dir3;
 }	t_player;
 
 typedef struct s_gameboard
@@ -185,11 +188,10 @@ void		free_textures(t_textures *text);
 void		free_images(t_images *imgs);
 int			get_new_position(keys_t key, t_gameboard *gb);
 void		bfs(t_gameboard *gb, t_list *frontier, t_list *reached);
-void		check_collision(t_gameboard *gb);
+void		check_collision(t_gameboard *gb, int i, int dir);
 void		check_rectangular(t_gameboard *gb);
 void		check_map_content(t_gameboard *gb);
 void		close_game(struct mlx_key_data keypress, void *param);
 void	check_map_parameters(t_gameboard *gb);
-void	move_patrol_h(t_gameboard *gb, int i);
-void	move_patrol_v(t_gameboard *gb, int i);
+void	move_patrol(t_gameboard *gb);
 #endif
