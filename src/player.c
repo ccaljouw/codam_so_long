@@ -6,13 +6,11 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 17:28:07 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 18:24:45 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <math.h>
-#include <stdio.h> //// remove
 
 t_player	*init_player(void)
 {
@@ -62,30 +60,20 @@ int	get_new_position(keys_t key, t_gameboard *gb)
 	return (1);
 }
 
-void	check_collision(t_gameboard *gb, int i, int dir)
+int	move(keys_t key, t_gameboard *gb)
 {
-	int		x;
-	int		y;
+	int	map_x;
+	int	map_y;
 
-	if ((mlx_get_time() - gb->coll_time) < 1.5)
-		return ;
-	x = (gb->imgs->patrol->instances[i].x + (dir * 32)) / SIZE;
-	y = (gb->imgs->patrol->instances[i].y + (dir * 32)) / SIZE;
-	if (x == gb->imgs->pl->instances[0].x / SIZE \
-		&& y == gb->imgs->pl->instances[0].y / SIZE)
-	{
-		gb->coll_time = mlx_get_time();
-		gb->player->lives -= 1;
-		if (gb->player->lives > 0)
-			gb->imgs->sprites->player += 2;
-		else
-			end_game(gb, 0);
-		if (gb->player->lives >= 0)
-		{
-			mlx_draw_texture(gb->imgs->lives_count, \
-					gb->text->nums[gb->player->lives], 0, 0);
-			mlx_draw_texture(gb->imgs->pl, \
-					gb->text->player[gb->imgs->sprites->player], 0, 0);
-		}
-	}
+	if (!get_new_position(key, gb))
+		return (0);
+	map_x = gb->player->x_npos / SIZE;
+	map_y = gb->player->y_npos / SIZE;
+	if (map_x < 0 || map_y < 0 || map_x > gb->map->map_width || \
+									map_y > gb->map->map_height)
+		error(FT_INVPOS, gb);
+	if (!check_map_pos(gb, map_x, map_y))
+		return (0);
+	move_player(gb, gb->imgs->pl);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 11:23:51 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 18:24:37 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,48 @@ void	check_map_parameters(t_gameboard *gb)
 	}
 	gb->map->map_height = j;
 	check_valid(gb);
+}
+
+int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
+{
+	if (gb->map->arr[map_y][map_x] == '1')
+		return (0);
+	if (gb->map->arr[map_y][map_x] == 'C')
+		get_collectable(gb, map_x, map_y);
+	if (gb->map->arr[map_y][map_x] == 'E' && gb->coll == 0)
+		end_game(gb, 1);
+	if (gb->imgs->pl->enabled == 1)
+		gb->moves += 1;
+	if (gb->moves > 999)
+		end_game(gb, 3);
+	set_movescore(gb->moves, gb);
+	return (1);
+}
+
+void	check_collision(t_gameboard *gb, int i, int dir)
+{
+	int		x;
+	int		y;
+
+	if ((mlx_get_time() - gb->coll_time) < 1.5)
+		return ;
+	x = (gb->imgs->patrol->instances[i].x + (dir * 32)) / SIZE;
+	y = (gb->imgs->patrol->instances[i].y + (dir * 32)) / SIZE;
+	if (x == gb->imgs->pl->instances[0].x / SIZE \
+		&& y == gb->imgs->pl->instances[0].y / SIZE)
+	{
+		gb->coll_time = mlx_get_time();
+		gb->player->lives -= 1;
+		if (gb->player->lives > 0)
+			gb->imgs->sprites->player += 2;
+		else
+			end_game(gb, 0);
+		if (gb->player->lives >= 0)
+		{
+			mlx_draw_texture(gb->imgs->lives_count, \
+					gb->text->nums[gb->player->lives], 0, 0);
+			mlx_draw_texture(gb->imgs->pl, \
+					gb->text->player[gb->imgs->sprites->player], 0, 0);
+		}
+	}
 }

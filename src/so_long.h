@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 17:25:13 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 18:24:09 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,42 +157,30 @@ typedef struct s_gameboard
 	double			coll_time;
 }	t_gameboard;
 
-t_gameboard	*init_gameboard(void);
-void		init_map(char *file, t_gameboard *gb);
-void		init_window(t_gameboard *gb);
-void		init_images(t_gameboard *gb);
-void		init_textures(t_gameboard *gb);
-void		init_characters(t_gameboard *gb);
-void		render_map(t_gameboard *gb, int x, int y);
-void		render_window(t_gameboard *gb);
-int			check_coord(t_gameboard *gb, t_pos *pos);
+void			error(t_errno val, t_gameboard *gb);
+void			init_map(char *file, t_gameboard *gb);
+void			init_textures(t_gameboard *gb);
+void			init_window(t_gameboard *gb);
+void			init_images(t_gameboard *gb);
+void			init_characters(t_gameboard *gb);
+void			render_window(t_gameboard *gb);
+void			check_map_content(t_gameboard *gb);
+void			frame_hook(void *param);
+void			key_hook(struct mlx_key_data keypress, void *param);
+void			delete_content(void *param);
+void			free_all(t_gameboard *gb);
+void			end_game(t_gameboard *gb, int result);
+int				move(keys_t key, t_gameboard *gb);
+void			move_player(t_gameboard *gb, mlx_image_t *image);
+void			change_direction(keys_t key, t_images *imgs, t_textures *text);
+int				check_map_pos(t_gameboard *gb, int map_x, int map_y);
+void			check_collision(t_gameboard *gb, int i, int dir);
+int				check_map(t_gameboard *gb, int x, int y);
+void			set_movescore(int moves, t_gameboard *gb);
+void			get_collectable(t_gameboard *gb, int map_x, int map_y);
 mlx_texture_t	**init_num_sprite(t_gameboard *gb, int count);
 mlx_texture_t	**init_player_sprite(t_gameboard *gb, int count);
 mlx_texture_t	**init_patrol_sprite(t_gameboard *gb, int count);
-void		render_map(t_gameboard *gb, int x, int y);
-void		key_hook(struct mlx_key_data keypress, void *param);
-void		frame_hook(void *param);
-int			check_map_pos(t_gameboard *gb, int map_x, int map_y);
-void		change_direction(keys_t key, t_images *imgs, t_textures *text);
-void		get_collectable(t_gameboard *gb, int map_x, int map_y);
-void		hit_patrol(t_gameboard *gb);
-void		move_player(t_gameboard *gb, mlx_image_t *image);
-void		set_movescore(int moves, t_gameboard *gb);
-int			check_map(t_gameboard *gb, int x, int y);
-void		error(t_errno val, t_gameboard *gb);
-void		end_game(t_gameboard *gb, int result);
-void		free_all(t_gameboard *gb);
-void		delete_content(void *param);
-void		delete_list_pointer(void *param);
-void		free_sprite(mlx_texture_t **sprite);
-void		free_textures(t_textures *text);
-void		free_images(t_images *imgs);
-int			get_new_position(keys_t key, t_gameboard *gb);
-void		bfs(t_gameboard *gb, t_list *frontier, t_list *reached);
-void		check_collision(t_gameboard *gb, int i, int dir);
-void		check_rectangular(t_gameboard *gb);
-void		check_map_content(t_gameboard *gb);
-void		close_game(struct mlx_key_data keypress, void *param);
-void	check_map_parameters(t_gameboard *gb);
-void	move_patrol(t_gameboard *gb);
+void			check_map_parameters(t_gameboard *gb);
+void			move_patrol(t_gameboard *gb);
 #endif

@@ -6,29 +6,11 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 16:10:25 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 17:55:49 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	move(keys_t key, t_gameboard *gb)
-{
-	int	map_x;
-	int	map_y;
-
-	if (!get_new_position(key, gb))
-		return (0);
-	map_x = gb->player->x_npos / SIZE;
-	map_y = gb->player->y_npos / SIZE;
-	if (map_x < 0 || map_y < 0 || map_x > gb->map->map_width || \
-									map_y > gb->map->map_height)
-		error(FT_INVPOS, gb);
-	if (!check_map_pos(gb, map_x, map_y))
-		return (0);
-	move_player(gb, gb->imgs->pl);
-	return (1);
-}
 
 void	key_hook(struct mlx_key_data keypress, void *param)
 {

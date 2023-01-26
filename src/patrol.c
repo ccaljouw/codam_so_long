@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/26 12:56:07 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 16:32:24 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 17:57:58 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_move(t_gameboard *gb, int instance, int dir)
 {
 	int	x;
 	int	y;
-	
+
 	if (dir == 1)
 	{
 		x = (gb->imgs->patrol->instances[instance].x + 32) / SIZE;
@@ -33,6 +33,7 @@ int	check_move(t_gameboard *gb, int instance, int dir)
 	}
 	return (dir);
 }
+
 void	move_h(t_gameboard *gb, int dir, int i)
 {
 	if (dir == 1)
@@ -66,7 +67,7 @@ void	move_x(t_gameboard *gb, int dir, int i)
 void	move_patrol(t_gameboard *gb)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < gb->imgs->patrol->count)
 	{
@@ -91,4 +92,3 @@ void	move_patrol(t_gameboard *gb)
 		i++;
 	}
 }
-

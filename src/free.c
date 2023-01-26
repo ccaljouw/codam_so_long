@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 19:05:54 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 16:38:58 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 18:23:20 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void	free_map(t_map *map)
 		free(map->arr);
 	}
 	free(map);
+}
+
+void	free_sprite(mlx_texture_t **sprite)
+{
+	int	i;
+
+	i = 0;
+	if (!sprite)
+		return ;
+	while (sprite[i])
+	{
+		mlx_delete_texture(sprite[i]);
+		i++;
+	}
+	free(sprite);
 }
 
 void	free_textures(t_textures *text)
@@ -58,21 +73,6 @@ void	free_textures(t_textures *text)
 		mlx_delete_texture(text->moves_exc);
 }
 
-void	free_sprite(mlx_texture_t **sprite)
-{
-	int	i;
-
-	i = 0;
-	if (!sprite)
-		return ;
-	while (sprite[i])
-	{
-		mlx_delete_texture(sprite[i]);
-		i++;
-	}
-	free(sprite);
-}
-
 void	free_images(t_images *imgs)
 {
 	if (imgs->sprites)
@@ -97,6 +97,8 @@ void	free_all(t_gameboard *gb)
 			free_textures(gb->text);
 			free(gb->text);
 		}
+		if (gb->mlx)
+			mlx_terminate(gb->mlx);
 		free(gb);
 	}
 }
