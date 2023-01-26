@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 17:25:04 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 17:37:26 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
-	// change enemy position and movement
+	// segfault in free by incorrectie filename
 	atexit(system_leaks);
 	check_args(argc, argv);
 	gb = init_gameboard();
