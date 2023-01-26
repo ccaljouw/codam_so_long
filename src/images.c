@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 16:56:52 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:28:34 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ void	load_images(t_gameboard *gb)
 }
 
 void	init_images(t_gameboard *gb)
-{
+{	
 	gb->imgs = malloc(sizeof(t_images));
 	if (!gb->imgs)
 		error(FT_MEMFAIL, gb);
 	init_sprites(gb);
-	init_num_sprite(gb);
-	init_patrol_sprite(gb);
-	init_player_sprite(gb);
+	gb->text->nums = init_num_sprite(gb, 10);
+	gb->text->patrol = init_patrol_sprite(gb, 60);
+	gb->text->player = init_player_sprite(gb, 6);
 	load_images(gb);
 }

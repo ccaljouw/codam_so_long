@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 10:20:54 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/26 10:27:31 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,9 @@ void		init_characters(t_gameboard *gb);
 void		render_map(t_gameboard *gb, int x, int y);
 void		render_window(t_gameboard *gb);
 int			check_coord(t_gameboard *gb, t_pos *pos);
-void		init_num_sprite(t_gameboard *gb);
-void		init_player_sprite(t_gameboard *gb);
-void		init_patrol_sprite(t_gameboard *gb);
+mlx_texture_t	**init_num_sprite(t_gameboard *gb, int count);
+mlx_texture_t	**init_player_sprite(t_gameboard *gb, int count);
+mlx_texture_t	**init_patrol_sprite(t_gameboard *gb, int count);
 void		render_map(t_gameboard *gb, int x, int y);
 void		key_hook(struct mlx_key_data keypress, void *param);
 void		frame_hook(void *param);

@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:05:38 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 16:58:08 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:29:52 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	main(int argc, char **argv)
 {	
 	t_gameboard	*gb;
 
-	// segfault if image file not found check loading before adding to gb?
 	// vallid path check nog working if more than one start position
 	// empty map gives error  "file was invallid or does nog exist"
 	// check walls on outer boundry of map?
