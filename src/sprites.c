@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 14:29:51 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 10:27:17 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 11:25:42 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ mlx_texture_t	**init_num_sprite(t_gameboard *gb, int count)
 	char			*filename;
 	mlx_texture_t	**sprite;
 	int				i;
-	
+
 	i = 0;
 	sprite = malloc(sizeof(mlx_texture_t *) * count + 1);
 	if (!sprite)
@@ -65,7 +65,7 @@ mlx_texture_t	**init_patrol_sprite(t_gameboard *gb, int count)
 	char			*filename;
 	mlx_texture_t	**sprite;
 	int				i;
-	
+
 	i = 0;
 	sprite = malloc(sizeof(mlx_texture_t *) * count + 1);
 	if (!sprite)
@@ -92,7 +92,7 @@ mlx_texture_t	**init_player_sprite(t_gameboard *gb, int count)
 	char			*filename;
 	mlx_texture_t	**sprite;
 	int				i;
-	
+
 	i = 0;
 	sprite = malloc(sizeof(mlx_texture_t *) * count + 1);
 	if (!sprite)

@@ -6,13 +6,12 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 11:10:59 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 11:24:57 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
-
 
 int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 {
@@ -91,7 +90,5 @@ void	init_map(char *file, t_gameboard *gb)
 	if (!gb->map->arr)
 		error(FT_MEMFAIL, gb);
 	check_map_parameters(gb);
-	// check_rectangular(gb);
-		
 	free(line);
 }

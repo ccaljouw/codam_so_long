@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 11:18:48 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 11:23:51 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_valid(t_gameboard *gb)
 	if (gb->map->coll_count < 1)
 		error(FT_INVMAPC, gb);
 	gb->map->start_count = 1;
-	gb->map->exit_count = 0; 
+	gb->map->exit_count = 0;
 	gb->map->coll_count = 0;
 }
 
@@ -67,4 +67,3 @@ void	check_map_parameters(t_gameboard *gb)
 	gb->map->map_height = j;
 	check_valid(gb);
 }
-
