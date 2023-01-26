@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 17:55:06 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 21:56:36 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	move_player(t_gameboard *gb, mlx_image_t *image)
 	image->instances[0].x = gb->player->x_npos;
 	image->instances[0].y = gb->player->y_npos;
 	if (gb->moves % 10 == 0)
+	{
+		gb->coll_time = mlx_get_time();
 		mlx_image_to_window(gb->mlx, gb->imgs->patrol, \
 				gb->player->x_pos, gb->player->y_pos);
+	}
 	gb->player->x_pos = gb->player->x_npos;
 	gb->player->y_pos = gb->player->y_npos;
 }

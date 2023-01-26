@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 17:55:49 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 21:39:21 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 void	frame_hook(void *param)
 {
 	t_gameboard	*gb;
-	int			i;
 
 	gb = param;
-	i = 0;
 	mlx_draw_texture(gb->imgs->patrol, \
 		gb->text->patrol[gb->imgs->sprites->patrol], 0, 0);
 	if (gb->imgs->sprites->patrol == 59)

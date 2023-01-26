@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/19 15:53:49 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 18:24:37 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 21:57:03 by cariencaljo   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	check_collision(t_gameboard *gb, int i, int dir)
 	int		x;
 	int		y;
 
-	if ((mlx_get_time() - gb->coll_time) < 1.5)
+	if ((mlx_get_time() - gb->coll_time) < 1)
 		return ;
 	x = (gb->imgs->patrol->instances[i].x + (dir * 32)) / SIZE;
 	y = (gb->imgs->patrol->instances[i].y + (dir * 32)) / SIZE;
