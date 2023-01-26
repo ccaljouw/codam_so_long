@@ -6,27 +6,13 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/11 15:45:41 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/25 16:39:50 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 11:10:59 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <fcntl.h>
 
-int	check_coord(t_gameboard *gb, t_pos *pos)
-{
-	if (!ft_strchr("0CPE1", gb->map->arr[pos->y][pos->x]))
-		error(FT_INVMAPCH, gb);
-	if (gb->map->arr[pos->y][pos->x] == '1')
-		return (0);
-	if (gb->map->arr[pos->y][pos->x] == 'C')
-		gb->map->coll_count += 1;
-	if (gb->map->arr[pos->y][pos->x] == 'P')
-		gb->map->start_count += 1;
-	if (gb->map->arr[pos->y][pos->x] == 'E')
-		gb->map->exit_count += 1;
-	return (1);
-}
 
 int	check_map_pos(t_gameboard *gb, int map_x, int map_y)
 {
@@ -74,7 +60,7 @@ char	*read_file(char *line, char *file)
 void	check_map_content(t_gameboard *gb)
 {
 	if (gb->map->coll_count != gb->imgs->coll->count || \
-			gb->imgs->exit->count != gb->map->exit_count)
+			gb->map->exit_count != 1 || gb->map->start_count != 1)
 		error(FT_INVPATH, gb);
 	if (gb->map->start_count != 1)
 		error(FT_INVMAPP, gb);
@@ -94,7 +80,7 @@ void	init_map(char *file, t_gameboard *gb)
 	if (!gb->map)
 		error(FT_MEMFAIL, gb);
 	gb->map->coll_count = 0;
-	gb->map->start_count = 1;
+	gb->map->start_count = 0;
 	gb->map->exit_count = 0;
 	gb->map->map_width = 0;
 	gb->map->map_height = 0;
@@ -104,6 +90,8 @@ void	init_map(char *file, t_gameboard *gb)
 	gb->map->arr = ft_split(line, '\n');
 	if (!gb->map->arr)
 		error(FT_MEMFAIL, gb);
-	check_rectangular(gb);
+	check_map_parameters(gb);
+	// check_rectangular(gb);
+		
 	free(line);
 }

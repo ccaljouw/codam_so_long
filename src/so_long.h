@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 10:27:31 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 10:52:25 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "MLX42.h"
 # define SIZE 64		//pixel widht and hight per map position
 # define SIDE 192		//pixel widht of sidebar
-# define MAX_X 38		//max x positions in map
+# define MAX_X 37		//max x positions in map
 # define MAX_Y 22		//max y positions in map
 /**
 *  The error codes used to idenfity the correct error message.
@@ -186,4 +186,5 @@ void		check_collision(t_gameboard *gb);
 void		check_rectangular(t_gameboard *gb);
 void		check_map_content(t_gameboard *gb);
 void		close_game(struct mlx_key_data keypress, void *param);
+void	check_map_parameters(t_gameboard *gb);
 #endif
