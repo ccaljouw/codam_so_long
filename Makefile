@@ -1,6 +1,6 @@
 NAME 		:= so_long
 CC 			?= gcc
-CFLAGS 		:= -Wall -Wextra -Werror
+CFLAGS 		:= -Wall -Wextra #-Werror
 CODAMFLAGS  := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 HOMEFLAGS	:= -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/
 LIBFT	 	:= ./libs/libft

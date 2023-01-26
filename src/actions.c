@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 12:50:27 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 16:43:33 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	move_player(t_gameboard *gb, mlx_image_t *image)
 void	end_game(t_gameboard *gb, int result)
 {
 	gb->imgs->pl->enabled = 0;
-	ft_printf("%d\n", gb->coll);
 	if (result == 1)
 		mlx_image_to_window(gb->mlx, gb->imgs->win, \
 				(gb->width - gb->imgs->win->width) / 2, \

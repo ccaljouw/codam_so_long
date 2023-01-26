@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 16:29:07 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 17:25:13 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ typedef struct s_gameboard
 	int				moves;
 	int				width;
 	int				height;
+	double			coll_time;
 }	t_gameboard;
 
 t_gameboard	*init_gameboard(void);
