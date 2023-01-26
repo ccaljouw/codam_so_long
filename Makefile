@@ -8,8 +8,8 @@ LIBMLX		:= ./libs/MLX42
 LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/libmlx42.a
 HEADERS		:= -I $(LIBFT)  -I $(LIBMLX)/include/MLX42
 
-OBJ 		:= $(addprefix obj/, so_long.o player.o patrol.o window.o images.o sprites.o init_map.o check_map.o \
-				breadth_first_search.o hook.o actions.o free.o utils.o)
+OBJ 		:= $(addprefix obj/, so_long.o player.o patrol.o window.o images.o sprites.o \
+				init_map.o check_map.o breadth_first_search.o hook.o actions.o free.o utils.o)
 
 all: $(NAME)
 
