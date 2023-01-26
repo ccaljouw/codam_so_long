@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/20 16:05:30 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 10:28:34 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 12:22:08 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_sprites(t_gameboard *gb)
 
 void	load_images(t_gameboard *gb)
 {
-	gb->imgs->patrol = mlx_new_image(gb->mlx, SIZE, SIZE);
+	gb->imgs->patrol = mlx_new_image(gb->mlx, 32, 32);
 	gb->imgs->coll = mlx_texture_to_image(gb->mlx, gb->text->coll);
 	gb->imgs->exit = mlx_texture_to_image(gb->mlx, gb->text->exit_closed);
 	gb->imgs->pl = mlx_texture_to_image(gb->mlx, gb->text->player[0]);

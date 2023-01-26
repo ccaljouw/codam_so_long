@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/13 22:44:55 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 11:21:00 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 13:18:06 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,23 @@ void	key_hook(struct mlx_key_data keypress, void *param)
 void	frame_hook(void *param)
 {
 	t_gameboard	*gb;
+	int			i;
 
 	gb = param;
+	i = 0;
 	mlx_draw_texture(gb->imgs->patrol, \
-		gb->text->patrol[gb->imgs->sprites->patrol], \
-		gb->patrol->x_pos, (SIZE - gb->text->patrol[0]->height) / 2);
-	if (gb->imgs->sprites->patrol == 9)
+		gb->text->patrol[gb->imgs->sprites->patrol], 0, 0);
+	if (gb->imgs->sprites->patrol == 59)
 		gb->imgs->sprites->patrol = 0;
 	else
 		gb->imgs->sprites->patrol += 1;
-	if (gb->patrol->x_npos == 0)
-		gb->patrol->x_pos++;
-	else
-		gb->patrol->x_pos--;
-	if (gb->patrol->x_pos >= SIZE - 32)
+	while (i < gb->imgs->patrol->count)
 	{
-		// check move to right	
-		gb->patrol->x_npos = 1;
+		if (i % 2== 0)
+			move_patrol_h(gb, i);
+		else
+			move_patrol_v(gb, i);
+		i++;
 	}
-	if (gb->patrol->x_pos <= 0)
-	{
-		// check move to left
-		gb->patrol->x_npos = 0;
-	}
+
 }

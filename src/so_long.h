@@ -6,7 +6,7 @@
 /*   By: ccaljouw <ccaljouw@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 12:12:25 by ccaljouw      #+#    #+#                 */
-/*   Updated: 2023/01/26 10:52:25 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 13:18:21 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_textures
 {
 	mlx_texture_t	**player;
 	mlx_texture_t	**patrol;
+	mlx_texture_t	**patrol1;
 	mlx_texture_t	**nums;
 	mlx_texture_t	*side;
 	mlx_texture_t	*lives_title;
@@ -88,6 +89,7 @@ typedef struct s_textures
 typedef struct s_sprites
 {
 	int				patrol;
+	int				patrol1;
 	int				player;
 }	t_sprites;
 
@@ -132,6 +134,7 @@ typedef struct s_player
 	int				y_pos;
 	int				x_npos;
 	int				y_npos;
+	int				dir;
 }	t_player;
 
 typedef struct s_gameboard
@@ -187,4 +190,6 @@ void		check_rectangular(t_gameboard *gb);
 void		check_map_content(t_gameboard *gb);
 void		close_game(struct mlx_key_data keypress, void *param);
 void	check_map_parameters(t_gameboard *gb);
+void	move_patrol_h(t_gameboard *gb, int i);
+void	move_patrol_v(t_gameboard *gb, int i);
 #endif

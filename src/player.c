@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/17 09:34:37 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/25 10:11:12 by cariencaljo   ########   odam.nl         */
+/*   Updated: 2023/01/26 12:49:22 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_player	*init_player(void)
 	player->y_pos = 0;
 	player->x_npos = 0;
 	player->y_npos = 0;
+	player->dir = 0;
 	return (player);
 }
 
@@ -63,8 +64,8 @@ void	check_collision(t_gameboard *gb)
 	i = gb->imgs->patrol->count - 1;
 	while (i >= 0)
 	{
-		if (gb->imgs->patrol->instances[i].x == gb->player->x_npos \
-			&& gb->imgs->patrol->instances[i].y == gb->player->y_npos)
+		if (gb->patrol->x_pos == gb->player->x_npos \
+			&& gb->patrol->y_pos == gb->player->y_npos)
 		{
 			gb->player->lives -= 1;
 			if (gb->player->lives > 0)

@@ -6,7 +6,7 @@
 /*   By: cariencaljouw <cariencaljouw@student.co      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/15 18:28:29 by cariencaljo   #+#    #+#                 */
-/*   Updated: 2023/01/26 11:23:13 by ccaljouw      ########   odam.nl         */
+/*   Updated: 2023/01/26 12:50:27 by ccaljouw      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	move_player(t_gameboard *gb, mlx_image_t *image)
 {
-	check_collision(gb);
+	// check_collision(gb);
 	image->instances[0].x = gb->player->x_npos;
 	image->instances[0].y = gb->player->y_npos;
 	if (gb->moves % 10 == 0)
