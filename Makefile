@@ -16,6 +16,9 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBS)
 	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
 
+bonus: $(OBJ) $(LIBS)
+	$(CC) $(CFLAGS) $(CODAMFLAGS) $^ -o $@
+
 home: $(OBJ) $(LIBS)
 	$(CC) $(CFLAGS) $(HOMEFLAGS) $^ -o $@
 
@@ -40,4 +43,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
